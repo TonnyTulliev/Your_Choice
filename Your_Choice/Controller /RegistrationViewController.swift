@@ -77,16 +77,17 @@ class RegistrationViewController: BaseViewController {
     }()
     
     var registerButton: UIButton = {
-       let button = UIButton(type: .system)
-       button.setTitle("Готово", for: .normal)
-       button.titleLabel?.textAlignment = .center
-       button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-       button.backgroundColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
-       button.tintColor = .white
-       button.layer.cornerRadius = 25
-       button.translatesAutoresizingMaskIntoConstraints = false
-       
-       return button
+        let button = UIButton(type: .system)
+        button.setTitle("Зарегистрировать", for: .normal)
+        button.titleLabel?.textAlignment = .center
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.backgroundColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        button.tintColor = .white
+        button.layer.cornerRadius = 25
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(actionForRegistrationButton), for: .allTouchEvents)
+        
+        return button
    }()
     var backButton: UIButton = {
        let button = UIButton(type: .system)
@@ -154,6 +155,12 @@ class RegistrationViewController: BaseViewController {
     }
     
     //MARK:- objc Metods
+    
+    @objc private func actionForRegistrationButton() {
+        let playersVC = PlayersViewController()
+        playersVC.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(playersVC, animated: true)
+    }
     
     @objc private func actionForBackButton() {
         navigationController?.popToRootViewController(animated: true)

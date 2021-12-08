@@ -13,6 +13,7 @@
 		370BC491275773A90077F2A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 370BC48F275773A90077F2A9 /* LaunchScreen.storyboard */; };
 		370BC4A3275E09B20077F2A9 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370BC4A2275E09B20077F2A9 /* BaseViewController.swift */; };
 		370BC4A5275E47EA0077F2A9 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370BC4A4275E47EA0077F2A9 /* RegistrationViewController.swift */; };
+		370BC4A72761499C0077F2A9 /* PlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370BC4A62761499C0077F2A9 /* PlayersViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		370BC492275773A90077F2A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		370BC4A2275E09B20077F2A9 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		370BC4A4275E47EA0077F2A9 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		370BC4A62761499C0077F2A9 /* PlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				370BC4A2275E09B20077F2A9 /* BaseViewController.swift */,
 				370BC488275773A70077F2A9 /* StartViewController.swift */,
 				370BC4A4275E47EA0077F2A9 /* RegistrationViewController.swift */,
+				370BC4A62761499C0077F2A9 /* PlayersViewController.swift */,
 			);
 			path = "Controller ";
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				370BC489275773A70077F2A9 /* StartViewController.swift in Sources */,
 				370BC485275773A70077F2A9 /* AppDelegate.swift in Sources */,
 				370BC4A5275E47EA0077F2A9 /* RegistrationViewController.swift in Sources */,
+				370BC4A72761499C0077F2A9 /* PlayersViewController.swift in Sources */,
 				370BC4A3275E09B20077F2A9 /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
