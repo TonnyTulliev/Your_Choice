@@ -59,7 +59,7 @@ class StartViewController: BaseViewController {
         
         return button
     }()
-    var registerButton: UIButton = {
+    var registerButtons: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Регистрация", for: .normal)
         button.titleLabel?.textAlignment = .center
@@ -91,16 +91,16 @@ class StartViewController: BaseViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        registerButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
-        registerButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
-        registerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        registerButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100).isActive = true
+        registerButtons.heightAnchor.constraint(equalToConstant: 55).isActive = true
+        registerButtons.widthAnchor.constraint(equalToConstant: 250).isActive = true
+        registerButtons.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        registerButtons.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100).isActive = true
         
         
         loginButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
         loginButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        loginButton.bottomAnchor.constraint(equalTo: registerButton.topAnchor, constant: -20).isActive = true
+        loginButton.bottomAnchor.constraint(equalTo: registerButtons.topAnchor, constant: -20).isActive = true
         
         emailTextField.heightAnchor.constraint(equalToConstant: 55).isActive = true
         emailTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
@@ -125,14 +125,14 @@ class StartViewController: BaseViewController {
     
     @objc private func tappedButton() {
         let nextVC = RegistrationViewController()
-        nextVC.modalPresentationStyle = .fullScreen
+//        nextVC.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(nextVC, animated: true)
     }
 //MARK:- metods
     
     private func addElementsToView(){
         view.addSubview(loginButton)
-        view.addSubview(registerButton)
+        view.addSubview(registerButtons)
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
         view.addSubview(mainImageView)

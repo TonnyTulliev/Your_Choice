@@ -14,8 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let viewController = StartViewController()
-        let navigationController  = UINavigationController(rootViewController: viewController)
+        let startViewController = StartViewController()
+        let navigationController  = UINavigationController(rootViewController: startViewController)
+        
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navigationController

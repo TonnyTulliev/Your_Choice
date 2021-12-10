@@ -14,6 +14,7 @@
 		370BC4A3275E09B20077F2A9 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370BC4A2275E09B20077F2A9 /* BaseViewController.swift */; };
 		370BC4A5275E47EA0077F2A9 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370BC4A4275E47EA0077F2A9 /* RegistrationViewController.swift */; };
 		370BC4A72761499C0077F2A9 /* PlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370BC4A62761499C0077F2A9 /* PlayersViewController.swift */; };
+		370BC4AD276204830077F2A9 /* PlayersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370BC4AC276204830077F2A9 /* PlayersTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		370BC4A2275E09B20077F2A9 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		370BC4A4275E47EA0077F2A9 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		370BC4A62761499C0077F2A9 /* PlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersViewController.swift; sourceTree = "<group>"; };
+		370BC4AC276204830077F2A9 /* PlayersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,10 +74,10 @@
 		370BC49A2757A1CD0077F2A9 /* Controller  */ = {
 			isa = PBXGroup;
 			children = (
-				370BC4A2275E09B20077F2A9 /* BaseViewController.swift */,
-				370BC488275773A70077F2A9 /* StartViewController.swift */,
-				370BC4A4275E47EA0077F2A9 /* RegistrationViewController.swift */,
-				370BC4A62761499C0077F2A9 /* PlayersViewController.swift */,
+				370BC4A8276203F20077F2A9 /* BaseViewController */,
+				370BC4A9276204050077F2A9 /* StartViewController */,
+				370BC4AA2762041A0077F2A9 /* RegistrationViewController */,
+				370BC4AB276204390077F2A9 /* PlayersViewController */,
 			);
 			path = "Controller ";
 			sourceTree = "<group>";
@@ -116,6 +118,47 @@
 				370BC48F275773A90077F2A9 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		370BC4A8276203F20077F2A9 /* BaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				370BC4A2275E09B20077F2A9 /* BaseViewController.swift */,
+			);
+			path = BaseViewController;
+			sourceTree = "<group>";
+		};
+		370BC4A9276204050077F2A9 /* StartViewController */ = {
+			isa = PBXGroup;
+			children = (
+				370BC488275773A70077F2A9 /* StartViewController.swift */,
+			);
+			path = StartViewController;
+			sourceTree = "<group>";
+		};
+		370BC4AA2762041A0077F2A9 /* RegistrationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				370BC4A4275E47EA0077F2A9 /* RegistrationViewController.swift */,
+			);
+			path = RegistrationViewController;
+			sourceTree = "<group>";
+		};
+		370BC4AB276204390077F2A9 /* PlayersViewController */ = {
+			isa = PBXGroup;
+			children = (
+				370BC4AE276204920077F2A9 /* PlayersCell */,
+				370BC4A62761499C0077F2A9 /* PlayersViewController.swift */,
+			);
+			path = PlayersViewController;
+			sourceTree = "<group>";
+		};
+		370BC4AE276204920077F2A9 /* PlayersCell */ = {
+			isa = PBXGroup;
+			children = (
+				370BC4AC276204830077F2A9 /* PlayersTableViewCell.swift */,
+			);
+			path = PlayersCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,6 +232,7 @@
 			files = (
 				370BC489275773A70077F2A9 /* StartViewController.swift in Sources */,
 				370BC485275773A70077F2A9 /* AppDelegate.swift in Sources */,
+				370BC4AD276204830077F2A9 /* PlayersTableViewCell.swift in Sources */,
 				370BC4A5275E47EA0077F2A9 /* RegistrationViewController.swift in Sources */,
 				370BC4A72761499C0077F2A9 /* PlayersViewController.swift in Sources */,
 				370BC4A3275E09B20077F2A9 /* BaseViewController.swift in Sources */,
@@ -260,7 +304,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -315,7 +359,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

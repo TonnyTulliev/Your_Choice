@@ -9,8 +9,9 @@ import UIKit
 
 class RegistrationViewController: BaseViewController {
     
+
     //MARK:- UI elements
-    var mainImageView: UIImageView = {
+   private var mainImageView: UIImageView = {
        var image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "Registration")
@@ -19,7 +20,7 @@ class RegistrationViewController: BaseViewController {
         return image
     }()
     
-    var emailTextField: UITextField = {
+    private var emailTextField: UITextField = {
         var textfield = UITextField()
         textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textfield.frame.height))
         textfield.leftViewMode = .always
@@ -30,10 +31,11 @@ class RegistrationViewController: BaseViewController {
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Email"
         textfield.returnKeyType = .next
+        
         return textfield
     }()
     
-    var nameTextField: UITextField = {
+    private var nameTextField: UITextField = {
         var textfield = UITextField()
         textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textfield.frame.height))
         textfield.leftViewMode = .always
@@ -44,10 +46,11 @@ class RegistrationViewController: BaseViewController {
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Введите ваше имя"
         textfield.returnKeyType = .next
+        
         return textfield
     }()
     
-    var passwordTextField: UITextField = {
+    private var passwordTextField: UITextField = {
         var textfield = UITextField()
         textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textfield.frame.height))
         textfield.leftViewMode = .always
@@ -59,9 +62,10 @@ class RegistrationViewController: BaseViewController {
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Пароль"
         textfield.returnKeyType = .done
+        
         return textfield
     }()
-    var repeatPasswordTextField: UITextField = {
+    private var repeatPasswordTextField: UITextField = {
         var textfield = UITextField()
         textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textfield.frame.height))
         textfield.leftViewMode = .always
@@ -73,10 +77,11 @@ class RegistrationViewController: BaseViewController {
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Повторите пароль"
         textfield.returnKeyType = .done
+        
         return textfield
     }()
     
-    var registerButton: UIButton = {
+  private var registerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Зарегистрировать", for: .normal)
         button.titleLabel?.textAlignment = .center
@@ -85,11 +90,13 @@ class RegistrationViewController: BaseViewController {
         button.tintColor = .white
         button.layer.cornerRadius = 25
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(actionForRegistrationButton), for: .allTouchEvents)
+    button.addTarget(self, action: #selector(registrationAction), for: .touchUpInside)
         
         return button
    }()
-    var backButton: UIButton = {
+    
+  
+    private var backButton: UIButton = {
        let button = UIButton(type: .system)
        button.setTitle("Назад", for: .normal)
        button.titleLabel?.textAlignment = .center
@@ -105,13 +112,17 @@ class RegistrationViewController: BaseViewController {
     //MARK:- Life cycle VC
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backButtonTitle = "Выйти"
         navigationController?.isNavigationBarHidden = false
         addTFDelegate()
         addElementsToView()
+        addRule()
         
         
         
     }
+    
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         backButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
@@ -155,15 +166,15 @@ class RegistrationViewController: BaseViewController {
     }
     
     //MARK:- objc Metods
-    
-    @objc private func actionForRegistrationButton() {
-        let playersVC = PlayersViewController()
-        playersVC.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(playersVC, animated: true)
-    }
-    
     @objc private func actionForBackButton() {
         navigationController?.popToRootViewController(animated: true)
+    }
+    @objc func registrationAction() {
+        let playersVC = PlayersViewController()
+//        navigationController?.setViewControllers([playersVC], animated: true)
+        navigationController?.pushViewController(playersVC, animated: true)
+      
+        
     }
     
     //MARK:- Metods
@@ -183,11 +194,24 @@ class RegistrationViewController: BaseViewController {
         passwordTextField.delegate = self
         repeatPasswordTextField.delegate = self
     }
+    private func addRule(){
+        if nameTextField.text == nil || nameTextField.text == "" {
+            registerButton.isEnabled = false
+        }else {
+            registerButton.isEnabled = true
+        }
+    }
 }
 
 //MARK:- Extensions
 extension RegistrationViewController : UITextFieldDelegate{
-
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        let name = nameTextField.text
+        UserDefaults.standard.setValue(name, forKey: "PlayersName")
+        addRule()
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         switch textField {
