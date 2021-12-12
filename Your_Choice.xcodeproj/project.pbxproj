@@ -60,6 +60,7 @@
 		370BC483275773A70077F2A9 /* Your_Choice */ = {
 			isa = PBXGroup;
 			children = (
+				370BC4B3276387D10077F2A9 /* View */,
 				370BC49E2757A2300077F2A9 /* Extensions */,
 				370BC49D2757A2110077F2A9 /* Application */,
 				370BC49C2757A1FE0077F2A9 /* Assets */,
@@ -159,6 +160,13 @@
 				370BC4AC276204830077F2A9 /* PlayersTableViewCell.swift */,
 			);
 			path = PlayersCell;
+			sourceTree = "<group>";
+		};
+		370BC4B3276387D10077F2A9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -35,6 +35,19 @@ class PlayersTableViewCell : UITableViewCell {
        
         return button
    }()
-    
+    private var mainTextField: UITextField = {
+        var textfield = UITextField(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textfield.frame.height))
+        textfield.leftViewMode = .always
+        textfield.translatesAutoresizingMaskIntoConstraints = false
+        textfield.layer.borderWidth = 2.0
+        textfield.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        textfield.backgroundColor = #colorLiteral(red: 0.9697982669, green: 0.9640328288, blue: 0.9742299914, alpha: 1)
+        textfield.layer.cornerRadius = 15
+        textfield.placeholder = "Введите имя игрока"
+        textfield.returnKeyType = .done
+        textfield.textAlignment = .center
+        return textfield
+    }()
     
 }
