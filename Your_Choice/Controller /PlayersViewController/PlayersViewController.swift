@@ -9,7 +9,7 @@ import UIKit
 class PlayersViewController: BaseViewController {
     
     //MARK:- Properties
-    var playerName = [String?]()
+
     var index = 0
     var playersCounts: Int = {
         return 2
@@ -23,7 +23,6 @@ class PlayersViewController: BaseViewController {
          image.translatesAutoresizingMaskIntoConstraints = false
          image.image = UIImage(named: "Players")
          image.contentMode = .scaleAspectFill
-         
          return image
      }()
     
@@ -34,7 +33,7 @@ class PlayersViewController: BaseViewController {
         label.textColor = .white
         label.text = "Введите имя и выберите цвет игроков"
         label.font =  UIFont(name: "Arial Rounded MT Bold", size: 18)
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         return label
     }()
     
@@ -46,26 +45,12 @@ class PlayersViewController: BaseViewController {
         tableView.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
         tableView.layer.cornerRadius = 15
         tableView.tableFooterView = UIView()
-        tableView.register(PlayersTableViewCell.self, forCellReuseIdentifier: "cell")
-        
-        
+
+
+
         return tableView
     }()
-    
-    private var mainTextField: UITextField = {
-        var textfield = UITextField(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textfield.frame.height))
-        textfield.leftViewMode = .always
-        textfield.translatesAutoresizingMaskIntoConstraints = false
-        textfield.layer.borderWidth = 2.0
-        textfield.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
-        textfield.backgroundColor = #colorLiteral(red: 0.9697982669, green: 0.9640328288, blue: 0.9742299914, alpha: 1)
-        textfield.layer.cornerRadius = 15
-        textfield.placeholder = "Введите имя игрока"
-        textfield.returnKeyType = .done
-        textfield.textAlignment = .center
-        return textfield
-    }()
+
     
     private var nextButton: UIButton = {
         let button = UIButton(type: .system)
@@ -147,25 +132,18 @@ class PlayersViewController: BaseViewController {
         super.viewDidLoad()
         addElementsToView()
         addDelegate()
-        addFirstNameInArray()
         navigationController?.isNavigationBarHidden = false
         navigationItem.title = "Настройки игроков"
         
-        mainTextField.isHidden = true
-        
-        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        registreationCell()
+    }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
-//        .topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-//        playersImageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
-//        playersImageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
-//        playersImageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
-//        playersImageView.heightAnchor.constraint(equalToConstant: 55).isActive = true
-        
-       
+  
         playersImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         playersImageView.widthAnchor.constraint(equalToConstant: 250).isActive = true
         playersImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -196,6 +174,7 @@ class PlayersViewController: BaseViewController {
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
         tableView.heightAnchor.constraint(equalToConstant: 250).isActive = true
+       
         
         buttonView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         buttonView.widthAnchor.constraint(equalToConstant: 250).isActive = true
@@ -206,29 +185,24 @@ class PlayersViewController: BaseViewController {
         label.heightAnchor.constraint(equalToConstant: 50).isActive = true
         label.widthAnchor.constraint(equalToConstant: 250).isActive = true
         label.centerXAnchor.constraint(equalTo: hederView.centerXAnchor).isActive = true
-        
+
         
         
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-    }
+    
     //MARK:- objc metods
     
     @objc private func plusPlayer() {
+               let maxPlayers = 5
         
-
-        //       let maxPlayers = 5
-        //
-        //        if playersCounts < maxPlayers {
-        //            playersCounts += 1
-        //            tableView.reloadData()
-        //        }else {
-        //             print(playersCounts) // добавить лейбл с оповещением
-        //        }
-        //
+                if playersCounts < maxPlayers {
+                    playersCounts += 1
+                    tableView.reloadData()
+                }else {
+                     print(playersCounts) // добавить лейбл с оповещением
+                }
+        
     }
     
     @objc private func minusPlayer() {
@@ -248,7 +222,6 @@ class PlayersViewController: BaseViewController {
     
     //MARK:- metods
     private func addElementsToView() {
-        view.addSubview(mainTextField)
         view.addSubview(nextButton)
         view.addSubview(tableView)
         view.addSubview(buttonView)
@@ -261,47 +234,17 @@ class PlayersViewController: BaseViewController {
     }
     
     private func addDelegate() {
-        mainTextField.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
+       
     }
-    
-    private func addFirstNameInArray(){
-        print(mainPlayerName)
-        playerName.append(mainPlayerName)
-        playerName.append("Игрок")
-        playerName.append("Игрок")
-        playerName.append("Игрок")
-        playerName.append("Игрок")
+    private func registreationCell() {
+        tableView.register(PlayersTableViewCell.self, forCellReuseIdentifier: "text")
+        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "cell")
+        
     }
-    
 }
-//MARK:- extensions textFields
-extension PlayersViewController: UITextFieldDelegate {
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        
-        
-    }
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        for  name in playerName{
-            
-            if name == "Игрок"{
-                index += 1
-                print(index)
-                playerName.insert(mainTextField.text, at: index)
-                break
-            }
-        }
-        print(playerName[selectAll(_:)])
-        tableView.reloadData()
-        mainTextField.resignFirstResponder()
-        mainTextField.text = ""
-        return true
-    }
-    
-}
+
 //MARK:- extensions TableView
 extension PlayersViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -316,55 +259,31 @@ extension PlayersViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        switch indexPath {
-        case [0,0]:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PlayersTableViewCell
-            cell.textLabel?.textAlignment = .center
-            cell.layer.cornerRadius = 15
-            cell.layer.borderWidth = 1 // text field
-            cell.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-            cell.textLabel?.text = playerName[indexPath.row]
-            cell.addSubview(mainTextField)
-            return cell
-        case [0,0]:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PlayersTableViewCell
-            cell.textLabel?.textAlignment = .center
-            cell.layer.cornerRadius = 15
-            cell.layer.borderWidth = 1 // text field
-            cell.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-            cell.textLabel?.text = playerName[indexPath.row]
-            cell.addSubview(mainTextField)
-            return cell
-        default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PlayersTableViewCell
-            cell.textLabel?.textAlignment = .center
-            cell.layer.cornerRadius = 15
-            cell.layer.borderWidth = 1 // text field
-            cell.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-            cell.textLabel?.text = playerName[indexPath.row]
-            cell.addSubview(mainTextField)
-            return cell
-        }
-        
-        
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-//        cell.textLabel?.textAlignment = .center
-//        cell.layer.cornerRadius = 15
-//        cell.layer.borderWidth = 1 // text field
-//        cell.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-//        cell.textLabel?.text = playerName[indexPath.row]
-//        cell.addSubview(mainTextField)
-//        return cell
-//
-    }
-   
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        mainTextField.isHidden = false
-        mainTextField.becomeFirstResponder()
-        
-        
+       let cell = tableView.dequeueReusableCell(withIdentifier: "text", for: indexPath) as! PlayersTableViewCell
        
+       return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+  
+    
+}
+extension PlayersViewController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+
+        
         
     }
+    func textFieldShouldReturn(_ textField: UITextField, indexPath: IndexPath, tableView: UITableView) -> Bool {
+
+        
+        return false
+    }
+  
 }
+

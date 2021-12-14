@@ -116,7 +116,7 @@ class RegistrationViewController: BaseViewController {
         navigationController?.isNavigationBarHidden = false
         addTFDelegate()
         addElementsToView()
-        addRule()
+//        addRule()
         
         
         
@@ -209,7 +209,7 @@ extension RegistrationViewController : UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         let name = nameTextField.text
         UserDefaults.standard.setValue(name, forKey: "PlayersName")
-        addRule()
+//        addRule()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

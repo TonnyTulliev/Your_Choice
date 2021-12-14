@@ -15,6 +15,7 @@
 		370BC4A5275E47EA0077F2A9 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370BC4A4275E47EA0077F2A9 /* RegistrationViewController.swift */; };
 		370BC4A72761499C0077F2A9 /* PlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370BC4A62761499C0077F2A9 /* PlayersViewController.swift */; };
 		370BC4AD276204830077F2A9 /* PlayersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370BC4AC276204830077F2A9 /* PlayersTableViewCell.swift */; };
+		370BC4B72768A2F40077F2A9 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370BC4B62768A2F30077F2A9 /* CustomTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		370BC4A4275E47EA0077F2A9 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		370BC4A62761499C0077F2A9 /* PlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersViewController.swift; sourceTree = "<group>"; };
 		370BC4AC276204830077F2A9 /* PlayersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersTableViewCell.swift; sourceTree = "<group>"; };
+		370BC4B62768A2F30077F2A9 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 		370BC4AE276204920077F2A9 /* PlayersCell */ = {
 			isa = PBXGroup;
 			children = (
+				370BC4B62768A2F30077F2A9 /* CustomTableViewCell.swift */,
 				370BC4AC276204830077F2A9 /* PlayersTableViewCell.swift */,
 			);
 			path = PlayersCell;
@@ -241,6 +244,7 @@
 				370BC489275773A70077F2A9 /* StartViewController.swift in Sources */,
 				370BC485275773A70077F2A9 /* AppDelegate.swift in Sources */,
 				370BC4AD276204830077F2A9 /* PlayersTableViewCell.swift in Sources */,
+				370BC4B72768A2F40077F2A9 /* CustomTableViewCell.swift in Sources */,
 				370BC4A5275E47EA0077F2A9 /* RegistrationViewController.swift in Sources */,
 				370BC4A72761499C0077F2A9 /* PlayersViewController.swift in Sources */,
 				370BC4A3275E09B20077F2A9 /* BaseViewController.swift in Sources */,
