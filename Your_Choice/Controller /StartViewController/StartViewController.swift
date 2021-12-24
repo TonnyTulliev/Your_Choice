@@ -15,7 +15,6 @@ class StartViewController: BaseViewController {
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "YouChoice")
         image.contentMode = .scaleAspectFill
-        
         return image
     }()
     
@@ -56,9 +55,9 @@ class StartViewController: BaseViewController {
         button.tintColor = .white
         button.layer.cornerRadius = 25
         button.translatesAutoresizingMaskIntoConstraints = false
-        
         return button
     }()
+    
     var registerButtons: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Регистрация", for: .normal)
@@ -69,20 +68,16 @@ class StartViewController: BaseViewController {
         button.layer.cornerRadius = 25
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
-        
         return button
     }()
     
-    
-   
     //MARK:- Life cycle vc
     override func viewDidLoad() {
         super.viewDidLoad()
         addElementsToView()
         addTFDelegate()
-       
-        
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
@@ -118,35 +113,30 @@ class StartViewController: BaseViewController {
         mainImageView.widthAnchor.constraint(equalToConstant: 250).isActive = true
         mainImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         mainImageView.bottomAnchor.constraint(equalTo: emailTextField.topAnchor, constant: -50).isActive = true
-        
     }
     
-//MARK:- objc metods
-    
+    //MARK:- objc metods
     @objc private func tappedButton() {
         let nextVC = RegistrationViewController()
 //        nextVC.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(nextVC, animated: true)
     }
-//MARK:- metods
     
+    //MARK:- metods
     private func addElementsToView(){
         view.addSubview(loginButton)
         view.addSubview(registerButtons)
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
         view.addSubview(mainImageView)
-        
     }
     
     private func addTFDelegate() {
         emailTextField.delegate = self
         passwordTextField.delegate = self
     }
-    
 }
 //MARK:- Extensions
-
 extension StartViewController: UITextFieldDelegate {
     
      func textFieldShouldReturn(_ textField: UITextField) -> Bool {

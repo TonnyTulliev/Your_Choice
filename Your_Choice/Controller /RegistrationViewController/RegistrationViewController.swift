@@ -46,7 +46,6 @@ class RegistrationViewController: BaseViewController {
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Введите ваше имя"
         textfield.returnKeyType = .next
-        
         return textfield
     }()
     
@@ -62,9 +61,9 @@ class RegistrationViewController: BaseViewController {
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Пароль"
         textfield.returnKeyType = .done
-        
         return textfield
     }()
+    
     private var repeatPasswordTextField: UITextField = {
         var textfield = UITextField()
         textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textfield.frame.height))
@@ -77,7 +76,6 @@ class RegistrationViewController: BaseViewController {
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Повторите пароль"
         textfield.returnKeyType = .done
-        
         return textfield
     }()
     
@@ -90,12 +88,10 @@ class RegistrationViewController: BaseViewController {
         button.tintColor = .white
         button.layer.cornerRadius = 25
         button.translatesAutoresizingMaskIntoConstraints = false
-    button.addTarget(self, action: #selector(registrationAction), for: .touchUpInside)
-        
+        button.addTarget(self, action: #selector(registrationAction), for: .touchUpInside)
         return button
    }()
     
-  
     private var backButton: UIButton = {
        let button = UIButton(type: .system)
        button.setTitle("Назад", for: .normal)
@@ -106,9 +102,9 @@ class RegistrationViewController: BaseViewController {
        button.layer.cornerRadius = 25
        button.translatesAutoresizingMaskIntoConstraints = false
        button.addTarget(self, action: #selector(actionForBackButton), for: .allTouchEvents)
-       
        return button
    }()
+    
     //MARK:- Life cycle VC
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,12 +112,8 @@ class RegistrationViewController: BaseViewController {
         navigationController?.isNavigationBarHidden = false
         addTFDelegate()
         addElementsToView()
-//        addRule()
-        
-        
-        
+        //  addRule()
     }
-    
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -162,7 +154,6 @@ class RegistrationViewController: BaseViewController {
         mainImageView.widthAnchor.constraint(equalToConstant: 250).isActive = true
         mainImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         mainImageView.bottomAnchor.constraint(equalTo: nameTextField.topAnchor, constant: -30).isActive = true
-        
     }
     
     //MARK:- objc Metods
@@ -171,10 +162,8 @@ class RegistrationViewController: BaseViewController {
     }
     @objc func registrationAction() {
         let playersVC = PlayersViewController()
-//        navigationController?.setViewControllers([playersVC], animated: true)
+    // navigationController?.setViewControllers([playersVC], animated: true)
         navigationController?.pushViewController(playersVC, animated: true)
-      
-        
     }
     
     //MARK:- Metods
@@ -188,12 +177,14 @@ class RegistrationViewController: BaseViewController {
         view.addSubview(repeatPasswordTextField)
     
     }
+    
     private func addTFDelegate() {
         nameTextField.delegate = self
         emailTextField.delegate = self
         passwordTextField.delegate = self
         repeatPasswordTextField.delegate = self
     }
+    
     private func addRule(){
         if nameTextField.text == nil || nameTextField.text == "" {
             registerButton.isEnabled = false
@@ -209,7 +200,7 @@ extension RegistrationViewController : UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         let name = nameTextField.text
         UserDefaults.standard.setValue(name, forKey: "PlayersName")
-//        addRule()
+        // addRule()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

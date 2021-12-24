@@ -9,7 +9,6 @@ import UIKit
 class PlayersViewController: BaseViewController {
     
     //MARK:- Properties
-
     var index = 0
     var playersCounts: Int = {
         return 2
@@ -17,6 +16,7 @@ class PlayersViewController: BaseViewController {
     var mainPlayerName: String {
         return UserDefaults.standard.value(forKey: "PlayersName") as! String
     }
+    
     //MARK:- UI
     private var playersImageView: UIImageView = {
         var image = UIImageView()
@@ -45,12 +45,8 @@ class PlayersViewController: BaseViewController {
         tableView.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
         tableView.layer.cornerRadius = 15
         tableView.tableFooterView = UIView()
-
-
-
         return tableView
     }()
-
     
     private var nextButton: UIButton = {
         let button = UIButton(type: .system)
@@ -63,7 +59,6 @@ class PlayersViewController: BaseViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(backAction), for: .touchUpInside)
         return button
-        
     }()
     
     private var plusButton: UIButton = {
@@ -79,13 +74,12 @@ class PlayersViewController: BaseViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(plusPlayer), for: .touchUpInside)
         return button
-        
     }()
+    
     private var minusButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "delete.left"), for: .normal)
         button.largeContentImage = .add
-        
         button.layer.borderWidth = 2
         button.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
         button.titleLabel?.textAlignment = .center
@@ -96,7 +90,6 @@ class PlayersViewController: BaseViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(minusPlayer), for: .touchUpInside)
         return button
-        
     }()
     
     private var buttonView: UIView = {
@@ -126,7 +119,6 @@ class PlayersViewController: BaseViewController {
         return view
     }()
     
-    
     //MARK:- life cycle VC
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,21 +126,19 @@ class PlayersViewController: BaseViewController {
         addDelegate()
         navigationController?.isNavigationBarHidden = false
         navigationItem.title = "Настройки игроков"
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         registreationCell()
     }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-  
         playersImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         playersImageView.widthAnchor.constraint(equalToConstant: 250).isActive = true
         playersImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         playersImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-        
         
         nextButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
         nextButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
@@ -175,24 +165,17 @@ class PlayersViewController: BaseViewController {
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
         tableView.heightAnchor.constraint(equalToConstant: 250).isActive = true
        
-        
         buttonView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         buttonView.widthAnchor.constraint(equalToConstant: 250).isActive = true
         buttonView.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -10).isActive = true
         buttonView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        
         label.heightAnchor.constraint(equalToConstant: 50).isActive = true
         label.widthAnchor.constraint(equalToConstant: 250).isActive = true
         label.centerXAnchor.constraint(equalTo: hederView.centerXAnchor).isActive = true
-
-        
-        
     }
     
-    
     //MARK:- objc metods
-    
     @objc private func plusPlayer() {
                let maxPlayers = 5
         
@@ -202,7 +185,6 @@ class PlayersViewController: BaseViewController {
                 }else {
                      print(playersCounts) // добавить лейбл с оповещением
                 }
-        
     }
     
     @objc private func minusPlayer() {
@@ -213,7 +195,6 @@ class PlayersViewController: BaseViewController {
         }else {
             print(playersCounts) // добавить лейбл с оповещением
         }
-        
     }
     
     @objc private func backAction() {
@@ -227,7 +208,6 @@ class PlayersViewController: BaseViewController {
         view.addSubview(buttonView)
         view.addSubview(hederView)
         view.addSubview(playersImageView)
-        
         buttonView.addSubview(minusButton)
         buttonView.addSubview(plusButton)
         hederView.addSubview(label)
@@ -241,7 +221,6 @@ class PlayersViewController: BaseViewController {
     private func registreationCell() {
         tableView.register(PlayersTableViewCell.self, forCellReuseIdentifier: "text")
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "cell")
-        
     }
 }
 
@@ -256,34 +235,23 @@ extension PlayersViewController: UITableViewDelegate, UITableViewDataSource {
         return playersCounts
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
        let cell = tableView.dequeueReusableCell(withIdentifier: "text", for: indexPath) as! PlayersTableViewCell
-       
-       return cell
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
-  
-    
 }
-extension PlayersViewController: UITextFieldDelegate {
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
 
-        
+extension PlayersViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
     }
     func textFieldShouldReturn(_ textField: UITextField, indexPath: IndexPath, tableView: UITableView) -> Bool {
-
         
         return false
     }
-  
 }
 
