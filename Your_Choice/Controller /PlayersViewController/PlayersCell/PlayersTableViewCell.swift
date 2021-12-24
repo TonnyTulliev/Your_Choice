@@ -20,9 +20,6 @@ class PlayersTableViewCell : UITableViewCell {
         textfield.backgroundColor = .white
         textfield.borderStyle = .none
         textfield.minimumFontSize = 18
-      
-       
-        
         return textfield
     }()
     
@@ -32,8 +29,6 @@ class PlayersTableViewCell : UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.addSubview(textField)
         textField.frame = bounds
-
-
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

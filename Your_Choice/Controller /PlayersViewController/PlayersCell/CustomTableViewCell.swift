@@ -14,13 +14,21 @@ class CustomTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-        self.textField = UITextField(frame: CGRect(x: 119.00, y: 9, width: 216.00, height: 31.00));
-        self.addSubview(self.textField)
-        
+        self.textField = UITextField()
+        setConstraint()
+        addElements()
         contentView.backgroundColor = .white
     }
 
+    private func setConstraint(){
+        textField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        textField.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true 
+    }
+    
+    private func addElements(){
+        self.addSubview(self.textField)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

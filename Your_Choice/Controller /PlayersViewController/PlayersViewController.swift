@@ -112,7 +112,7 @@ class PlayersViewController: BaseViewController {
     private var hederView : UIView = {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
-        view.layer.cornerRadius = 15
+        view.layer.cornerRadius = 25
         view.layer.borderWidth = 2
         view.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -242,6 +242,9 @@ extension PlayersViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50 
     }
 }
 
