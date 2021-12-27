@@ -7,21 +7,23 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 class PlayerHeaderTableView: UITableViewHeaderFooterView {
     
    
     var label : UILabel = {
         var label = UILabel()
-        label.text = "Landmarks"
+        label.text = "Игроки"
         label.font = UIFont(name: "Arial", size: 40)
         label.font = UIFont.boldSystemFont(ofSize: 40)
+        label.contentMode = .center
         return label
     }()
     
     var favorites : UILabel = {
         var label = UILabel()
-        label.text = "Favorites only"
+        label.text = "Выберите имя и цвет игрока"
         return label
     }()
     
@@ -58,33 +60,33 @@ class PlayerHeaderTableView: UITableViewHeaderFooterView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-//        label.snp.makeConstraints { (make) in
-//            make.left.equalTo(self.snp.left).offset(10)
-//            make.bottom.equalTo(centralView.snp.top).offset(-12)
-//        }
-//        centralView.snp.makeConstraints { (make) in
-//            make.centerY.equalTo(self.snp.centerY)
-//            make.left.equalTo(self.snp.left).offset(10)
-//            make.right.equalTo(self.snp.right).offset(-10)
-//            make.height.equalTo(1)
-//        }
-//        favorites.snp.makeConstraints { (make) in
-//            make.left.equalTo(self.snp.left).offset(10)
-//            make.bottom.equalTo(switcher.snp.centerY)
-//            
-//        }
-//        switcher.snp.makeConstraints { (make) in
-//            make.right.equalTo(self.snp.right).offset(-30)
-//            make.top.equalTo(centralView.snp.bottom).offset(12)
-//            make.bottom.equalTo(self.snp.bottom).offset(12)
-//           
-//        }
-//        bottomView.snp.makeConstraints { (make) in
-//            make.bottom.equalTo(self.snp.bottom)
-//            make.left.equalTo(self.snp.left).offset(10)
-//            make.right.equalTo(self.snp.right).offset(-10)
-//            make.height.equalTo(1)
-//        }
+        label.snp.makeConstraints { (make) in
+            make.left.equalTo(self.snp.left).offset(10)
+            make.bottom.equalTo(centralView.snp.top).offset(-12)
+        }
+        centralView.snp.makeConstraints { (make) in
+            make.centerY.equalTo(self.snp.centerY)
+            make.left.equalTo(self.snp.left).offset(10)
+            make.right.equalTo(self.snp.right).offset(-10)
+            make.height.equalTo(1)
+        }
+        favorites.snp.makeConstraints { (make) in
+            make.left.equalTo(self.snp.left).offset(10)
+            make.bottom.equalTo(switcher.snp.centerY)
+            
+        }
+        switcher.snp.makeConstraints { (make) in
+            make.right.equalTo(self.snp.right).offset(-30)
+            make.top.equalTo(centralView.snp.bottom).offset(12)
+            make.bottom.equalTo(self.snp.bottom).offset(12)
+           
+        }
+        bottomView.snp.makeConstraints { (make) in
+            make.bottom.equalTo(self.snp.bottom)
+            make.left.equalTo(self.snp.left).offset(10)
+            make.right.equalTo(self.snp.right).offset(-10)
+            make.height.equalTo(1)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

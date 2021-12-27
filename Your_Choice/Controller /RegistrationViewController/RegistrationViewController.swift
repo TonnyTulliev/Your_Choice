@@ -88,6 +88,10 @@ class RegistrationViewController: BaseViewController {
         button.tintColor = .white
         button.layer.cornerRadius = 25
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 3, height: 3)
+        button.layer.shadowOpacity = 0.6
+        button.layer.shadowRadius = 4.0
         button.addTarget(self, action: #selector(registrationAction), for: .touchUpInside)
         return button
    }()
@@ -101,6 +105,10 @@ class RegistrationViewController: BaseViewController {
        button.tintColor = .white
        button.layer.cornerRadius = 25
        button.translatesAutoresizingMaskIntoConstraints = false
+       button.layer.shadowColor = UIColor.black.cgColor
+       button.layer.shadowOffset = CGSize(width: 3, height: 3)
+       button.layer.shadowOpacity = 0.6
+       button.layer.shadowRadius = 4.0
        button.addTarget(self, action: #selector(actionForBackButton), for: .allTouchEvents)
        return button
    }()

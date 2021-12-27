@@ -45,6 +45,7 @@ class StartViewController: BaseViewController {
         textfield.returnKeyType = .done
         return textfield
     }()
+   
     
     private  var loginButton: UIButton = {
         let button = UIButton(type: .system)
@@ -57,8 +58,8 @@ class StartViewController: BaseViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 3, height: 3)
-        button.layer.shadowOpacity = 0.7
-        button.layer.shadowRadius = 6.0
+        button.layer.shadowOpacity = 0.6
+        button.layer.shadowRadius = 4.0
         return button
     }()
     
@@ -71,6 +72,10 @@ class StartViewController: BaseViewController {
         button.tintColor = .white
         button.layer.cornerRadius = 25
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 3, height: 3)
+        button.layer.shadowOpacity = 0.6
+        button.layer.shadowRadius = 4.0
         button.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
         return button
     }()

@@ -5,6 +5,7 @@
 //  Created by Антон Скуратов on 08.12.2021.
 //
 import UIKit
+import SnapKit
 
 class PlayersViewController: BaseViewController {
     
@@ -18,6 +19,7 @@ class PlayersViewController: BaseViewController {
     }
     
     //MARK:- UI
+    
     private var playersImageView: UIImageView = {
         var image = UIImageView()
          image.translatesAutoresizingMaskIntoConstraints = false
@@ -57,6 +59,10 @@ class PlayersViewController: BaseViewController {
         button.tintColor = .white
         button.layer.cornerRadius = 25
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 3, height: 3)
+        button.layer.shadowOpacity = 0.6
+        button.layer.shadowRadius = 4.0
         button.addTarget(self, action: #selector(backAction), for: .touchUpInside)
         return button
     }()
@@ -72,6 +78,10 @@ class PlayersViewController: BaseViewController {
         button.tintColor = .white
         button.layer.cornerRadius = 25
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 3, height: 3)
+        button.layer.shadowOpacity = 0.6
+        button.layer.shadowRadius = 4.0
         button.addTarget(self, action: #selector(plusPlayer), for: .touchUpInside)
         return button
     }()
@@ -88,6 +98,10 @@ class PlayersViewController: BaseViewController {
         button.tintColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
         button.layer.cornerRadius = 25
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 3, height: 3)
+        button.layer.shadowOpacity = 0.6
+        button.layer.shadowRadius = 4.0
         button.addTarget(self, action: #selector(minusPlayer), for: .touchUpInside)
         return button
     }()
@@ -124,14 +138,11 @@ class PlayersViewController: BaseViewController {
         super.viewDidLoad()
         addElementsToView()
         addDelegate()
-        navigationController?.isNavigationBarHidden = false
-        navigationItem.title = "Настройки игроков"
+        registreationCell()
+        сonfig()
+        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        registreationCell()
-    }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -163,7 +174,7 @@ class PlayersViewController: BaseViewController {
         tableView.topAnchor.constraint(equalTo: hederView.bottomAnchor, constant: 0).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
-        tableView.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        tableView.heightAnchor.constraint(equalToConstant: 270).isActive = true
        
         buttonView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         buttonView.widthAnchor.constraint(equalToConstant: 250).isActive = true
@@ -178,10 +189,12 @@ class PlayersViewController: BaseViewController {
     //MARK:- objc metods
     @objc private func plusPlayer() {
                let maxPlayers = 5
+                
         
                 if playersCounts < maxPlayers {
-                    playersCounts += 1
-                    tableView.reloadData()
+                    let optionsVC = OptionsViewControoler()
+                    navigationController?.present(optionsVC, animated: true)
+//                    changeScreenConfig()
                 }else {
                      print(playersCounts) // добавить лейбл с оповещением
                 }
@@ -211,6 +224,7 @@ class PlayersViewController: BaseViewController {
         buttonView.addSubview(minusButton)
         buttonView.addSubview(plusButton)
         hederView.addSubview(label)
+    
     }
     
     private func addDelegate() {
@@ -220,7 +234,19 @@ class PlayersViewController: BaseViewController {
     }
     private func registreationCell() {
         tableView.register(PlayersTableViewCell.self, forCellReuseIdentifier: "text")
-        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "cell")//удалить
+        tableView.register(PlayerHeaderTableView.self, forHeaderFooterViewReuseIdentifier: "head")
+    }
+    
+    private func сonfig(){
+        view.alpha = 1
+        navigationController?.navigationBar.isHidden = false
+        navigationItem.title = "Настройки игроков"
+    }
+    
+    func changeScreenConfig(){
+        view.alpha = 0.5
+        navigationController?.navigationBar.isHidden = true
     }
 }
 
@@ -236,16 +262,19 @@ extension PlayersViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       let cell = tableView.dequeueReusableCell(withIdentifier: "text", for: indexPath) as! PlayersTableViewCell
+       
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "text", for: indexPath) as? PlayersTableViewCell  else { return UITableViewCell() }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50 
     }
+    
 }
 
 extension PlayersViewController: UITextFieldDelegate {
@@ -253,7 +282,6 @@ extension PlayersViewController: UITextFieldDelegate {
         
     }
     func textFieldShouldReturn(_ textField: UITextField, indexPath: IndexPath, tableView: UITableView) -> Bool {
-        
         return false
     }
 }
