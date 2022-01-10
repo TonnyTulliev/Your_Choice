@@ -7,28 +7,44 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 class PlayersTableViewCell : UITableViewCell {
-    
-    
-    var nameText = ""
-        
+   
+    let realm = try! Realm()
+    var name = ""
+  
     var textField : UITextField = {
-        let textfield = UITextField()
+        var textfield = UITextField()
         textfield.placeholder = "Введите ваше имя"
         textfield.textAlignment = .center
-        textfield.backgroundColor = .white
+//      textfield.backgroundColor = .white
         textfield.borderStyle = .none
         textfield.minimumFontSize = 18
         return textfield
     }()
     
-    
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.addSubview(textField)
-        textField.frame = bounds
+//        self.addSubview(textField)
+        let color = self.realm.objects(PlayerRealm.self)[0].color
+        self.textLabel?.textAlignment = .center
+        self.textLabel?.text = self.realm.objects(PlayerRealm.self)[0].name
+        switch color {
+        case "red":
+            self.backgroundColor = #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1)
+        case "blue":
+            self.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        case "orange":
+            self.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
+        case "green":
+            self.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+        default:
+            self.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        }
+        textField.backgroundColor = UIColor(named: "red")
+//        self.backgroundColor = .gray
+   
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -7,10 +7,14 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 class OptionsViewControoler: UIViewController{
     
+    let realm = try! Realm()
     var optionPlayersView = OptionsPlayersView()
+    var testNIk: PlayersViewController?
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +33,26 @@ class OptionsViewControoler: UIViewController{
     private func  addElements(){
         view.addSubview(optionPlayersView)
     }
+    
     @objc func done(){
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true){ [weak self] in
+            guard let name = self?.optionPlayersView.name else { return }
+            guard let color = self?.optionPlayersView.color else { return }
+            let player = PlayerRealm()
+            player.color = color
+            player.name = name
+            let realmObject = self?.realm.objects(PlayerRealm.self)
+//            let player = Player(name: name, id: nil, color: color, task: [nil])
+//            let realmPlayer = realmPlayer(value: player)
+            try! self?.realm.write({
+                self?.realm.add(player)
+                print(realmObject as Any)
+            })
+            self?.testNIk?.playersCounts += 1
+            self?.testNIk?.tableView.reloadData()
+        }
     }
+    
     @objc func exit(){
         dismiss(animated: true, completion: nil)
     }

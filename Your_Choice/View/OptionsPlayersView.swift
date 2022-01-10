@@ -12,7 +12,11 @@ import SnapKit
 class OptionsPlayersView: UIView {
     
     
-     var exitButton: UIButton = {
+    var name = ""
+    var color = ""
+    
+    var buttons = [UIButton]()
+    var exitButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
         button.setBackgroundImage(UIImage(systemName: "multiply.circle.fill"), for: .normal)
@@ -75,7 +79,6 @@ class OptionsPlayersView: UIView {
         button.layer.cornerRadius = 15
         button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1))
         button.addTarget(self, action: #selector(green), for: .touchUpInside)
-        
         return button
     }()
     
@@ -90,7 +93,6 @@ class OptionsPlayersView: UIView {
        return stack
     }()
     
-    
      var doneButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
@@ -104,17 +106,16 @@ class OptionsPlayersView: UIView {
         button.layer.shadowOffset = CGSize(width: 3, height: 3)
         button.layer.shadowOpacity = 0.6
         button.layer.shadowRadius = 4.0
-//        button.addTarget(self, action: #selector(done), for: .touchUpInside)
+        button.addTarget(self, action: #selector(done), for: .touchUpInside)
         return button
         }()
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         config()
         addElements()
         addConstraints()
-        nameTextField.delegate = self 
+        nameTextField.delegate = self
         }
 
     required init(coder aDecoder: NSCoder) {
@@ -139,37 +140,75 @@ class OptionsPlayersView: UIView {
         stackView.addArrangedSubview(orangeImage)
         stackView.addArrangedSubview(blueImage)
         stackView.addArrangedSubview(greenImage)
+        buttons.append(redImage)
+        buttons.append(orangeImage)
+        buttons.append(blueImage)
+        buttons.append(greenImage)
+        
     }
     
-//    @objc private func done(){
-//
-//    }
+    @objc private func done(){
+    //выход 
+
+    }
+    
     @objc private func red(){
-        redImage.layer.borderWidth = 4 // одну функцию  и логику 
-        redImage.layer.borderColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
-        orangeImage.tintColor = .white
-        redImage.setImage(UIImage(systemName: "checkmark"), for: .normal)
+        for i in buttons {
+            if i == redImage{
+                i.layer.borderWidth = 4 // одну функцию  и логику
+                i.layer.borderColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+                i.tintColor = .white
+                i.setImage(UIImage(systemName: "checkmark"), for: .normal)
+                color = "red"
+            }else{
+                i.layer.borderWidth = 0
+                i.setImage(UIImage(named: ""), for: .normal)
+            }
+        }
     }
+    
     @objc private func blue(){
-        blueImage.layer.borderWidth = 4
-        blueImage.layer.borderColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
-        orangeImage.tintColor = .white
-        blueImage.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        print("blue")
+        for i in buttons {
+            if i == blueImage{
+                i.layer.borderWidth = 4 // одну функцию  и логику
+                i.layer.borderColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+                i.tintColor = .white
+                i.setImage(UIImage(systemName: "checkmark"), for: .normal)
+                color = "blue"
+            }else{
+                i.layer.borderWidth = 0
+                i.setImage(UIImage(named: ""), for: .normal)
+            }
+        }
     }
+    
     @objc private func orange(){
-        orangeImage.layer.borderWidth = 4
-        orangeImage.layer.borderColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
-        orangeImage.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        orangeImage.tintColor = .white
-        print("orange")
+        for i in buttons {
+            if i == orangeImage{
+                i.layer.borderWidth = 4 // одну функцию  и логику
+                i.layer.borderColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+                i.tintColor = .white
+                i.setImage(UIImage(systemName: "checkmark"), for: .normal)
+                color = "orange"
+            }else{
+                i.layer.borderWidth = 0
+                i.setImage(UIImage(named: ""), for: .normal)
+            }
+        }
     }
     @objc private func green(){
-        greenImage.layer.borderWidth = 4
-        greenImage.layer.borderColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
-        orangeImage.tintColor = .white
-        greenImage.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        print("green")
+        for i in buttons {
+            if i == greenImage{
+                i.layer.borderWidth = 4 // одну функцию  и логику
+                i.layer.borderColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+                i.tintColor = .white
+                i.setImage(UIImage(systemName: "checkmark"), for: .normal)
+                color = "green"
+            }else{
+                i.layer.borderWidth = 0
+                i.setImage(UIImage(named: ""), for: .normal)
+            }
+        }
     }
     
     private func addConstraints() {
@@ -212,6 +251,7 @@ class OptionsPlayersView: UIView {
         
     }
 }
+
 extension OptionsPlayersView: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         
@@ -219,6 +259,7 @@ extension OptionsPlayersView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
         default:
+            name = textField.text ?? ""
             textField.resignFirstResponder()
         }
         return false 

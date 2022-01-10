@@ -11,6 +11,8 @@
 		3704F7F82775D1C400145381 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3704F7F72775D1C400145381 /* CustomButton.swift */; };
 		3704F7FA2775D9B800145381 /* OptionsPlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3704F7F92775D9B800145381 /* OptionsPlayersView.swift */; };
 		3704F7FD2775E9DD00145381 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3704F7FC2775E9DD00145381 /* OptionsViewController.swift */; };
+		3704F7FF277B217200145381 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3704F7FE277B217200145381 /* Player.swift */; };
+		3704F801278C2C5900145381 /* PlayerRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3704F800278C2C5900145381 /* PlayerRealm.swift */; };
 		370BC485275773A70077F2A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370BC484275773A70077F2A9 /* AppDelegate.swift */; };
 		370BC489275773A70077F2A9 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370BC488275773A70077F2A9 /* StartViewController.swift */; };
 		370BC48E275773A90077F2A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 370BC48D275773A90077F2A9 /* Assets.xcassets */; };
@@ -28,6 +30,8 @@
 		3704F7F72775D1C400145381 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		3704F7F92775D9B800145381 /* OptionsPlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsPlayersView.swift; sourceTree = "<group>"; };
 		3704F7FC2775E9DD00145381 /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
+		3704F7FE277B217200145381 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		3704F800278C2C5900145381 /* PlayerRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerRealm.swift; sourceTree = "<group>"; };
 		370BC481275773A70077F2A9 /* Your_Choice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Your_Choice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		370BC484275773A70077F2A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		370BC488275773A70077F2A9 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 		370BC49B2757A1D60077F2A9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3704F7FE277B217200145381 /* Player.swift */,
+				3704F800278C2C5900145381 /* PlayerRealm.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -333,10 +339,12 @@
 				3704F7FD2775E9DD00145381 /* OptionsViewController.swift in Sources */,
 				370BC485275773A70077F2A9 /* AppDelegate.swift in Sources */,
 				3704F7F82775D1C400145381 /* CustomButton.swift in Sources */,
+				3704F7FF277B217200145381 /* Player.swift in Sources */,
 				370BC4AD276204830077F2A9 /* PlayersTableViewCell.swift in Sources */,
 				3704F7FA2775D9B800145381 /* OptionsPlayersView.swift in Sources */,
 				370BC4B72768A2F40077F2A9 /* CustomTableViewCell.swift in Sources */,
 				370BC4A5275E47EA0077F2A9 /* RegistrationViewController.swift in Sources */,
+				3704F801278C2C5900145381 /* PlayerRealm.swift in Sources */,
 				370BC4A72761499C0077F2A9 /* PlayersViewController.swift in Sources */,
 				370BC4A3275E09B20077F2A9 /* BaseViewController.swift in Sources */,
 				3704F7F62775CE1200145381 /* PlayerHeaderTableView.swift in Sources */,

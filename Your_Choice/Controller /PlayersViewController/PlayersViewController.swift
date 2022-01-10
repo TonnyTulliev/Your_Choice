@@ -12,7 +12,7 @@ class PlayersViewController: BaseViewController {
     //MARK:- Properties
     var index = 0
     var playersCounts: Int = {
-        return 2
+        return 0
     }()
     var mainPlayerName: String {
         return UserDefaults.standard.value(forKey: "PlayersName") as! String
@@ -39,7 +39,7 @@ class PlayersViewController: BaseViewController {
         return label
     }()
     
-    private var tableView: UITableView = {
+    var tableView: UITableView = {
         var tableView = UITableView()
         tableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -140,7 +140,6 @@ class PlayersViewController: BaseViewController {
         addDelegate()
         registreationCell()
         сonfig()
-        
     }
     
     
@@ -193,6 +192,7 @@ class PlayersViewController: BaseViewController {
         
                 if playersCounts < maxPlayers {
                     let optionsVC = OptionsViewControoler()
+                    optionsVC.testNIk = self 
                     navigationController?.present(optionsVC, animated: true)
 //                    changeScreenConfig()
                 }else {
@@ -234,7 +234,6 @@ class PlayersViewController: BaseViewController {
     }
     private func registreationCell() {
         tableView.register(PlayersTableViewCell.self, forCellReuseIdentifier: "text")
-        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "cell")//удалить
         tableView.register(PlayerHeaderTableView.self, forHeaderFooterViewReuseIdentifier: "head")
     }
     
@@ -248,6 +247,7 @@ class PlayersViewController: BaseViewController {
         view.alpha = 0.5
         navigationController?.navigationBar.isHidden = true
     }
+
 }
 
 //MARK:- extensions TableView
@@ -263,7 +263,7 @@ extension PlayersViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "text", for: indexPath) as? PlayersTableViewCell  else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "text", for: indexPath) as? PlayersTableViewCell else { return UITableViewCell()}
         return cell
     }
     
