@@ -32,8 +32,8 @@ class PlayersViewController: BaseViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.textColor = .white
-        label.text = "Введите имя и выберите цвет игроков"
-        label.font =  UIFont(name: "Arial Rounded MT Bold", size: 18)
+        label.text = "Выберите от 2 до 4 игроков"
+        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         label.numberOfLines = 0
         return label
     }()
@@ -46,6 +46,10 @@ class PlayersViewController: BaseViewController {
         tableView.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
         tableView.layer.cornerRadius = 15
         tableView.tableFooterView = UIView()
+        tableView.layer.shadowColor = UIColor.black.cgColor
+        tableView.layer.shadowOffset = CGSize(width: 3, height: 3)
+        tableView.layer.shadowOpacity = 0.4
+        tableView.layer.shadowRadius = 3.0
         return tableView
     }()
     
@@ -129,6 +133,10 @@ class PlayersViewController: BaseViewController {
         view.layer.borderWidth = 2
         view.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOffset = CGSize(width: 3, height: 3)
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowRadius = 2.0
         return view
     }()
     
@@ -173,7 +181,7 @@ class PlayersViewController: BaseViewController {
         tableView.topAnchor.constraint(equalTo: hederView.bottomAnchor, constant: 0).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
-        tableView.heightAnchor.constraint(equalToConstant: 254).isActive = true
+        tableView.heightAnchor.constraint(equalToConstant: 250).isActive = true
        
         buttonView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         buttonView.widthAnchor.constraint(equalToConstant: 250).isActive = true
@@ -194,25 +202,27 @@ class PlayersViewController: BaseViewController {
                     navigationController?.present(optionsVC, animated: true)
                     tableView.reloadData()
                 }else {
-                    //alert
+                    alert(title: "Внимание", message: "Достигнуто максимальное количество игроков")
                 }
     }
     
     @objc private func minusPlayer() {
         let minPlayers = 0
-        guard let lastPlayer = realm.objects(PlayerRealm.self).last else { return } 
-        if realm.objects(PlayerRealm.self).count > minPlayers {
+        if realm.objects(PlayerRealm.self).count != minPlayers {
+            guard let lastPlayer = realm.objects(PlayerRealm.self).last else { return }
             try! realm.write({
                 realm.delete(lastPlayer)
             })
             tableView.reloadData()
+            print(realm.objects(PlayerRealm.self).count)
         }else {
-           //alert
+            alert(title: "Внимание", message: "Необходимо минимум 2 игрока")
+            print(realm.objects(PlayerRealm.self).count)
         }
     }
     
     @objc private func backAction() {
-        navigationController?.popViewController(animated: true)
+        checkNextButton()
     }
     
     //MARK:- metods
@@ -241,13 +251,27 @@ class PlayersViewController: BaseViewController {
     private func сonfig(){
         view.alpha = 1
         navigationController?.navigationBar.isHidden = false
-        navigationItem.title = "Настройки игроков"
+        navigationItem.title = "Игроки"
+       
     }
     
-    private func removePlayersDataBase(){
+    private func removePlayersDataBase() {
         try! realm.write({
             realm.deleteAll()
         })
+    }
+    
+    private func alert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func checkNextButton() {
+        if realm.objects(PlayerRealm.self).count < 2  {
+            alert(title: "Внимание", message: "Выберите игроков")
+        }
     }
 }
 

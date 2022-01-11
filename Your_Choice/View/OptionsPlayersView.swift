@@ -14,8 +14,15 @@ class OptionsPlayersView: UIView {
     
     var name = ""
     var color = ""
-    
     var buttons = [UIButton]()
+    
+    var label: UILabel = {
+        let label = UILabel()
+        label.text = "Настройка игрока"
+        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        return label
+    }()
+    
     var exitButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
@@ -34,11 +41,12 @@ class OptionsPlayersView: UIView {
     private var nameTextField: UITextField = {
         let textfield = UITextField()
         textfield.translatesAutoresizingMaskIntoConstraints = false
-        textfield.layer.borderWidth = 2.0
+        textfield.layer.borderWidth = 3.0
         textfield.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
         textfield.backgroundColor = #colorLiteral(red: 0.9697982669, green: 0.9640328288, blue: 0.9742299914, alpha: 1)
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Введите ваше имя"
+        textfield.font = UIFont.boldSystemFont(ofSize: 18)
         textfield.textAlignment = .center
         textfield.contentMode = .center
         textfield.returnKeyType = .done
@@ -115,6 +123,7 @@ class OptionsPlayersView: UIView {
         config()
         addElements()
         addConstraints()
+        checkButtonEnable()
         nameTextField.delegate = self
         }
 
@@ -133,6 +142,7 @@ class OptionsPlayersView: UIView {
     
     private func addElements() {
         self.addSubview(exitButton)
+        self.addSubview(label)
         self.addSubview(nameTextField)
         self.addSubview(stackView)
         self.addSubview(doneButton)
@@ -160,11 +170,13 @@ class OptionsPlayersView: UIView {
                 i.tintColor = .white
                 i.setImage(UIImage(systemName: "checkmark"), for: .normal)
                 color = "red"
+                
             }else{
                 i.layer.borderWidth = 0
                 i.setImage(UIImage(named: ""), for: .normal)
             }
         }
+        checkButtonEnable()
     }
     
     @objc private func blue(){
@@ -180,6 +192,7 @@ class OptionsPlayersView: UIView {
                 i.setImage(UIImage(named: ""), for: .normal)
             }
         }
+        checkButtonEnable()
     }
     
     @objc private func orange(){
@@ -195,7 +208,9 @@ class OptionsPlayersView: UIView {
                 i.setImage(UIImage(named: ""), for: .normal)
             }
         }
+        checkButtonEnable()
     }
+    
     @objc private func green(){
         for i in buttons {
             if i == greenImage{
@@ -209,6 +224,7 @@ class OptionsPlayersView: UIView {
                 i.setImage(UIImage(named: ""), for: .normal)
             }
         }
+        checkButtonEnable()
     }
     
     private func addConstraints() {
@@ -216,6 +232,11 @@ class OptionsPlayersView: UIView {
             exitButton.top.equalTo(self.snp.top).offset(20)
             exitButton.right.equalTo(self.snp.right).offset(-20)
             exitButton.size.equalTo(CGSize(width: 40, height: 40))
+        }
+        label.snp.makeConstraints { label in
+            label.top.equalTo(self.snp.top).offset(20)
+            label.centerX.equalTo(self.snp.centerX)
+            label.centerY.equalTo(exitButton.snp.centerY)
         }
         nameTextField.snp.makeConstraints { nameTextField in
             nameTextField.size.equalTo(CGSize(width: 300, height: 60))
@@ -250,6 +271,15 @@ class OptionsPlayersView: UIView {
         }
         
     }
+    private func checkButtonEnable(){
+        if name == "" || color == "" {
+            doneButton.backgroundColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+            doneButton.isEnabled = false
+        }else{
+            doneButton.backgroundColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+            doneButton.isEnabled = true
+        }
+    }
 }
 
 extension OptionsPlayersView: UITextFieldDelegate {
@@ -261,6 +291,7 @@ extension OptionsPlayersView: UITextFieldDelegate {
         default:
             name = textField.text ?? ""
             textField.resignFirstResponder()
+            checkButtonEnable()
         }
         return false 
     }
