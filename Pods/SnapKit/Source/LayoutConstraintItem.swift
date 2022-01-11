@@ -27,7 +27,7 @@
     import AppKit
 #endif
 
-// по дефолту стоял class snapkit ругался 
+
 public protocol LayoutConstraintItem: AnyObject {
 }
 

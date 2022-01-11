@@ -11,26 +11,12 @@ import RealmSwift
 
 class PlayersTableViewCell : UITableViewCell {
    
-    let realm = try! Realm()
-    var name = ""
-  
-    var textField : UITextField = {
-        var textfield = UITextField()
-        textfield.placeholder = "Введите ваше имя"
-        textfield.textAlignment = .center
-//      textfield.backgroundColor = .white
-        textfield.borderStyle = .none
-        textfield.minimumFontSize = 18
-        return textfield
-    }()
+    var player: PlayerRealm?
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-//        self.addSubview(textField)
-        let color = self.realm.objects(PlayerRealm.self)[0].color
-        self.textLabel?.textAlignment = .center
-        self.textLabel?.text = self.realm.objects(PlayerRealm.self)[0].name
-        switch color {
+    func fetchData(player: PlayerRealm?){
+        guard let player = player else { return }
+        self.textLabel?.text = player.name
+        switch player.color {
         case "red":
             self.backgroundColor = #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1)
         case "blue":
@@ -42,10 +28,13 @@ class PlayersTableViewCell : UITableViewCell {
         default:
             self.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         }
-        textField.backgroundColor = UIColor(named: "red")
-//        self.backgroundColor = .gray
-   
     }
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.textLabel?.textAlignment = .center
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

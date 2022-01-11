@@ -6,14 +6,13 @@
 //
 import UIKit
 import SnapKit
+import RealmSwift
 
 class PlayersViewController: BaseViewController {
     
     //MARK:- Properties
     var index = 0
-    var playersCounts: Int = {
-        return 0
-    }()
+    let realm = try! Realm()
     var mainPlayerName: String {
         return UserDefaults.standard.value(forKey: "PlayersName") as! String
     }
@@ -140,6 +139,7 @@ class PlayersViewController: BaseViewController {
         addDelegate()
         registreationCell()
         сonfig()
+        removePlayersDataBase()
     }
     
     
@@ -173,7 +173,7 @@ class PlayersViewController: BaseViewController {
         tableView.topAnchor.constraint(equalTo: hederView.bottomAnchor, constant: 0).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
-        tableView.heightAnchor.constraint(equalToConstant: 270).isActive = true
+        tableView.heightAnchor.constraint(equalToConstant: 254).isActive = true
        
         buttonView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         buttonView.widthAnchor.constraint(equalToConstant: 250).isActive = true
@@ -187,26 +187,27 @@ class PlayersViewController: BaseViewController {
     
     //MARK:- objc metods
     @objc private func plusPlayer() {
-               let maxPlayers = 5
-                
-        
-                if playersCounts < maxPlayers {
+               let maxPlayers = 4
+                if realm.objects(PlayerRealm.self).count < maxPlayers {
                     let optionsVC = OptionsViewControoler()
-                    optionsVC.testNIk = self 
+                    optionsVC.playersVC = self 
                     navigationController?.present(optionsVC, animated: true)
-//                    changeScreenConfig()
+                    tableView.reloadData()
                 }else {
-                     print(playersCounts) // добавить лейбл с оповещением
+                    //alert
                 }
     }
     
     @objc private func minusPlayer() {
         let minPlayers = 0
-        if playersCounts > minPlayers {
-            playersCounts -= 1
+        guard let lastPlayer = realm.objects(PlayerRealm.self).last else { return } 
+        if realm.objects(PlayerRealm.self).count > minPlayers {
+            try! realm.write({
+                realm.delete(lastPlayer)
+            })
             tableView.reloadData()
         }else {
-            print(playersCounts) // добавить лейбл с оповещением
+           //alert
         }
     }
     
@@ -243,11 +244,11 @@ class PlayersViewController: BaseViewController {
         navigationItem.title = "Настройки игроков"
     }
     
-    func changeScreenConfig(){
-        view.alpha = 0.5
-        navigationController?.navigationBar.isHidden = true
+    private func removePlayersDataBase(){
+        try! realm.write({
+            realm.deleteAll()
+        })
     }
-
 }
 
 //MARK:- extensions TableView
@@ -258,12 +259,13 @@ extension PlayersViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return playersCounts
+        return realm.objects(PlayerRealm.self).count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "text", for: indexPath) as? PlayersTableViewCell else { return UITableViewCell()}
+        cell.fetchData(player: realm.objects(PlayerRealm.self)[indexPath.row])
+        cell.player = realm.objects(PlayerRealm.self)[indexPath.row]
         return cell
     }
     
@@ -272,7 +274,7 @@ extension PlayersViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50 
+        return 60
     }
     
 }

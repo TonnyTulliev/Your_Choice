@@ -13,7 +13,7 @@ class OptionsViewControoler: UIViewController{
     
     let realm = try! Realm()
     var optionPlayersView = OptionsPlayersView()
-    var testNIk: PlayersViewController?
+    var playersVC: PlayersViewController?
    
     
     override func viewDidLoad() {
@@ -38,18 +38,15 @@ class OptionsViewControoler: UIViewController{
         dismiss(animated: true){ [weak self] in
             guard let name = self?.optionPlayersView.name else { return }
             guard let color = self?.optionPlayersView.color else { return }
+            guard let allPlayer = self?.realm.objects(PlayerRealm.self) else {return}
             let player = PlayerRealm()
             player.color = color
             player.name = name
-            let realmObject = self?.realm.objects(PlayerRealm.self)
-//            let player = Player(name: name, id: nil, color: color, task: [nil])
-//            let realmPlayer = realmPlayer(value: player)
             try! self?.realm.write({
                 self?.realm.add(player)
-                print(realmObject as Any)
             })
-            self?.testNIk?.playersCounts += 1
-            self?.testNIk?.tableView.reloadData()
+            self?.playersVC?.tableView.reloadData()
+            print(allPlayer)
         }
     }
     
