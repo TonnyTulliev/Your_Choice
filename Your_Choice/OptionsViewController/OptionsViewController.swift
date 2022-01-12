@@ -35,20 +35,17 @@ class OptionsViewControoler: UIViewController{
     }
     
     @objc func done(){
-        dismiss(animated: true){ [weak self] in
-            guard let name = self?.optionPlayersView.name else { return }
-            guard let color = self?.optionPlayersView.color else { return }
-            guard let allPlayer = self?.realm.objects(PlayerRealm.self) else {return}
-            let player = PlayerRealm()
-            player.color = color
-            player.name = name
-            try! self?.realm.write({
-                self?.realm.add(player)
-            })
-            self?.playersVC?.tableView.reloadData()
-            self?.playersVC?.showAndHideInfoImage()
-            print(allPlayer)
-        }
+        let name = optionPlayersView.name
+        let color = optionPlayersView.color
+        let player = PlayerRealm()
+        player.color = color
+        player.name = name
+        try! self.realm.write({
+            self.realm.add(player)
+        })
+        self.playersVC?.tableView.reloadData()
+        self.playersVC?.showAndHideInfoImage()
+        dismiss(animated: true)
     }
     
     @objc func exit(){
