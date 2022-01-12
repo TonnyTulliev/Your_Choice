@@ -38,6 +38,18 @@ class PlayersViewController: BaseViewController {
         return label
     }()
     
+    private var infoLabel : UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.textColor = .black
+        label.text = "Вам нужно создать игрока"
+        label.isHidden = false
+        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        label.numberOfLines = 0
+        return label
+    }()
+    
     var tableView: UITableView = {
         var tableView = UITableView()
         tableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -66,7 +78,7 @@ class PlayersViewController: BaseViewController {
         button.layer.shadowOffset = CGSize(width: 3, height: 3)
         button.layer.shadowOpacity = 0.6
         button.layer.shadowRadius = 4.0
-        button.addTarget(self, action: #selector(backAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(taskScreenAction), for: .touchUpInside)
         return button
     }()
     
@@ -191,23 +203,30 @@ class PlayersViewController: BaseViewController {
         label.heightAnchor.constraint(equalToConstant: 50).isActive = true
         label.widthAnchor.constraint(equalToConstant: 250).isActive = true
         label.centerXAnchor.constraint(equalTo: hederView.centerXAnchor).isActive = true
+        
+        infoLabel.centerYAnchor.constraint(equalTo: tableView.centerYAnchor).isActive = true
+        infoLabel.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
+        
     }
     
     //MARK:- objc metods
     @objc private func plusPlayer() {
-               let maxPlayers = 4
-                if realm.objects(PlayerRealm.self).count < maxPlayers {
-                    let optionsVC = OptionsViewControoler()
-                    optionsVC.playersVC = self 
-                    navigationController?.present(optionsVC, animated: true)
-                    tableView.reloadData()
-                }else {
-                    alert(title: "Внимание", message: "Достигнуто максимальное количество игроков")
-                }
+        let maxPlayers = 4
+        showAndHideInfoLabel()
+        if realm.objects(PlayerRealm.self).count < maxPlayers {
+            let optionsVC = OptionsViewControoler()
+            optionsVC.playersVC = self
+            navigationController?.present(optionsVC, animated: true)
+            tableView.reloadData()
+            infoLabel.isHidden = true
+        }else {
+            alert(title: "Внимание", message: "Достигнуто максимальное количество игроков")
+        }
     }
     
     @objc private func minusPlayer() {
         let minPlayers = 0
+        showAndHideInfoLabel()
         if realm.objects(PlayerRealm.self).count != minPlayers {
             guard let lastPlayer = realm.objects(PlayerRealm.self).last else { return }
             try! realm.write({
@@ -221,8 +240,8 @@ class PlayersViewController: BaseViewController {
         }
     }
     
-    @objc private func backAction() {
-        checkNextButton()
+    @objc private func taskScreenAction() {
+        changeStateTheTaskButton()
     }
     
     //MARK:- metods
@@ -235,6 +254,7 @@ class PlayersViewController: BaseViewController {
         buttonView.addSubview(minusButton)
         buttonView.addSubview(plusButton)
         hederView.addSubview(label)
+        tableView.tableFooterView?.addSubview(infoLabel)
     
     }
     
@@ -268,9 +288,17 @@ class PlayersViewController: BaseViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    private func checkNextButton() {
+    private func changeStateTheTaskButton() {
         if realm.objects(PlayerRealm.self).count < 2  {
-            alert(title: "Внимание", message: "Выберите игроков")
+            alert(title: "Внимание", message: "Необходимо минимум 2 игрока")
+        }
+    }
+    
+    private func showAndHideInfoLabel(){// доделать проверку 
+        if realm.objects(PlayerRealm.self).count == 0  {
+            infoLabel.isHidden = false
+        }else {
+            infoLabel.isHidden = true
         }
     }
 }

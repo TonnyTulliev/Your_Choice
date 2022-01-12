@@ -53,40 +53,40 @@ class OptionsPlayersView: UIView {
         return textfield
         }()
     
-    private var orangeImage: UIButton = {
+    private var purpleButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 15
-        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1))
-        button.addTarget(self, action: #selector(orange), for: .touchUpInside)
+        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.4302968681, green: 0.07698533684, blue: 1, alpha: 1))
+        button.addTarget(self, action: #selector(purpleTapped), for: .touchUpInside)
         return button
     }()
     
-    private var redImage: UIButton = {
+    private var redButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 15
-        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1))
-        button.addTarget(self, action: #selector(red), for: .touchUpInside)
+        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 1, green: 0.04556197673, blue: 0.09580480307, alpha: 1))
+        button.addTarget(self, action: #selector(redTapped), for: .touchUpInside)
         return button
     }()
     
-    private var blueImage: UIButton = {
+    private var blueButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 15
-        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1))
-        button.addTarget(self, action: #selector(blue), for: .touchUpInside)
+        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0, green: 0.2113227248, blue: 0.9904268384, alpha: 1))
+        button.addTarget(self, action: #selector(blueTapped), for: .touchUpInside)
         return button
     }()
     
-    private var greenImage: UIButton = {
+    private var greenButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.borderColor = .none
         button.layer.cornerRadius = 15
-        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1))
-        button.addTarget(self, action: #selector(green), for: .touchUpInside)
+        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0, green: 1, blue: 0, alpha: 1))
+        button.addTarget(self, action: #selector(greenTapped), for: .touchUpInside)
         return button
     }()
     
@@ -146,14 +146,14 @@ class OptionsPlayersView: UIView {
         self.addSubview(nameTextField)
         self.addSubview(stackView)
         self.addSubview(doneButton)
-        stackView.addArrangedSubview(redImage)
-        stackView.addArrangedSubview(orangeImage)
-        stackView.addArrangedSubview(blueImage)
-        stackView.addArrangedSubview(greenImage)
-        buttons.append(redImage)
-        buttons.append(orangeImage)
-        buttons.append(blueImage)
-        buttons.append(greenImage)
+        stackView.addArrangedSubview(redButton)
+        stackView.addArrangedSubview(purpleButton)
+        stackView.addArrangedSubview(blueButton)
+        stackView.addArrangedSubview(greenButton)
+        buttons.append(redButton)
+        buttons.append(purpleButton)
+        buttons.append(blueButton)
+        buttons.append(greenButton)
         
     }
     
@@ -162,9 +162,9 @@ class OptionsPlayersView: UIView {
 
     }
     
-    @objc private func red(){
+    @objc private func redTapped(){
         for i in buttons {
-            if i == redImage{
+            if i == redButton{
                 i.layer.borderWidth = 4 // одну функцию  и логику
                 i.layer.borderColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
                 i.tintColor = .white
@@ -179,9 +179,9 @@ class OptionsPlayersView: UIView {
         checkButtonEnable()
     }
     
-    @objc private func blue(){
+    @objc private func blueTapped(){
         for i in buttons {
-            if i == blueImage{
+            if i == blueButton{
                 i.layer.borderWidth = 4 // одну функцию  и логику
                 i.layer.borderColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
                 i.tintColor = .white
@@ -195,14 +195,14 @@ class OptionsPlayersView: UIView {
         checkButtonEnable()
     }
     
-    @objc private func orange(){
+    @objc private func purpleTapped(){
         for i in buttons {
-            if i == orangeImage{
+            if i == purpleButton{
                 i.layer.borderWidth = 4 // одну функцию  и логику
                 i.layer.borderColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
                 i.tintColor = .white
                 i.setImage(UIImage(systemName: "checkmark"), for: .normal)
-                color = "orange"
+                color = "purple"
             }else{
                 i.layer.borderWidth = 0
                 i.setImage(UIImage(named: ""), for: .normal)
@@ -211,9 +211,9 @@ class OptionsPlayersView: UIView {
         checkButtonEnable()
     }
     
-    @objc private func green(){
+    @objc private func greenTapped(){
         for i in buttons {
-            if i == greenImage{
+            if i == greenButton{
                 i.layer.borderWidth = 4 // одну функцию  и логику
                 i.layer.borderColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
                 i.tintColor = .white
@@ -253,19 +253,19 @@ class OptionsPlayersView: UIView {
             doneButton.top.equalTo(stackView.snp.bottom).offset(20)
             doneButton.centerX.equalTo(self.snp.centerX)
         }
-        redImage.snp.makeConstraints { redImage in
+        redButton.snp.makeConstraints { redImage in
             redImage.size.equalTo(CGSize(width: 60, height: 60))
             redImage.centerY.equalTo(stackView.snp.centerY)
         }
-        orangeImage.snp.makeConstraints { orangeImage in
+        purpleButton.snp.makeConstraints { orangeImage in
             orangeImage.size.equalTo(CGSize(width: 60, height: 60))
             orangeImage.centerY.equalTo(stackView.snp.centerY)
         }
-        blueImage.snp.makeConstraints { blueImage in
+        blueButton.snp.makeConstraints { blueImage in
             blueImage.size.equalTo(CGSize(width: 60, height: 60))
             blueImage.centerY.equalTo(stackView.snp.centerY)
         }
-        greenImage.snp.makeConstraints { greenImage in
+        greenButton.snp.makeConstraints { greenImage in
             greenImage.size.equalTo(CGSize(width: 60, height: 60))
             greenImage.centerY.equalTo(stackView.snp.centerY)
         }
