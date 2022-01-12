@@ -17,6 +17,7 @@ class PlayersTableViewCell : UITableViewCell {
         guard let player = player else { return }
         self.textLabel?.text = player.name
         self.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        self.textLabel?.textColor = .white
         switch player.color {
         case "red":
             self.backgroundColor = #colorLiteral(red: 1, green: 0.04556197673, blue: 0.09580480307, alpha: 1)

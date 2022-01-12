@@ -38,14 +38,24 @@ class PlayersViewController: BaseViewController {
         return label
     }()
     
+    private var infoImage : UIImageView = {
+        var image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.isHidden = false
+        image.image = UIImage(systemName: "exclamationmark.triangle")
+        image.tintColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
+    
     private var infoLabel : UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.textColor = .black
-        label.text = "Вам нужно создать игрока"
         label.isHidden = false
-        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        label.text = "Недостаточно игоков"
+        label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         label.numberOfLines = 0
         return label
     }()
@@ -103,7 +113,7 @@ class PlayersViewController: BaseViewController {
     
     private var minusButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "delete.left"), for: .normal)
+        button.setImage(UIImage(systemName: "person.crop.circle.fill.badge.minus"), for: .normal)
         button.largeContentImage = .add
         button.layer.borderWidth = 2
         button.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
@@ -204,21 +214,22 @@ class PlayersViewController: BaseViewController {
         label.widthAnchor.constraint(equalToConstant: 250).isActive = true
         label.centerXAnchor.constraint(equalTo: hederView.centerXAnchor).isActive = true
         
-        infoLabel.centerYAnchor.constraint(equalTo: tableView.centerYAnchor).isActive = true
-        infoLabel.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
+        infoImage.bottomAnchor.constraint(equalTo: buttonView.topAnchor,constant: -20).isActive = true
+        infoImage.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
+        infoImage.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        infoImage.widthAnchor.constraint(equalToConstant: 120).isActive = true
         
+        infoLabel.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
+        infoLabel.bottomAnchor.constraint(equalTo: buttonView.topAnchor,constant: -5).isActive = true
     }
     
     //MARK:- objc metods
     @objc private func plusPlayer() {
         let maxPlayers = 4
-        showAndHideInfoLabel()
         if realm.objects(PlayerRealm.self).count < maxPlayers {
             let optionsVC = OptionsViewControoler()
             optionsVC.playersVC = self
             navigationController?.present(optionsVC, animated: true)
-            tableView.reloadData()
-            infoLabel.isHidden = true
         }else {
             alert(title: "Внимание", message: "Достигнуто максимальное количество игроков")
         }
@@ -226,7 +237,7 @@ class PlayersViewController: BaseViewController {
     
     @objc private func minusPlayer() {
         let minPlayers = 0
-        showAndHideInfoLabel()
+        showAndHideInfoImage()
         if realm.objects(PlayerRealm.self).count != minPlayers {
             guard let lastPlayer = realm.objects(PlayerRealm.self).last else { return }
             try! realm.write({
@@ -254,8 +265,8 @@ class PlayersViewController: BaseViewController {
         buttonView.addSubview(minusButton)
         buttonView.addSubview(plusButton)
         hederView.addSubview(label)
+        tableView.tableFooterView?.addSubview(infoImage)
         tableView.tableFooterView?.addSubview(infoLabel)
-    
     }
     
     private func addDelegate() {
@@ -294,10 +305,12 @@ class PlayersViewController: BaseViewController {
         }
     }
     
-    private func showAndHideInfoLabel(){// доделать проверку 
-        if realm.objects(PlayerRealm.self).count == 0  {
+    func showAndHideInfoImage(){// доделать проверку
+        if realm.objects(PlayerRealm.self).count <= 1 {
+            infoImage.isHidden = false
             infoLabel.isHidden = false
         }else {
+            infoImage.isHidden = true
             infoLabel.isHidden = true
         }
     }
