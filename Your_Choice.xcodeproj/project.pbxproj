@@ -56,6 +56,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37039D0C27906DB5006B22B4 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				370BC4AE276204920077F2A9 /* PlayersCell */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		3704F7FB2775E9C000145381 /* OptionsViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -85,12 +93,12 @@
 		370BC483275773A70077F2A9 /* Your_Choice */ = {
 			isa = PBXGroup;
 			children = (
-				370BC4B3276387D10077F2A9 /* View */,
-				370BC49E2757A2300077F2A9 /* Extensions */,
 				370BC49D2757A2110077F2A9 /* Application */,
 				370BC49B2757A1D60077F2A9 /* Model */,
+				370BC4B3276387D10077F2A9 /* View */,
 				370BC49A2757A1CD0077F2A9 /* Controller  */,
-				3704F7FB2775E9C000145381 /* OptionsViewController */,
+				37039D0C27906DB5006B22B4 /* Cell */,
+				370BC49E2757A2300077F2A9 /* Extensions */,
 				370BC49C2757A1FE0077F2A9 /* Assets */,
 				370BC49F2757A4960077F2A9 /* Storyboard */,
 				370BC492275773A90077F2A9 /* Info.plist */,
@@ -105,6 +113,7 @@
 				370BC4A9276204050077F2A9 /* StartViewController */,
 				370BC4AA2762041A0077F2A9 /* RegistrationViewController */,
 				370BC4AB276204390077F2A9 /* PlayersViewController */,
+				3704F7FB2775E9C000145381 /* OptionsViewController */,
 			);
 			path = "Controller ";
 			sourceTree = "<group>";
@@ -176,7 +185,6 @@
 		370BC4AB276204390077F2A9 /* PlayersViewController */ = {
 			isa = PBXGroup;
 			children = (
-				370BC4AE276204920077F2A9 /* PlayersCell */,
 				370BC4A62761499C0077F2A9 /* PlayersViewController.swift */,
 			);
 			path = PlayersViewController;

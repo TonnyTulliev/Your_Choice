@@ -57,7 +57,7 @@ class OptionsPlayersView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 15
-        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.4302968681, green: 0.07698533684, blue: 1, alpha: 1))
+        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.4393012524, green: 0.1838757396, blue: 0.8778187633, alpha: 1))
         button.addTarget(self, action: #selector(purpleTapped), for: .touchUpInside)
         return button
     }()
@@ -66,7 +66,7 @@ class OptionsPlayersView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 15
-        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 1, green: 0.04556197673, blue: 0.09580480307, alpha: 1))
+        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.8534528613, green: 0.1875628829, blue: 0.2131209671, alpha: 1))
         button.addTarget(self, action: #selector(redTapped), for: .touchUpInside)
         return button
     }()
@@ -75,7 +75,7 @@ class OptionsPlayersView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 15
-        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0, green: 0.2113227248, blue: 0.9904268384, alpha: 1))
+        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.2540225983, green: 0.3274088502, blue: 0.9160223603, alpha: 1))
         button.addTarget(self, action: #selector(blueTapped), for: .touchUpInside)
         return button
     }()
@@ -85,7 +85,7 @@ class OptionsPlayersView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.borderColor = .none
         button.layer.cornerRadius = 15
-        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0, green: 1, blue: 0, alpha: 1))
+        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.2306479812, green: 0.7787331939, blue: 0.2370785177, alpha: 1))
         button.addTarget(self, action: #selector(greenTapped), for: .touchUpInside)
         return button
     }()
