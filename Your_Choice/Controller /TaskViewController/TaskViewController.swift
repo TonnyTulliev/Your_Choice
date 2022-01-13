@@ -82,6 +82,7 @@ class TaskViewController: UIViewController{
     
     private func config() {
         view.backgroundColor = .white
+        navigationItem.title = "Задания"
     }
     
     private func addElements() {
@@ -92,26 +93,26 @@ class TaskViewController: UIViewController{
     }
     private func addConstraints() {
         taskImage.snp.makeConstraints { taskImage in
-            taskImage.top.equalTo(view.snp.top).offset(90)
+            taskImage.bottom.equalTo(tableView.snp.top).offset(-30)
             taskImage.centerX.equalTo(view.snp.centerX)
             taskImage.height.equalTo(80)
             taskImage.width.equalTo(250)
         }
         tableView.snp.makeConstraints { tableView in
-            tableView.top.equalTo(taskImage.snp.bottom).offset(20)
-            tableView.bottom.equalTo(addTaskButton.snp.top).offset(-20)
+            tableView.centerX.equalTo(view.snp.centerX)
+            tableView.centerY.equalTo(view.snp.centerY)
             tableView.left.equalTo(view.snp.left).offset(10)
             tableView.right.equalTo(view.snp.right).offset(-10)
-//            tableView.height.equalTo(250)
+            tableView.height.equalTo(300)
         }
         nextButton.snp.makeConstraints { nextButton in
-            nextButton.bottom.equalTo(view.snp.bottom).offset(-50)
+            nextButton.top.equalTo(tableView.snp.bottom).offset(20)
             nextButton.centerX.equalTo(view.snp.centerX)
             nextButton.height.equalTo(55)
             nextButton.width.equalTo(250)
         }
         addTaskButton.snp.makeConstraints { addTaskButton in
-            addTaskButton.bottom.equalTo(nextButton.snp.top).offset(-20)
+            addTaskButton.top.equalTo(nextButton.snp.bottom).offset(20)
             addTaskButton.centerX.equalTo(view.snp.centerX)
             addTaskButton.height.equalTo(55)
             addTaskButton.width.equalTo(250)

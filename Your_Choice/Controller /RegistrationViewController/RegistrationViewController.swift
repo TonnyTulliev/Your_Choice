@@ -128,12 +128,12 @@ class RegistrationViewController: BaseViewController {
         backButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
         backButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         backButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        backButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
+        backButton.topAnchor.constraint(equalTo: registerButton.bottomAnchor, constant: 20).isActive = true
         
         registerButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
         registerButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         registerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        registerButton.bottomAnchor.constraint(equalTo: backButton.topAnchor, constant: -20).isActive = true
+        registerButton.topAnchor.constraint(equalTo: repeatPasswordTextField.bottomAnchor, constant: 40).isActive = true
         
         emailTextField.heightAnchor.constraint(equalToConstant: 55).isActive = true
         emailTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
@@ -145,12 +145,13 @@ class RegistrationViewController: BaseViewController {
         passwordTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
         passwordTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
         passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        passwordTextField.bottomAnchor.constraint(equalTo: repeatPasswordTextField.topAnchor, constant: -10).isActive = true
+        passwordTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 30).isActive = true
+        
         repeatPasswordTextField.heightAnchor.constraint(equalToConstant: 55).isActive = true
         repeatPasswordTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
         repeatPasswordTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
         repeatPasswordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        repeatPasswordTextField.bottomAnchor.constraint(equalTo: registerButton.topAnchor, constant: -30).isActive = true
+        repeatPasswordTextField.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 10).isActive = true
         
         nameTextField.heightAnchor.constraint(equalToConstant: 55).isActive = true
         nameTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
@@ -161,7 +162,7 @@ class RegistrationViewController: BaseViewController {
         mainImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         mainImageView.widthAnchor.constraint(equalToConstant: 250).isActive = true
         mainImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        mainImageView.bottomAnchor.constraint(equalTo: nameTextField.topAnchor, constant: -30).isActive = true
+        mainImageView.bottomAnchor.constraint(equalTo: nameTextField.topAnchor, constant: -40).isActive = true
     }
     
     //MARK:- objc Metods

@@ -174,12 +174,12 @@ class PlayersViewController: BaseViewController {
         playersImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         playersImageView.widthAnchor.constraint(equalToConstant: 250).isActive = true
         playersImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        playersImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        playersImageView.bottomAnchor.constraint(equalTo: hederView.topAnchor, constant: -40).isActive = true
         
         nextButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
         nextButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
+        nextButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 45).isActive = true
         
         minusButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         minusButton.widthAnchor.constraint(equalToConstant: 140).isActive = true
@@ -191,19 +191,20 @@ class PlayersViewController: BaseViewController {
         plusButton.rightAnchor.constraint(equalTo: buttonView.rightAnchor  ).isActive = true
         plusButton.bottomAnchor.constraint(equalTo: buttonView.bottomAnchor).isActive = true
         
-        hederView.topAnchor.constraint(equalTo: playersImageView.bottomAnchor, constant: 45).isActive = true
+        hederView.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: 0).isActive = true
         hederView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
         hederView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
         hederView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        tableView.topAnchor.constraint(equalTo: hederView.bottomAnchor, constant: 0).isActive = true
+        tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 40).isActive = true
+        tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
         tableView.heightAnchor.constraint(equalToConstant: 244).isActive = true
        
         buttonView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         buttonView.widthAnchor.constraint(equalToConstant: 250).isActive = true
-        buttonView.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -10).isActive = true
+        buttonView.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -20).isActive = true
         buttonView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         label.heightAnchor.constraint(equalToConstant: 50).isActive = true

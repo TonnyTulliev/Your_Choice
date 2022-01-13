@@ -80,6 +80,17 @@ class StartViewController: BaseViewController {
         return button
     }()
     
+//    private var stackView: UIStackView = {
+//       var stack = UIStackView()
+//        stack.axis = NSLayoutConstraint.Axis.vertical
+//        stack.distribution = UIStackView.Distribution.equalSpacing
+//        stack.alignment = UIStackView.Alignment.center
+//        stack.spacing = 20
+//        stack.backgroundColor = .white
+//        stack.translatesAutoresizingMaskIntoConstraints = false
+//       return stack
+//    }()
+    
     //MARK:- Life cycle vc
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,12 +109,12 @@ class StartViewController: BaseViewController {
         registerButtons.heightAnchor.constraint(equalToConstant: 55).isActive = true
         registerButtons.widthAnchor.constraint(equalToConstant: 250).isActive = true
         registerButtons.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        registerButtons.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100).isActive = true
+        registerButtons.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20).isActive = true
         
         loginButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
         loginButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        loginButton.bottomAnchor.constraint(equalTo: registerButtons.topAnchor, constant: -20).isActive = true
+        loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 40).isActive = true
         
         emailTextField.heightAnchor.constraint(equalToConstant: 55).isActive = true
         emailTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
@@ -115,7 +126,7 @@ class StartViewController: BaseViewController {
         passwordTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
         passwordTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
         passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        passwordTextField.bottomAnchor.constraint(equalTo: loginButton.topAnchor, constant: -50).isActive = true
+        passwordTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         mainImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         mainImageView.widthAnchor.constraint(equalToConstant: 250).isActive = true
