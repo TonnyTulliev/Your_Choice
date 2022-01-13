@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		37039D0B278E2B46006B22B4 /* OptionsPlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3704F7F92775D9B800145381 /* OptionsPlayersView.swift */; };
+		37039D12279086B6006B22B4 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37039D11279086B6006B22B4 /* TaskViewController.swift */; };
 		3704F7F62775CE1200145381 /* PlayerHeaderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3704F7F52775CE1100145381 /* PlayerHeaderTableView.swift */; };
 		3704F7F82775D1C400145381 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3704F7F72775D1C400145381 /* CustomButton.swift */; };
 		3704F7FD2775E9DD00145381 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3704F7FC2775E9DD00145381 /* OptionsViewController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		37039D11279086B6006B22B4 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		3704F7F52775CE1100145381 /* PlayerHeaderTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerHeaderTableView.swift; sourceTree = "<group>"; };
 		3704F7F72775D1C400145381 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		3704F7F92775D9B800145381 /* OptionsPlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsPlayersView.swift; sourceTree = "<group>"; };
@@ -62,6 +64,14 @@
 				370BC4AE276204920077F2A9 /* PlayersCell */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		37039D102790868F006B22B4 /* TaskViewController */ = {
+			isa = PBXGroup;
+			children = (
+				37039D11279086B6006B22B4 /* TaskViewController.swift */,
+			);
+			path = TaskViewController;
 			sourceTree = "<group>";
 		};
 		3704F7FB2775E9C000145381 /* OptionsViewController */ = {
@@ -114,6 +124,7 @@
 				370BC4AA2762041A0077F2A9 /* RegistrationViewController */,
 				370BC4AB276204390077F2A9 /* PlayersViewController */,
 				3704F7FB2775E9C000145381 /* OptionsViewController */,
+				37039D102790868F006B22B4 /* TaskViewController */,
 			);
 			path = "Controller ";
 			sourceTree = "<group>";
@@ -349,6 +360,7 @@
 				370BC4A72761499C0077F2A9 /* PlayersViewController.swift in Sources */,
 				370BC4A3275E09B20077F2A9 /* BaseViewController.swift in Sources */,
 				37039D0B278E2B46006B22B4 /* OptionsPlayersView.swift in Sources */,
+				37039D12279086B6006B22B4 /* TaskViewController.swift in Sources */,
 				3704F7F62775CE1200145381 /* PlayerHeaderTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

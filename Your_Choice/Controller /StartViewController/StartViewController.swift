@@ -100,7 +100,6 @@ class StartViewController: BaseViewController {
         registerButtons.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         registerButtons.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100).isActive = true
         
-        
         loginButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
         loginButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true

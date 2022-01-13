@@ -68,10 +68,6 @@ class PlayersViewController: BaseViewController {
         tableView.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
         tableView.layer.cornerRadius = 15
         tableView.tableFooterView = UIView()
-        tableView.layer.shadowColor = UIColor.black.cgColor
-        tableView.layer.shadowOffset = CGSize(width: 3, height: 3)
-        tableView.layer.shadowOpacity = 0.4
-        tableView.layer.shadowRadius = 3.0
         return tableView
     }()
     
@@ -252,7 +248,9 @@ class PlayersViewController: BaseViewController {
     }
     
     @objc private func taskScreenAction() {
-        changeStateTheTaskButton()
+//        changeStateTheTaskButton()
+        let taskVC = TaskViewController()
+        navigationController?.pushViewController(taskVC, animated: true)
     }
     
     //MARK:- metods
