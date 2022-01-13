@@ -166,7 +166,7 @@ class OptionsPlayersView: UIView {
         for i in buttons {
             if i == redButton{
                 i.layer.borderWidth = 4 // одну функцию  и логику
-                i.layer.borderColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+                i.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 i.tintColor = .white
                 i.setImage(UIImage(systemName: "checkmark"), for: .normal)
                 color = "red"
@@ -183,7 +183,7 @@ class OptionsPlayersView: UIView {
         for i in buttons {
             if i == blueButton{
                 i.layer.borderWidth = 4 // одну функцию  и логику
-                i.layer.borderColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+                i.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 i.tintColor = .white
                 i.setImage(UIImage(systemName: "checkmark"), for: .normal)
                 color = "blue"
@@ -199,7 +199,7 @@ class OptionsPlayersView: UIView {
         for i in buttons {
             if i == purpleButton{
                 i.layer.borderWidth = 4 // одну функцию  и логику
-                i.layer.borderColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+                i.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 i.tintColor = .white
                 i.setImage(UIImage(systemName: "checkmark"), for: .normal)
                 color = "purple"
@@ -215,7 +215,7 @@ class OptionsPlayersView: UIView {
         for i in buttons {
             if i == greenButton{
                 i.layer.borderWidth = 4 // одну функцию  и логику
-                i.layer.borderColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+                i.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 i.tintColor = .white
                 i.setImage(UIImage(systemName: "checkmark"), for: .normal)
                 color = "green"

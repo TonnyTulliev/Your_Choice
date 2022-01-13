@@ -43,7 +43,7 @@ class PlayersViewController: BaseViewController {
         image.translatesAutoresizingMaskIntoConstraints = false
         image.isHidden = false
         image.image = UIImage(systemName: "exclamationmark.triangle")
-        image.tintColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        image.tintColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -53,7 +53,7 @@ class PlayersViewController: BaseViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.isHidden = false
-        label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        label.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         label.text = "Недостаточно игоков"
         label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         label.numberOfLines = 0
@@ -203,7 +203,7 @@ class PlayersViewController: BaseViewController {
         tableView.topAnchor.constraint(equalTo: hederView.bottomAnchor, constant: 0).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
-        tableView.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        tableView.heightAnchor.constraint(equalToConstant: 244).isActive = true
        
         buttonView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         buttonView.widthAnchor.constraint(equalToConstant: 250).isActive = true
@@ -214,13 +214,13 @@ class PlayersViewController: BaseViewController {
         label.widthAnchor.constraint(equalToConstant: 250).isActive = true
         label.centerXAnchor.constraint(equalTo: hederView.centerXAnchor).isActive = true
         
-        infoImage.bottomAnchor.constraint(equalTo: buttonView.topAnchor,constant: -20).isActive = true
+        infoImage.centerYAnchor.constraint(equalTo: tableView.centerYAnchor,constant: -12).isActive = true
         infoImage.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
         infoImage.heightAnchor.constraint(equalToConstant: 120).isActive = true
         infoImage.widthAnchor.constraint(equalToConstant: 120).isActive = true
         
         infoLabel.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
-        infoLabel.bottomAnchor.constraint(equalTo: buttonView.topAnchor,constant: -5).isActive = true
+        infoLabel.topAnchor.constraint(equalTo: infoImage.bottomAnchor,constant: -12).isActive = true
     }
     
     //MARK:- objc metods
@@ -330,7 +330,6 @@ extension PlayersViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "text", for: indexPath) as? PlayersTableViewCell else { return UITableViewCell()}
         cell.fetchData(player: realm.objects(PlayerRealm.self)[indexPath.row])
-        cell.player = realm.objects(PlayerRealm.self)[indexPath.row]
         return cell
     }
     

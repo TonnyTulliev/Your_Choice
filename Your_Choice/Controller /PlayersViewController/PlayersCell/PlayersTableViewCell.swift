@@ -8,10 +8,20 @@
 import Foundation
 import UIKit
 import RealmSwift
+import SnapKit
 
 class PlayersTableViewCell : UITableViewCell {
    
     var player: PlayerRealm?
+    
+    private var personImage: UIImageView = {
+    let image = UIImageView()
+        image.image = UIImage(systemName: "person.fill")
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFit
+        image.tintColor = .white
+    return image
+    }()
     
     func fetchData(player: PlayerRealm?){
         guard let player = player else { return }
@@ -32,8 +42,19 @@ class PlayersTableViewCell : UITableViewCell {
         }
     }
     
+    private func addConstraints() {
+        personImage.snp.makeConstraints { personImage in
+            personImage.centerY.equalTo(self.snp.centerY)
+            personImage.left.equalTo(self.snp.left).offset(20)
+            personImage.height.equalTo(40)
+            personImage.width.equalTo(40)
+        }
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.addSubview(personImage)
+        addConstraints()
         self.textLabel?.textAlignment = .center
     }
     
