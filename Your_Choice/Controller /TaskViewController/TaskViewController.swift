@@ -14,11 +14,11 @@ class TaskViewController: UIViewController{
     
     private var taskImage: UIImageView = {
         var image = UIImageView()
-         image.translatesAutoresizingMaskIntoConstraints = false
-         image.image = UIImage(named: "Tasks")
-         image.contentMode = .scaleAspectFill
-         return image
-     }()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: "Tasks")
+        image.contentMode = .scaleAspectFill
+        return image
+    }()
     
     private var tableView: UITableView = {
         var tableView = UITableView()
@@ -70,6 +70,8 @@ class TaskViewController: UIViewController{
         config()
         addElements()
         addConstraints()
+        addDelegate()
+        registrationCell()
     }
     
     @objc private func addTask() {
@@ -117,6 +119,38 @@ class TaskViewController: UIViewController{
             addTaskButton.height.equalTo(55)
             addTaskButton.width.equalTo(250)
         }
-        
+    }
+    
+    private func addDelegate() {
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
+    
+    private func registrationCell(){
+        tableView.register(TaskTableViewCell.self, forCellReuseIdentifier: "task")
+    }
+    
+}
+extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "task", for: indexPath) as? TaskTableViewCell else { return UITableViewCell() }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
 }

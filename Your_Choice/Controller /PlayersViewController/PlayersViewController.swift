@@ -163,7 +163,7 @@ class PlayersViewController: BaseViewController {
         super.viewDidLoad()
         addElementsToView()
         addDelegate()
-        registreationCell()
+        registrationCell()
         сonfig()
         removePlayersDataBase()
     }
@@ -271,9 +271,9 @@ class PlayersViewController: BaseViewController {
     private func addDelegate() {
         tableView.dataSource = self
         tableView.delegate = self
-       
     }
-    private func registreationCell() {
+    
+    private func registrationCell() {
         tableView.register(PlayersTableViewCell.self, forCellReuseIdentifier: "text")
         tableView.register(PlayerHeaderTableView.self, forHeaderFooterViewReuseIdentifier: "head")
     }

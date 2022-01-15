@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		37039D0B278E2B46006B22B4 /* OptionsPlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3704F7F92775D9B800145381 /* OptionsPlayersView.swift */; };
 		37039D12279086B6006B22B4 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37039D11279086B6006B22B4 /* TaskViewController.swift */; };
+		37039D1527934EBD006B22B4 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37039D1427934EBD006B22B4 /* TaskTableViewCell.swift */; };
 		3704F7F62775CE1200145381 /* PlayerHeaderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3704F7F52775CE1100145381 /* PlayerHeaderTableView.swift */; };
 		3704F7F82775D1C400145381 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3704F7F72775D1C400145381 /* CustomButton.swift */; };
 		3704F7FD2775E9DD00145381 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3704F7FC2775E9DD00145381 /* OptionsViewController.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		37039D11279086B6006B22B4 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
+		37039D1427934EBD006B22B4 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		3704F7F52775CE1100145381 /* PlayerHeaderTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerHeaderTableView.swift; sourceTree = "<group>"; };
 		3704F7F72775D1C400145381 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		3704F7F92775D9B800145381 /* OptionsPlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsPlayersView.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 		37039D0C27906DB5006B22B4 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				37039D1327934EAD006B22B4 /* TaskCell */,
 				370BC4AE276204920077F2A9 /* PlayersCell */,
 			);
 			path = Cell;
@@ -72,6 +75,14 @@
 				37039D11279086B6006B22B4 /* TaskViewController.swift */,
 			);
 			path = TaskViewController;
+			sourceTree = "<group>";
+		};
+		37039D1327934EAD006B22B4 /* TaskCell */ = {
+			isa = PBXGroup;
+			children = (
+				37039D1427934EBD006B22B4 /* TaskTableViewCell.swift */,
+			);
+			path = TaskCell;
 			sourceTree = "<group>";
 		};
 		3704F7FB2775E9C000145381 /* OptionsViewController */ = {
@@ -357,6 +368,7 @@
 				370BC4AD276204830077F2A9 /* PlayersTableViewCell.swift in Sources */,
 				370BC4A5275E47EA0077F2A9 /* RegistrationViewController.swift in Sources */,
 				3704F801278C2C5900145381 /* PlayerRealm.swift in Sources */,
+				37039D1527934EBD006B22B4 /* TaskTableViewCell.swift in Sources */,
 				370BC4A72761499C0077F2A9 /* PlayersViewController.swift in Sources */,
 				370BC4A3275E09B20077F2A9 /* BaseViewController.swift in Sources */,
 				37039D0B278E2B46006B22B4 /* OptionsPlayersView.swift in Sources */,
