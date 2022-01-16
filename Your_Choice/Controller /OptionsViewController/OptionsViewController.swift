@@ -34,7 +34,7 @@ class OptionsViewControoler: UIViewController{
         view.addSubview(optionPlayersView)
     }
     
-    @objc func done(){
+    @objc private func done(){
         let name = optionPlayersView.name
         let color = optionPlayersView.color
         let player = PlayerRealm()
@@ -48,7 +48,7 @@ class OptionsViewControoler: UIViewController{
         dismiss(animated: true)
     }
     
-    @objc func exit(){
+    @objc private func exit(){
         dismiss(animated: true, completion: nil)
     }
     

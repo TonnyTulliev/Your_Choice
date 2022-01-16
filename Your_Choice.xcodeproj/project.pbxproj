@@ -23,6 +23,8 @@
 		370BC4A5275E47EA0077F2A9 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370BC4A4275E47EA0077F2A9 /* RegistrationViewController.swift */; };
 		370BC4A72761499C0077F2A9 /* PlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370BC4A62761499C0077F2A9 /* PlayersViewController.swift */; };
 		370BC4AD276204830077F2A9 /* PlayersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370BC4AC276204830077F2A9 /* PlayersTableViewCell.swift */; };
+		37A3512A2794B77800D4E903 /* TaskSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A351292794B77800D4E903 /* TaskSettingsView.swift */; };
+		37A3512D2794BA4000D4E903 /* TasksSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A3512C2794BA4000D4E903 /* TasksSettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		370BC4A4275E47EA0077F2A9 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		370BC4A62761499C0077F2A9 /* PlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersViewController.swift; sourceTree = "<group>"; };
 		370BC4AC276204830077F2A9 /* PlayersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersTableViewCell.swift; sourceTree = "<group>"; };
+		37A351292794B77800D4E903 /* TaskSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSettingsView.swift; sourceTree = "<group>"; };
+		37A3512C2794BA4000D4E903 /* TasksSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksSettingsViewController.swift; sourceTree = "<group>"; };
 		890490CAD5D47D49DBF15081 /* Pods-Your_Choice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Your_Choice.debug.xcconfig"; path = "Target Support Files/Pods-Your_Choice/Pods-Your_Choice.debug.xcconfig"; sourceTree = "<group>"; };
 		D448B72406BE3BDE5E079EA0 /* Pods-Your_Choice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Your_Choice.release.xcconfig"; path = "Target Support Files/Pods-Your_Choice/Pods-Your_Choice.release.xcconfig"; sourceTree = "<group>"; };
 		EF33D9C7DDB040FC61597E76 /* Pods_Your_Choice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Your_Choice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,6 +140,7 @@
 				370BC4AB276204390077F2A9 /* PlayersViewController */,
 				3704F7FB2775E9C000145381 /* OptionsViewController */,
 				37039D102790868F006B22B4 /* TaskViewController */,
+				37A3512B2794BA1C00D4E903 /* TasksSettingsViewController */,
 			);
 			path = "Controller ";
 			sourceTree = "<group>";
@@ -226,8 +231,17 @@
 				3704F7F52775CE1100145381 /* PlayerHeaderTableView.swift */,
 				3704F7F72775D1C400145381 /* CustomButton.swift */,
 				3704F7F92775D9B800145381 /* OptionsPlayersView.swift */,
+				37A351292794B77800D4E903 /* TaskSettingsView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		37A3512B2794BA1C00D4E903 /* TasksSettingsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				37A3512C2794BA4000D4E903 /* TasksSettingsViewController.swift */,
+			);
+			path = TasksSettingsViewController;
 			sourceTree = "<group>";
 		};
 		C8233CBB3751DC63C2CD1D3E /* Pods */ = {
@@ -366,10 +380,12 @@
 				3704F7F82775D1C400145381 /* CustomButton.swift in Sources */,
 				3704F7FF277B217200145381 /* Player.swift in Sources */,
 				370BC4AD276204830077F2A9 /* PlayersTableViewCell.swift in Sources */,
+				37A3512D2794BA4000D4E903 /* TasksSettingsViewController.swift in Sources */,
 				370BC4A5275E47EA0077F2A9 /* RegistrationViewController.swift in Sources */,
 				3704F801278C2C5900145381 /* PlayerRealm.swift in Sources */,
 				37039D1527934EBD006B22B4 /* TaskTableViewCell.swift in Sources */,
 				370BC4A72761499C0077F2A9 /* PlayersViewController.swift in Sources */,
+				37A3512A2794B77800D4E903 /* TaskSettingsView.swift in Sources */,
 				370BC4A3275E09B20077F2A9 /* BaseViewController.swift in Sources */,
 				37039D0B278E2B46006B22B4 /* OptionsPlayersView.swift in Sources */,
 				37039D12279086B6006B22B4 /* TaskViewController.swift in Sources */,

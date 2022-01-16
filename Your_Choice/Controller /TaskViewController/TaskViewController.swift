@@ -33,7 +33,7 @@ class TaskViewController: UIViewController{
     
     private var addTaskButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Добавить задание", for: .normal)
+        button.setTitle("Создать задание", for: .normal)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.backgroundColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
@@ -85,6 +85,7 @@ class TaskViewController: UIViewController{
     private func config() {
         view.backgroundColor = .white
         navigationItem.title = "Задания"
+        tableView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     }
     
     private func addElements() {
