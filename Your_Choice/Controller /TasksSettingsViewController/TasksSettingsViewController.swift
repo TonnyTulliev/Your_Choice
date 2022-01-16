@@ -13,7 +13,7 @@ import RealmSwift
 class TasksSettingsViewController: UIViewController {
     
     let realm = try! Realm()
-    var playersVC: PlayersViewController?
+    var taskVC: TaskViewController?
     var taskSettingsView = TaskSettingView()
     
     override func viewDidLoad() {
@@ -35,28 +35,26 @@ class TasksSettingsViewController: UIViewController {
         addConstraints()
     }
     
+    private func  addElements(){
+        view.addSubview(taskSettingsView)
+    }
+    
     @objc private func done(){
-        let taskName = taskSettingsView.taksName
+        let taskName = taskSettingsView.taskName
         let category = taskSettingsView.category
         let task = TaskRealm()
         task.category = category
-        task.name = name
+        task.taskName = taskName
         try! self.realm.write({
             self.realm.add(task)
         })
-//        self.playersVC?.tableView.reloadData()
-//        self.playersVC?.showAndHideInfoImage()
+        self.taskVC?.tableView.reloadData()
         dismiss(animated: true)
     }
     
     @objc private func exit(){
         dismiss(animated: true, completion: nil)
     }
-    
-    private func  addElements(){
-        view.addSubview(taskSettingsView)
-    }
-    
     private func  addConstraints(){
         taskSettingsView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 60).isActive = true
         taskSettingsView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true

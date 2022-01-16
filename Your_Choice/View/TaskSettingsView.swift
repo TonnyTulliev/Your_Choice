@@ -93,6 +93,8 @@ class TaskSettingView: UIView {
     private func addElements() {
         self.addSubview(label)
         self.addSubview(exitButton)
+        self.addSubview(taskTextField)
+        self.addSubview(doneButton)
     }
     
     private func addConstraints() {
@@ -113,7 +115,7 @@ class TaskSettingView: UIView {
         }
         doneButton.snp.makeConstraints { doneButton in
             doneButton.size.equalTo(CGSize(width: 250, height: 55))
-            doneButton.top.equalTo(taskTextField.snp.bottom).offset(50)
+            doneButton.top.equalTo(taskTextField.snp.bottom).offset(20)
             doneButton.centerX.equalTo(self.snp.centerX)
         }
     }

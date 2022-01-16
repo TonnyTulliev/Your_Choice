@@ -12,6 +12,8 @@ import RealmSwift
 
 class TaskViewController: UIViewController{
     
+    var realm = try! Realm()
+    
     private var taskImage: UIImageView = {
         var image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -20,7 +22,7 @@ class TaskViewController: UIViewController{
         return image
     }()
     
-    private var tableView: UITableView = {
+    var tableView: UITableView = {
         var tableView = UITableView()
         tableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -72,10 +74,14 @@ class TaskViewController: UIViewController{
         addConstraints()
         addDelegate()
         registrationCell()
+        tableView.reloadData()
+        print(realm.objects(TaskRealm.self).count)
     }
     
     @objc private func addTask() {
-        
+        let taskVC = TasksSettingsViewController()
+        taskVC.taskVC = self
+        navigationController?.present(taskVC, animated: true, completion: nil)
     }
     
     @objc private func goNext() {
@@ -85,7 +91,7 @@ class TaskViewController: UIViewController{
     private func config() {
         view.backgroundColor = .white
         navigationItem.title = "Задания"
-        tableView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        tableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
     
     private func addElements() {
@@ -139,15 +145,17 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return realm.objects(TaskRealm.self).count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "task", for: indexPath) as? TaskTableViewCell else { return UITableViewCell() }
+        cell.fetchData(task: realm.objects(TaskRealm.self)[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

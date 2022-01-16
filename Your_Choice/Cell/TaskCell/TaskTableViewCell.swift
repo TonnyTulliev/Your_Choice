@@ -11,6 +11,8 @@ import SnapKit
 
 class TaskTableViewCell: UITableViewCell {
     
+    var task: TaskRealm?
+    
     private var taskImage: UIImageView = {
     let image = UIImageView()
         image.image = UIImage(systemName: "square.and.pencil")
@@ -29,13 +31,18 @@ class TaskTableViewCell: UITableViewCell {
         }
     }
     
+    func fetchData(task: TaskRealm?){
+        guard let task = task else { return }
+        self.textLabel?.text = task.taskName
+        self.textLabel?.textAlignment = .center
+        self.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        
+        
+    }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.addSubview(taskImage)
         addConstraints()
-        self.textLabel?.text = "Тестовая задача"
-        self.textLabel?.textAlignment = .center
-        self.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         
     }
     

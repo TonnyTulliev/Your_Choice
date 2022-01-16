@@ -287,7 +287,8 @@ class PlayersViewController: BaseViewController {
     
     private func removePlayersDataBase() {
         try! realm.write({
-            realm.deleteAll()
+            let base = realm.objects(PlayerRealm.self)
+            realm.delete(base)
         })
     }
     
