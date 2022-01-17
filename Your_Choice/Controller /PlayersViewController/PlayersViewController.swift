@@ -280,7 +280,7 @@ class PlayersViewController: BaseViewController {
     
     private func сonfig(){
         view.alpha = 1
-        navigationController?.navigationBar.isHidden = false
+        navigationController?.isNavigationBarHidden = false
         navigationItem.title = "Игроки"
        
     }

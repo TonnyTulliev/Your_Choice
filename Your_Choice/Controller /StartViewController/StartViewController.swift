@@ -18,6 +18,15 @@ class StartViewController: BaseViewController {
         return image
     }()
     
+    private var smokeImageView: UIImageView = {
+        var image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: "smoke")
+        image.contentMode = .scaleAspectFill
+        image.alpha = 0.9
+        return image
+    }()
+    
     private var emailTextField: UITextField = {
         var textfield = UITextField()
         textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textfield.frame.height))
@@ -80,16 +89,6 @@ class StartViewController: BaseViewController {
         return button
     }()
     
-//    private var stackView: UIStackView = {
-//       var stack = UIStackView()
-//        stack.axis = NSLayoutConstraint.Axis.vertical
-//        stack.distribution = UIStackView.Distribution.equalSpacing
-//        stack.alignment = UIStackView.Alignment.center
-//        stack.spacing = 20
-//        stack.backgroundColor = .white
-//        stack.translatesAutoresizingMaskIntoConstraints = false
-//       return stack
-//    }()
     
     //MARK:- Life cycle vc
     override func viewDidLoad() {
@@ -105,6 +104,10 @@ class StartViewController: BaseViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        smokeImageView.heightAnchor.constraint(equalToConstant: 750).isActive = true
+        smokeImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        smokeImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: 30).isActive = true
+        smokeImageView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
         registerButtons.heightAnchor.constraint(equalToConstant: 55).isActive = true
         registerButtons.widthAnchor.constraint(equalToConstant: 250).isActive = true
@@ -132,6 +135,8 @@ class StartViewController: BaseViewController {
         mainImageView.widthAnchor.constraint(equalToConstant: 250).isActive = true
         mainImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         mainImageView.bottomAnchor.constraint(equalTo: emailTextField.topAnchor, constant: -50).isActive = true
+        
+        
     }
     
     //MARK:- objc metods
@@ -148,6 +153,8 @@ class StartViewController: BaseViewController {
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
         view.addSubview(mainImageView)
+        view.addSubview(smokeImageView)
+        view.sendSubviewToBack(smokeImageView)
     }
     
     private func addTFDelegate() {

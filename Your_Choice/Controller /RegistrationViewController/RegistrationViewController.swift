@@ -35,6 +35,15 @@ class RegistrationViewController: BaseViewController {
         return textfield
     }()
     
+    private var smokeImageView: UIImageView = {
+        var image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: "smoke")
+        image.contentMode = .scaleAspectFill
+        image.alpha = 0.9
+        return image
+    }()
+    
     private var nameTextField: UITextField = {
         var textfield = UITextField()
         textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textfield.frame.height))
@@ -117,14 +126,21 @@ class RegistrationViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backButtonTitle = "Выйти"
-        navigationController?.isNavigationBarHidden = false
         addTFDelegate()
         addElementsToView()
         //  addRule()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        smokeImageView.heightAnchor.constraint(equalToConstant: 750).isActive = true
+        smokeImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        smokeImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: 50).isActive = true
+        smokeImageView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: 50).isActive = true
+        
         backButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
         backButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         backButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -184,6 +200,8 @@ class RegistrationViewController: BaseViewController {
         view.addSubview(mainImageView)
         view.addSubview(backButton)
         view.addSubview(repeatPasswordTextField)
+        view.addSubview(smokeImageView)
+        view.sendSubviewToBack(smokeImageView)
     
     }
     
