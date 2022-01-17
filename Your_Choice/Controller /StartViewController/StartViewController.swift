@@ -18,7 +18,7 @@ class StartViewController: BaseViewController {
         return image
     }()
     
-    private var smokeImageView: UIImageView = {
+    private var backgroundImageView: UIImageView = {
         var image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "smoke")
@@ -104,10 +104,10 @@ class StartViewController: BaseViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        smokeImageView.heightAnchor.constraint(equalToConstant: 750).isActive = true
-        smokeImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        smokeImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: 30).isActive = true
-        smokeImageView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        backgroundImageView.heightAnchor.constraint(equalToConstant: 750).isActive = true
+        backgroundImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: 30).isActive = true
+        backgroundImageView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
         registerButtons.heightAnchor.constraint(equalToConstant: 55).isActive = true
         registerButtons.widthAnchor.constraint(equalToConstant: 250).isActive = true
@@ -153,8 +153,8 @@ class StartViewController: BaseViewController {
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
         view.addSubview(mainImageView)
-        view.addSubview(smokeImageView)
-        view.sendSubviewToBack(smokeImageView)
+        view.addSubview(backgroundImageView)
+        view.sendSubviewToBack(backgroundImageView)
     }
     
     private func addTFDelegate() {

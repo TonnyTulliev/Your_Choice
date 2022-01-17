@@ -35,7 +35,7 @@ class RegistrationViewController: BaseViewController {
         return textfield
     }()
     
-    private var smokeImageView: UIImageView = {
+    private var backgroundImageView: UIImageView = {
         var image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "smoke")
@@ -136,10 +136,10 @@ class RegistrationViewController: BaseViewController {
     }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        smokeImageView.heightAnchor.constraint(equalToConstant: 750).isActive = true
-        smokeImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        smokeImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: 50).isActive = true
-        smokeImageView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: 50).isActive = true
+        backgroundImageView.heightAnchor.constraint(equalToConstant: 750).isActive = true
+        backgroundImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: 50).isActive = true
+        backgroundImageView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: 50).isActive = true
         
         backButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
         backButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
@@ -200,8 +200,8 @@ class RegistrationViewController: BaseViewController {
         view.addSubview(mainImageView)
         view.addSubview(backButton)
         view.addSubview(repeatPasswordTextField)
-        view.addSubview(smokeImageView)
-        view.sendSubviewToBack(smokeImageView)
+        view.addSubview(backgroundImageView)
+        view.sendSubviewToBack(backgroundImageView)
     
     }
     
