@@ -14,28 +14,47 @@ class TaskViewController: UIViewController{
     
     var realm = try! Realm()
     
-    private var taskImage: UIImageView = {
-        var image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "Tasks")
-        image.contentMode = .scaleAspectFill
-        return image
+  
+    private var hederView : UIView = {
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 0.5057837963, green: 0.3098528385, blue: 0.9293116927, alpha: 1)
+        view.layer.cornerRadius = 15
+        view.layer.borderWidth = 1.5
+        view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOffset = CGSize(width: 3, height: 3)
+        view.layer.shadowOpacity = 0.6
+        view.layer.shadowRadius = 4.0
+        return view
     }()
     
     var tableView: UITableView = {
         var tableView = UITableView()
         tableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.layer.borderWidth = 4
-        tableView.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        tableView.layer.borderWidth = 1.5
+        tableView.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         tableView.layer.cornerRadius = 15
         tableView.tableFooterView = UIView()
         return tableView
     }()
     
-    private var addTaskButton: UIButton = {
+    private var containerView: UIView = {
+        let containerView:UIView = UIView()
+        containerView.backgroundColor = .clear
+        containerView.layer.shadowColor = UIColor.black.cgColor
+        containerView.layer.shadowOffset = CGSize(width: 3, height: 3)
+        containerView.layer.shadowOpacity = 0.6
+        containerView.layer.shadowRadius = 4.0
+        return containerView
+    }()
+    
+    private var plusButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Создать задание", for: .normal)
+        button.setImage(UIImage(systemName: "folder.badge.plus"), for: .normal)
+        button.layer.borderWidth = 2
+        button.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.backgroundColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
@@ -48,6 +67,33 @@ class TaskViewController: UIViewController{
         button.layer.shadowRadius = 4.0
         button.addTarget(self, action: #selector(addTask), for: .touchUpInside)
         return button
+    }()
+    
+    private var minusButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "folder.fill.badge.minus"), for: .normal)
+        button.largeContentImage = .add
+        button.layer.borderWidth = 2
+        button.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        button.titleLabel?.textAlignment = .center
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        button.tintColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        button.layer.cornerRadius = 25
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 3, height: 3)
+        button.layer.shadowOpacity = 0.6
+        button.layer.shadowRadius = 4.0
+        button.addTarget(self, action: #selector(deleteTask), for: .touchUpInside)
+        return button
+    }()
+    
+    private var buttonView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .none
+        return view
     }()
     
     private var nextButton: UIButton = {
@@ -84,6 +130,10 @@ class TaskViewController: UIViewController{
         navigationController?.present(taskVC, animated: true, completion: nil)
     }
     
+    @objc private func  deleteTask() {
+        print("delete")
+    }
+    
     @objc private func goNext() {
         
     }
@@ -95,17 +145,29 @@ class TaskViewController: UIViewController{
     }
     
     private func addElements() {
-        view.addSubview(tableView)
-        view.addSubview(taskImage)
-        view.addSubview(addTaskButton)
+        view.addSubview(containerView)
+        containerView.addSubview(tableView)
+        view.addSubview(hederView)
         view.addSubview(nextButton)
+        view.addSubview(buttonView)
+        buttonView.addSubview(minusButton)
+        buttonView.addSubview(plusButton)
+
     }
     private func addConstraints() {
-        taskImage.snp.makeConstraints { taskImage in
-            taskImage.bottom.equalTo(tableView.snp.top).offset(-30)
-            taskImage.centerX.equalTo(view.snp.centerX)
-            taskImage.height.equalTo(80)
-            taskImage.width.equalTo(250)
+        hederView.snp.makeConstraints { hederView in
+            hederView.bottom.equalTo(containerView.snp.top).offset(-20)
+            hederView.centerX.equalTo(view.snp.centerX)
+            hederView.height.equalTo(60)
+            hederView.left.equalTo(10)
+            hederView.right.equalTo(-10)
+        }
+        containerView.snp.makeConstraints { containerView in
+            containerView.centerX.equalTo(view.snp.centerX)
+            containerView.centerY.equalTo(view.snp.centerY)
+            containerView.left.equalTo(view.snp.left).offset(10)
+            containerView.right.equalTo(view.snp.right).offset(-10)
+            containerView.height.equalTo(300)
         }
         tableView.snp.makeConstraints { tableView in
             tableView.centerX.equalTo(view.snp.centerX)
@@ -115,16 +177,28 @@ class TaskViewController: UIViewController{
             tableView.height.equalTo(300)
         }
         nextButton.snp.makeConstraints { nextButton in
-            nextButton.top.equalTo(tableView.snp.bottom).offset(20)
+            nextButton.top.equalTo(tableView.snp.bottom).offset(40)
             nextButton.centerX.equalTo(view.snp.centerX)
             nextButton.height.equalTo(55)
             nextButton.width.equalTo(250)
         }
-        addTaskButton.snp.makeConstraints { addTaskButton in
-            addTaskButton.top.equalTo(nextButton.snp.bottom).offset(20)
-            addTaskButton.centerX.equalTo(view.snp.centerX)
-            addTaskButton.height.equalTo(55)
-            addTaskButton.width.equalTo(250)
+        buttonView.snp.makeConstraints { buttonView in
+            buttonView.centerY.equalTo(tableView.snp.bottom).offset(0)
+            buttonView.centerX.equalTo(tableView.snp.centerX)
+            buttonView.height.equalTo(50)
+            buttonView.width.equalTo(250)
+        }
+        minusButton.snp.makeConstraints { minusButton in
+            minusButton.left.equalTo(buttonView.snp.left)
+            minusButton.bottom.equalTo(buttonView.snp.bottom)
+            minusButton.height.equalTo(50)
+            minusButton.width.equalTo(140)
+        }
+        plusButton.snp.makeConstraints { plusButton in
+            plusButton.right.equalTo(buttonView.snp.right)
+            plusButton.bottom.equalTo(buttonView.snp.bottom)
+            plusButton.height.equalTo(50)
+            plusButton.width.equalTo(140)
         }
     }
     
@@ -155,7 +229,16 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.cellForRow(at: indexPath)?.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+        switch tableView.cellForRow(at: indexPath)?.backgroundColor { // добавить норм функцию 
+        case #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1) :
+            tableView.cellForRow(at: indexPath)?.backgroundColor = .white
+        case #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) :
+            tableView.cellForRow(at: indexPath)?.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+        case .some(_):
+            tableView.cellForRow(at: indexPath)?.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+        case .none:
+            tableView.cellForRow(at: indexPath)?.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

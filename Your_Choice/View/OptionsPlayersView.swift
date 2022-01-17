@@ -41,7 +41,7 @@ class OptionsPlayersView: UIView {
     private var nameTextField: UITextField = {
         let textfield = UITextField()
         textfield.translatesAutoresizingMaskIntoConstraints = false
-        textfield.layer.borderWidth = 3.0
+        textfield.layer.borderWidth = 1.5
         textfield.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
         textfield.backgroundColor = #colorLiteral(red: 0.9697982669, green: 0.9640328288, blue: 0.9742299914, alpha: 1)
         textfield.layer.cornerRadius = 15
@@ -57,7 +57,7 @@ class OptionsPlayersView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 15
-        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.4393012524, green: 0.1838757396, blue: 0.8778187633, alpha: 1))
+        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.4766717553, green: 0.2852187455, blue: 0.8323209882, alpha: 1))
         button.addTarget(self, action: #selector(purpleTapped), for: .touchUpInside)
         return button
     }()
@@ -66,7 +66,7 @@ class OptionsPlayersView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 15
-        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.8534528613, green: 0.1875628829, blue: 0.2131209671, alpha: 1))
+        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.7909195423, green: 0.3310045898, blue: 0.3346687257, alpha: 1))
         button.addTarget(self, action: #selector(redTapped), for: .touchUpInside)
         return button
     }()
@@ -75,7 +75,7 @@ class OptionsPlayersView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 15
-        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.2540225983, green: 0.3274088502, blue: 0.9160223603, alpha: 1))
+        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.3977680504, green: 0.4119620025, blue: 0.7987191081, alpha: 1))
         button.addTarget(self, action: #selector(blueTapped), for: .touchUpInside)
         return button
     }()
@@ -85,7 +85,7 @@ class OptionsPlayersView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.borderColor = .none
         button.layer.cornerRadius = 15
-        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.2306479812, green: 0.7787331939, blue: 0.2370785177, alpha: 1))
+        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.340542227, green: 0.6136100292, blue: 0.3587245941, alpha: 1))
         button.addTarget(self, action: #selector(greenTapped), for: .touchUpInside)
         return button
     }()
@@ -136,8 +136,8 @@ class OptionsPlayersView: UIView {
         self.backgroundColor = .white
         self.translatesAutoresizingMaskIntoConstraints = false
         self.layer.cornerRadius = 30
-        self.layer.borderWidth = 6
-        self.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        self.layer.borderWidth = 1.5
+        self.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
     }
     
     private func addElements() {
@@ -234,13 +234,13 @@ class OptionsPlayersView: UIView {
             exitButton.size.equalTo(CGSize(width: 40, height: 40))
         }
         label.snp.makeConstraints { label in
-            label.top.equalTo(self.snp.top).offset(20)
+            label.top.equalTo(self.snp.top).offset(60)
             label.centerX.equalTo(self.snp.centerX)
-            label.centerY.equalTo(exitButton.snp.centerY)
+//            label.centerY.equalTo(exitButton.snp.centerY)
         }
         nameTextField.snp.makeConstraints { nameTextField in
-            nameTextField.size.equalTo(CGSize(width: 300, height: 60))
-            nameTextField.top.equalTo(exitButton.snp.bottom).offset(20)
+            nameTextField.size.equalTo(CGSize(width: 300, height: 55))
+            nameTextField.top.equalTo(label.snp.bottom).offset(40)
             nameTextField.centerX.equalTo(self.snp.centerX)
         }
         stackView.snp.makeConstraints { stackView in

@@ -130,7 +130,7 @@ class PlayersViewController: BaseViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 3, height: 3)
-        button.layer.shadowOpacity = 0.1
+        button.layer.shadowOpacity = 0.6
         button.layer.shadowRadius = 4.0
         button.addTarget(self, action: #selector(minusPlayer), for: .touchUpInside)
         return button
@@ -212,15 +212,6 @@ class PlayersViewController: BaseViewController {
         label.widthAnchor.constraint(equalToConstant: 250).isActive = true
         label.centerXAnchor.constraint(equalTo: hederView.centerXAnchor).isActive = true
         
-        
-        
-//        infoImage.centerYAnchor.constraint(equalTo: tableView.centerYAnchor,constant: -12).isActive = true
-//        infoImage.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
-//        infoImage.heightAnchor.constraint(equalToConstant: 120).isActive = true
-//        infoImage.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        
-//        infoLabel.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
-//        infoLabel.topAnchor.constraint(equalTo: infoImage.bottomAnchor,constant: -12).isActive = true
     }
     
     //MARK:- objc metods

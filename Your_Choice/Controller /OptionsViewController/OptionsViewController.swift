@@ -54,7 +54,7 @@ class OptionsViewControoler: UIViewController{
     private func  addConstraints(){
         optionPlayersView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 60).isActive = true
         optionPlayersView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        optionPlayersView.heightAnchor.constraint(equalToConstant: 400).isActive = true
+        optionPlayersView.heightAnchor.constraint(equalToConstant: 470).isActive = true
         optionPlayersView.widthAnchor.constraint(equalToConstant: 350).isActive = true
     }
 }
