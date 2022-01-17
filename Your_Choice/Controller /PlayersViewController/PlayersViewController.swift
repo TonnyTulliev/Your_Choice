@@ -38,37 +38,46 @@ class PlayersViewController: BaseViewController {
         return label
     }()
     
-    private var infoImage : UIImageView = {
-        var image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.isHidden = false
-        image.image = UIImage(systemName: "exclamationmark.triangle")
-        image.tintColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-        image.contentMode = .scaleAspectFit
-        return image
-    }()
-    
-    private var infoLabel : UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.isHidden = false
-        label.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-        label.text = "Недостаточно игоков"
-        label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
-        label.numberOfLines = 0
-        return label
+    private var hederView : UIView = {
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 0.5057837963, green: 0.3098528385, blue: 0.9293116927, alpha: 1)
+        view.layer.cornerRadius = 15
+        view.layer.borderWidth = 1.5
+        view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOffset = CGSize(width: 3, height: 3)
+        view.layer.shadowOpacity = 0.6
+        view.layer.shadowRadius = 4.0
+        return view
     }()
     
     var tableView: UITableView = {
         var tableView = UITableView()
+        let imageView = UIImageView(image: UIImage(named: "people"))
+        imageView.contentMode = .scaleAspectFit
+        tableView.backgroundView = imageView
         tableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.layer.borderWidth = 4
-        tableView.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        tableView.layer.borderWidth = 1.5
+        tableView.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         tableView.layer.cornerRadius = 15
         tableView.tableFooterView = UIView()
+        tableView.layer.shadowColor = UIColor.black.cgColor
+        tableView.layer.shadowOffset = CGSize(width: 3, height: 3)
+        tableView.layer.shadowOpacity = 0.6
+        tableView.layer.shadowRadius = 4.0
         return tableView
+    }()
+    
+    var containerView: UIView = {
+        let containerView:UIView = UIView()
+        containerView.backgroundColor = .clear
+        containerView.layer.shadowColor = UIColor.black.cgColor
+        containerView.layer.shadowOffset = CGSize(width: 3, height: 3)
+        containerView.layer.shadowOpacity = 0.6
+        containerView.layer.shadowRadius = 4.0
+        return containerView
     }()
     
     private var nextButton: UIButton = {
@@ -121,7 +130,7 @@ class PlayersViewController: BaseViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 3, height: 3)
-        button.layer.shadowOpacity = 0.6
+        button.layer.shadowOpacity = 0.1
         button.layer.shadowRadius = 4.0
         button.addTarget(self, action: #selector(minusPlayer), for: .touchUpInside)
         return button
@@ -144,20 +153,6 @@ class PlayersViewController: BaseViewController {
         return view
     }()
     
-    private var hederView : UIView = {
-        let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
-        view.layer.cornerRadius = 25
-        view.layer.borderWidth = 2
-        view.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOffset = CGSize(width: 3, height: 3)
-        view.layer.shadowOpacity = 0.2
-        view.layer.shadowRadius = 2.0
-        return view
-    }()
-    
     //MARK:- life cycle VC
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -174,7 +169,7 @@ class PlayersViewController: BaseViewController {
         playersImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         playersImageView.widthAnchor.constraint(equalToConstant: 250).isActive = true
         playersImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        playersImageView.bottomAnchor.constraint(equalTo: hederView.topAnchor, constant: -40).isActive = true
+        playersImageView.bottomAnchor.constraint(equalTo: hederView.topAnchor, constant: -30).isActive = true
         
         nextButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
         nextButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
@@ -191,16 +186,22 @@ class PlayersViewController: BaseViewController {
         plusButton.rightAnchor.constraint(equalTo: buttonView.rightAnchor  ).isActive = true
         plusButton.bottomAnchor.constraint(equalTo: buttonView.bottomAnchor).isActive = true
         
-        hederView.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: 0).isActive = true
-        hederView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
-        hederView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
-        hederView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        hederView.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: -20).isActive = true
+        hederView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        hederView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+        hederView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
-        tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 40).isActive = true
+        containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 60).isActive = true
+        containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        containerView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        containerView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+        containerView.heightAnchor.constraint(equalToConstant: 243).isActive = true
+        
+        tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 60).isActive = true
         tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
-        tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
-        tableView.heightAnchor.constraint(equalToConstant: 244).isActive = true
+        tableView.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 10).isActive = true
+        tableView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -10).isActive = true
+        tableView.heightAnchor.constraint(equalToConstant: 243).isActive = true
        
         buttonView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         buttonView.widthAnchor.constraint(equalToConstant: 250).isActive = true
@@ -211,13 +212,15 @@ class PlayersViewController: BaseViewController {
         label.widthAnchor.constraint(equalToConstant: 250).isActive = true
         label.centerXAnchor.constraint(equalTo: hederView.centerXAnchor).isActive = true
         
-        infoImage.centerYAnchor.constraint(equalTo: tableView.centerYAnchor,constant: -12).isActive = true
-        infoImage.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
-        infoImage.heightAnchor.constraint(equalToConstant: 120).isActive = true
-        infoImage.widthAnchor.constraint(equalToConstant: 120).isActive = true
         
-        infoLabel.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
-        infoLabel.topAnchor.constraint(equalTo: infoImage.bottomAnchor,constant: -12).isActive = true
+        
+//        infoImage.centerYAnchor.constraint(equalTo: tableView.centerYAnchor,constant: -12).isActive = true
+//        infoImage.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
+//        infoImage.heightAnchor.constraint(equalToConstant: 120).isActive = true
+//        infoImage.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        
+//        infoLabel.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
+//        infoLabel.topAnchor.constraint(equalTo: infoImage.bottomAnchor,constant: -12).isActive = true
     }
     
     //MARK:- objc metods
@@ -234,7 +237,6 @@ class PlayersViewController: BaseViewController {
     
     @objc private func minusPlayer() {
         let minPlayers = 0
-        showAndHideInfoImage()
         if realm.objects(PlayerRealm.self).count != minPlayers {
             guard let lastPlayer = realm.objects(PlayerRealm.self).last else { return }
             try! realm.write({
@@ -257,15 +259,15 @@ class PlayersViewController: BaseViewController {
     //MARK:- metods
     private func addElementsToView() {
         view.addSubview(nextButton)
-        view.addSubview(tableView)
+        view.addSubview(containerView)
+        containerView.addSubview(tableView)
         view.addSubview(buttonView)
         view.addSubview(hederView)
         view.addSubview(playersImageView)
         buttonView.addSubview(minusButton)
         buttonView.addSubview(plusButton)
         hederView.addSubview(label)
-        tableView.tableFooterView?.addSubview(infoImage)
-        tableView.tableFooterView?.addSubview(infoLabel)
+    
     }
     
     private func addDelegate() {
@@ -302,16 +304,6 @@ class PlayersViewController: BaseViewController {
     private func changeStateTheTaskButton() {
         if realm.objects(PlayerRealm.self).count < 2  {
             alert(title: "Внимание", message: "Необходимо минимум 2 игрока")
-        }
-    }
-    
-    func showAndHideInfoImage(){// доделать проверку
-        if realm.objects(PlayerRealm.self).count <= 1 {
-            infoImage.isHidden = false
-            infoLabel.isHidden = false
-        }else {
-            infoImage.isHidden = true
-            infoLabel.isHidden = true
         }
     }
 }
