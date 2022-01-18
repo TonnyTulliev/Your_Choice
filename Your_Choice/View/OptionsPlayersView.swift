@@ -284,7 +284,12 @@ class OptionsPlayersView: UIView {
 
 extension OptionsPlayersView: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
+        switch textField {
+        default:
+            name = textField.text ?? ""
+            textField.resignFirstResponder()
+            checkButtonEnable()
+        }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {

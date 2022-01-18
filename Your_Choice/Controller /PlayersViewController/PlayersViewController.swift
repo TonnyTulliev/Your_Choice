@@ -21,11 +21,13 @@ class PlayersViewController: BaseViewController {
     
     private var playersImageView: UIImageView = {
         var image = UIImageView()
-         image.translatesAutoresizingMaskIntoConstraints = false
-         image.image = UIImage(named: "Players")
-         image.contentMode = .scaleAspectFill
-         return image
-     }()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: "Players")
+        image.contentMode = .scaleAspectFill
+        image.isHidden = false
+        
+        return image
+    }()
     
     private var label : UILabel = {
         var label = UILabel()
@@ -217,6 +219,7 @@ class PlayersViewController: BaseViewController {
     //MARK:- objc metods
     @objc private func plusPlayer() {
         let maxPlayers = 4
+        showAndHidePlayersImage()
         if realm.objects(PlayerRealm.self).count < maxPlayers {
             let optionsVC = OptionsViewControoler()
             optionsVC.playersVC = self
@@ -234,10 +237,9 @@ class PlayersViewController: BaseViewController {
                 realm.delete(lastPlayer)
             })
             tableView.reloadData()
-            print(realm.objects(PlayerRealm.self).count)
+            showAndHidePlayersImage()
         }else {
             alert(title: "Внимание", message: "Необходимо минимум 2 игрока")
-            print(realm.objects(PlayerRealm.self).count)
         }
     }
     
@@ -292,9 +294,11 @@ class PlayersViewController: BaseViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    private func changeStateTheTaskButton() {
-        if realm.objects(PlayerRealm.self).count < 2  {
-            alert(title: "Внимание", message: "Необходимо минимум 2 игрока")
+    func showAndHidePlayersImage() {
+        if realm.objects(PlayerRealm.self).count < 1 {
+            tableView.backgroundView?.isHidden = false
+        }else {
+            tableView.backgroundView?.isHidden = true
         }
     }
 }

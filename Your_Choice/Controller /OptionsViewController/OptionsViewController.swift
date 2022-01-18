@@ -44,6 +44,7 @@ class OptionsViewControoler: UIViewController{
             self.realm.add(player)
         })
         self.playersVC?.tableView.reloadData()
+        self.playersVC?.showAndHidePlayersImage()
         dismiss(animated: true)
     }
     

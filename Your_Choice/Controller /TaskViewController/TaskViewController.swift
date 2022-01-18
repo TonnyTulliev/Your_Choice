@@ -29,6 +29,17 @@ class TaskViewController: UIViewController{
         return view
     }()
     
+    private var label : UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.textColor = .white
+        label.text = "Выберите задание"
+        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        label.numberOfLines = 0
+        return label
+    }()
+    
     var tableView: UITableView = {
         var tableView = UITableView()
         tableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -131,7 +142,16 @@ class TaskViewController: UIViewController{
     }
     
     @objc private func  deleteTask() {
-        print("delete")
+        let minTasks = 0
+        if realm.objects(TaskRealm.self).count != minTasks {
+        guard let lastTask = realm.objects(TaskRealm.self).last else { return }
+        try! realm.write({
+            realm.delete(lastTask)
+        })
+        tableView.reloadData()
+        }else{
+            alert(title: "Внимание", message: "Создайте задание")
+        }
     }
     
     @objc private func goNext() {
@@ -148,6 +168,7 @@ class TaskViewController: UIViewController{
         view.addSubview(containerView)
         containerView.addSubview(tableView)
         view.addSubview(hederView)
+        hederView.addSubview(label)
         view.addSubview(nextButton)
         view.addSubview(buttonView)
         buttonView.addSubview(minusButton)
@@ -162,16 +183,21 @@ class TaskViewController: UIViewController{
             hederView.left.equalTo(10)
             hederView.right.equalTo(-10)
         }
+        label.snp.makeConstraints { label in
+            label.centerY.equalTo(hederView.snp.centerY)
+            label.centerX.equalTo(hederView.snp.centerX)
+
+        }
         containerView.snp.makeConstraints { containerView in
             containerView.centerX.equalTo(view.snp.centerX)
-            containerView.centerY.equalTo(view.snp.centerY)
+            containerView.centerY.equalTo(view.snp.centerY).offset(40)
             containerView.left.equalTo(view.snp.left).offset(10)
             containerView.right.equalTo(view.snp.right).offset(-10)
             containerView.height.equalTo(300)
         }
         tableView.snp.makeConstraints { tableView in
             tableView.centerX.equalTo(view.snp.centerX)
-            tableView.centerY.equalTo(view.snp.centerY)
+            tableView.centerY.equalTo(view.snp.centerY).offset(40)
             tableView.left.equalTo(view.snp.left).offset(10)
             tableView.right.equalTo(view.snp.right).offset(-10)
             tableView.height.equalTo(300)
@@ -209,6 +235,13 @@ class TaskViewController: UIViewController{
     
     private func registrationCell(){
         tableView.register(TaskTableViewCell.self, forCellReuseIdentifier: "task")
+    }
+    
+    private func alert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
     
 }

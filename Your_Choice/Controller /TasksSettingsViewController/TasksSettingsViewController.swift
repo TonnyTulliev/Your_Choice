@@ -41,7 +41,7 @@ class TasksSettingsViewController: UIViewController {
     
     @objc private func done(){
         let taskName = taskSettingsView.taskName
-        let category = taskSettingsView.category
+        let category = taskSettingsView.taskType
         let task = TaskRealm()
         task.category = category
         task.taskName = taskName
@@ -58,7 +58,7 @@ class TasksSettingsViewController: UIViewController {
     private func  addConstraints(){
         taskSettingsView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 60).isActive = true
         taskSettingsView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        taskSettingsView.heightAnchor.constraint(equalToConstant: 400).isActive = true
+        taskSettingsView.heightAnchor.constraint(equalToConstant: 470).isActive = true
         taskSettingsView.widthAnchor.constraint(equalToConstant: 350).isActive = true
     }
 }
