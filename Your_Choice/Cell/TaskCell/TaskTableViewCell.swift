@@ -15,10 +15,8 @@ class TaskTableViewCell: UITableViewCell {
     
     private var taskImage: UIImageView = {
     let image = UIImageView()
-        image.image = UIImage(systemName: "square.and.pencil")
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
-        image.tintColor = .black
     return image
     }()
     
@@ -26,13 +24,14 @@ class TaskTableViewCell: UITableViewCell {
         taskImage.snp.makeConstraints { taskImage in
             taskImage.centerY.equalTo(self.snp.centerY)
             taskImage.left.equalTo(self.snp.left).offset(20)
-            taskImage.height.equalTo(40)
-            taskImage.width.equalTo(40)
+            taskImage.height.equalTo(45)
+            taskImage.width.equalTo(45)
         }
     }
     
     func fetchData(task: TaskRealm?){
         guard let task = task else { return }
+        taskImage.image = UIImage(named: task.category)
         self.textLabel?.text = task.taskName
         self.textLabel?.textAlignment = .center
         self.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)

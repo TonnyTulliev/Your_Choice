@@ -47,7 +47,6 @@ class TaskSettingView: UIView {
         textfield.placeholder = "Напишите задание"
         textfield.font = UIFont.boldSystemFont(ofSize: 18)
         textfield.textAlignment = .center
-        textfield.contentMode = .center
         textfield.returnKeyType = .done
         return textfield
     }()
@@ -55,10 +54,9 @@ class TaskSettingView: UIView {
     private var shoppingTaskButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 15
-        button.setBackgroundImage(UIImage(named: "shop"), for: .normal)
-        button.layer.borderWidth = 1.5
-        button.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        button.layer.cornerRadius = 10
+//        button.setBackgroundImage(UIImage(named: "shop"), for: .normal)
+        button.setImage(UIImage(named: "shop"), for: .normal)
         button.clipsToBounds = true
         button.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(shoppingTaskTapped), for: .touchUpInside)
@@ -69,11 +67,9 @@ class TaskSettingView: UIView {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "home"), for: .normal)
         button.contentMode = .scaleAspectFit
-        button.layer.borderWidth = 1.5
-        button.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 15
+        button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(homeTaskTapped), for: .touchUpInside)
         return button
     }()
@@ -82,26 +78,22 @@ class TaskSettingView: UIView {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "person"), for: .normal)
         button.contentMode = .scaleAspectFit
-        button.layer.borderWidth = 1.5
-        button.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 15
+        button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(personalTaskTapped), for: .touchUpInside)
         return button
     }()
     
     private var otherTaskButton: UIButton = {
         let button = UIButton()
-        button.setBackgroundImage(UIImage(systemName: "ellipsis.circle"), for: .normal)
+        button.setImage(UIImage(named: "other"), for: .normal)
         button.tintColor = .black
         button.contentMode = .scaleAspectFit
-        button.layer.borderWidth = 1.5
-        button.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.borderColor = .none
-        button.layer.cornerRadius = 15
+        button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(otherTaskTapped), for: .touchUpInside)
         return button
     }()
@@ -228,8 +220,8 @@ class TaskSettingView: UIView {
                 taskType = "home"
                 
             }else{
-                i.layer.borderWidth = 1.5
-                i.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+                i.layer.borderWidth = 0
+                i.layer.borderColor = .none
             }
         }
         //        checkButtonEnable()
@@ -241,10 +233,10 @@ class TaskSettingView: UIView {
                 i.layer.borderWidth = 4 // одну функцию  и логику
                 i.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 i.tintColor = .white
-                taskType = "personal"
+                taskType = "person"
             }else{
-                i.layer.borderWidth = 1.5
-                i.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+                i.layer.borderWidth = 0
+                i.layer.borderColor = .none
             }
         }
         //        checkButtonEnable()
@@ -256,10 +248,10 @@ class TaskSettingView: UIView {
                 i.layer.borderWidth = 4 // одну функцию  и логику
                 i.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 i.tintColor = .white
-                taskType = "shopping"
+                taskType = "shop"
             }else{
-                i.layer.borderWidth = 1.5
-                i.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+                i.layer.borderWidth = 0
+                i.layer.borderColor = .none
             }
         }
         //        checkButtonEnable()
@@ -272,8 +264,8 @@ class TaskSettingView: UIView {
                 i.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 taskType = "other"
             }else{
-                i.layer.borderWidth = 1.5
-                i.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+                i.layer.borderWidth = 0
+                i.layer.borderColor = .none
             }
         }
         //        checkButtonEnable()
