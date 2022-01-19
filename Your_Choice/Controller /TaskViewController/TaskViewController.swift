@@ -13,7 +13,7 @@ import RealmSwift
 class TaskViewController: UIViewController{
     
     var realm = try! Realm()
-    
+    var taskArray = [Int]()
   
     private var hederView : UIView = {
         let view = UIView()
@@ -141,12 +141,12 @@ class TaskViewController: UIViewController{
         navigationController?.present(taskVC, animated: true, completion: nil)
     }
     
-    @objc private func  deleteTask() {
+    @objc func  deleteTask() {
         let minTasks = 0
         if realm.objects(TaskRealm.self).count != minTasks {
-        guard let lastTask = realm.objects(TaskRealm.self).last else { return }
+//            let task = realm.objects(TaskRealm.self)
         try! realm.write({
-            realm.delete(lastTask)
+//            realm.delete(task[index])
         })
         tableView.reloadData()
         }else{
@@ -154,6 +154,24 @@ class TaskViewController: UIViewController{
         }
     }
     
+    func getIndexForArray(index: IndexPath){
+        var mainIndex = 0
+        let index = index.row
+        if taskArray.contains(index){
+            for i in taskArray{
+                if i == index{
+                    taskArray.remove(at: mainIndex)
+                }
+                mainIndex += 1
+            }
+            print(taskArray)
+        }else{
+            taskArray.append(index)
+            print(taskArray)
+        }
+       
+    }
+        
     @objc private func goNext() {
         
     }
@@ -262,17 +280,25 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as? TaskTableViewCell
+        
         switch tableView.cellForRow(at: indexPath)?.backgroundColor { // добавить норм функцию 
         case #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1) :
-            tableView.cellForRow(at: indexPath)?.backgroundColor = .white
+            cell?.getColorForBackground(color: .white)
+            
         case #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) :
-            tableView.cellForRow(at: indexPath)?.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+            cell?.getColorForBackground(color: #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1))
+           
         case .some(_):
-            tableView.cellForRow(at: indexPath)?.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+            cell?.getColorForBackground(color: #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1))
+            
         case .none:
-            tableView.cellForRow(at: indexPath)?.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+            cell?.getColorForBackground(color: #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1))
+            
         }
+        getIndexForArray(index: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
