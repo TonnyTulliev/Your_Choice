@@ -14,6 +14,7 @@ class TaskViewController: UIViewController{
     
     var realm = try! Realm()
     var taskArray = [Int]()
+    private var viewModels: [TaskCellViewModel] = []
   
     private var hederView : UIView = {
         let view = UIView()
@@ -131,8 +132,8 @@ class TaskViewController: UIViewController{
         addConstraints()
         addDelegate()
         registrationCell()
+        getDataFromViewModels()
         tableView.reloadData()
-        print(realm.objects(TaskRealm.self).count)
     }
     
     @objc private func addTask() {
@@ -143,12 +144,13 @@ class TaskViewController: UIViewController{
     
     @objc func  deleteTask() {
         let minTasks = 0
-        if realm.objects(TaskRealm.self).count != minTasks {
-//            let task = realm.objects(TaskRealm.self)
-        try! realm.write({
-//            realm.delete(task[index])
-        })
-        tableView.reloadData()
+        if realm.objects(TaskRealm.self).count != minTasks && viewModels.count != minTasks {
+            guard let task = realm.objects(TaskRealm.self).last else { return }
+            try! realm.write({
+                realm.delete(task)
+            })
+            removeLastTask()
+            tableView.reloadData()
         }else{
             alert(title: "Внимание", message: "Создайте задание")
         }
@@ -252,7 +254,7 @@ class TaskViewController: UIViewController{
     }
     
     private func registrationCell(){
-        tableView.register(TaskTableViewCell.self, forCellReuseIdentifier: "task")
+        tableView.register(TaskTableViewCell.self, forCellReuseIdentifier: TaskTableViewCell.reuseID)
     }
     
     private func alert(title: String, message: String) {
@@ -260,6 +262,26 @@ class TaskViewController: UIViewController{
         let action = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func getDataFromViewModels(){
+        for n in 0..<realm.objects(TaskRealm.self).count {
+            viewModels.append(TaskCellViewModel(taskText: realm.objects(TaskRealm.self)[n].taskName, taskType: realm.objects(TaskRealm.self)[n].category , isSelected: false ))
+        }
+    }
+    
+    func addlastTask() {
+        guard let lastTask = realm.objects(TaskRealm.self).last else { return }
+        viewModels.append(TaskCellViewModel(taskText: lastTask.taskName, taskType: lastTask.category, isSelected: false))
+    }
+    
+    private func removeLastTask() {
+        let last = viewModels.count - 1
+        viewModels.remove(at: last)
+    }
+    
+    private func removeFromDataBase(){
+        
     }
     
 }
@@ -270,35 +292,22 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return realm.objects(TaskRealm.self).count
+        return viewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "task", for: indexPath) as? TaskTableViewCell else { return UITableViewCell() }
-        cell.fetchData(task: realm.objects(TaskRealm.self)[indexPath.row])
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TaskTableViewCell.reuseID ) as? TaskTableViewCell else { return UITableViewCell() }
+        let viewModel = viewModels[indexPath.row]
+        cell.setViewModel(viewModel)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as? TaskTableViewCell
-        
-        switch tableView.cellForRow(at: indexPath)?.backgroundColor { // добавить норм функцию 
-        case #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1) :
-            cell?.getColorForBackground(color: .white)
-            
-        case #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) :
-            cell?.getColorForBackground(color: #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1))
-           
-        case .some(_):
-            cell?.getColorForBackground(color: #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1))
-            
-        case .none:
-            cell?.getColorForBackground(color: #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1))
-            
-        }
-        getIndexForArray(index: indexPath)
+        getIndexForArray(index: indexPath) // переделать через viewModels
+        let viewModel = viewModels[indexPath.row]
+        viewModel.isSelected = !viewModel.isSelected
+        tableView.reloadRows(at: [indexPath], with: .automatic)
         tableView.deselectRow(at: indexPath, animated: true)
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

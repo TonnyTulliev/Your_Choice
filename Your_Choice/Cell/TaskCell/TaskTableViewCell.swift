@@ -12,6 +12,17 @@ import SnapKit
 class TaskTableViewCell: UITableViewCell {
     
     var task: TaskRealm?
+    static let reuseID = String(describing: self)
+    
+    var viewModel: TaskCellViewModel? {
+        didSet{
+            guard let viewModel = viewModel else { return }
+            contentView.backgroundColor = viewModel.isSelected ? #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1) : #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            self.textLabel?.text = viewModel.taskText
+            taskImage.image = UIImage(named: viewModel.taskType)
+            layoutIfNeeded()
+        }
+    }
     
     private var taskImage: UIImageView = {
     let image = UIImageView()
@@ -29,23 +40,21 @@ class TaskTableViewCell: UITableViewCell {
         }
     }
     
-    func fetchData(task: TaskRealm?){
-        guard let task = task else { return }
-        taskImage.image = UIImage(named: task.category)
-        self.textLabel?.text = task.taskName
-        self.textLabel?.textAlignment = .center
-        self.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        viewModel = nil
     }
     
-    func getColorForBackground(color: UIColor){
-        self.backgroundColor = color
+    func setViewModel(_ viewModel: TaskCellViewModel) {
+        self.viewModel = viewModel
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.addSubview(taskImage)
+        self.textLabel?.textAlignment = .center
+        self.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         addConstraints()
-        
     }
     
     required init?(coder: NSCoder) {

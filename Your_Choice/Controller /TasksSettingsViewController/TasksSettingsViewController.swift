@@ -48,6 +48,7 @@ class TasksSettingsViewController: UIViewController {
         try! self.realm.write({
             self.realm.add(task)
         })
+        self.taskVC?.addlastTask()
         self.taskVC?.tableView.reloadData()
         dismiss(animated: true)
     }
