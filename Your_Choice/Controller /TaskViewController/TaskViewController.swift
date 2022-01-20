@@ -97,7 +97,7 @@ class TaskViewController: UIViewController{
         button.layer.shadowOffset = CGSize(width: 3, height: 3)
         button.layer.shadowOpacity = 0.6
         button.layer.shadowRadius = 4.0
-        button.addTarget(self, action: #selector(deleteTask), for: .touchUpInside)
+        button.addTarget(self, action: #selector(deleteLastTask), for: .touchUpInside)
         return button
     }()
     
@@ -142,7 +142,7 @@ class TaskViewController: UIViewController{
         navigationController?.present(taskVC, animated: true, completion: nil)
     }
     
-    @objc func  deleteTask() {
+    @objc func  deleteLastTask() {
         let minTasks = 0
         if realm.objects(TaskRealm.self).count != minTasks && viewModels.count != minTasks {
             guard let task = realm.objects(TaskRealm.self).last else { return }
@@ -257,13 +257,6 @@ class TaskViewController: UIViewController{
         tableView.register(TaskTableViewCell.self, forCellReuseIdentifier: TaskTableViewCell.reuseID)
     }
     
-    private func alert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
-    }
-    
     private func getDataFromViewModels(){
         for n in 0..<realm.objects(TaskRealm.self).count {
             viewModels.append(TaskCellViewModel(taskText: realm.objects(TaskRealm.self)[n].taskName, taskType: realm.objects(TaskRealm.self)[n].category , isSelected: false ))
@@ -281,7 +274,14 @@ class TaskViewController: UIViewController{
     }
     
     private func removeFromDataBase(){
-        
+        // удалять выбранные объекты из базы
+    }
+    
+    private func alert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
     
 }
