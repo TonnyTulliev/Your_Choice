@@ -11,7 +11,7 @@ import SnapKit
 
 class TaskTableViewCell: UITableViewCell {
     
-    var task: TaskRealm?
+    var task: TaskRealmBase?
     static let reuseID = String(describing: self)
     
     var viewModel: TaskCellViewModel? {

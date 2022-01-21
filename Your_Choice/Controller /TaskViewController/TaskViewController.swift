@@ -15,7 +15,7 @@ class TaskViewController: UIViewController{
     var realm = try! Realm()
     var taskArray = [Int]()
     private var viewModels: [TaskCellViewModel] = []
-  
+    
     private var hederView : UIView = {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.5057837963, green: 0.3098528385, blue: 0.9293116927, alpha: 1)
@@ -144,19 +144,15 @@ class TaskViewController: UIViewController{
     
     @objc func  deleteLastTask() {
         let minTasks = 0
-        if realm.objects(TaskRealm.self).count != minTasks && viewModels.count != minTasks {
-            guard let task = realm.objects(TaskRealm.self).last else { return }
-            try! realm.write({
-                realm.delete(task)
-            })
-            removeLastTask()
-            tableView.reloadData()
+        if realm.objects(TaskRealmBase.self).count != minTasks && viewModels.count != minTasks {
+            removeSelectedTask()
         }else{
             alert(title: "Внимание", message: "Создайте задание")
         }
+        tableView.reloadData()
     }
     
-    func getIndexForArray(index: IndexPath){
+    func getIndexForArray(index: IndexPath){//delete
         var mainIndex = 0
         let index = index.row
         if taskArray.contains(index){
@@ -171,9 +167,8 @@ class TaskViewController: UIViewController{
             taskArray.append(index)
             print(taskArray)
         }
-       
     }
-        
+    
     @objc private func goNext() {
         
     }
@@ -193,7 +188,7 @@ class TaskViewController: UIViewController{
         view.addSubview(buttonView)
         buttonView.addSubview(minusButton)
         buttonView.addSubview(plusButton)
-
+        
     }
     private func addConstraints() {
         hederView.snp.makeConstraints { hederView in
@@ -206,7 +201,7 @@ class TaskViewController: UIViewController{
         label.snp.makeConstraints { label in
             label.centerY.equalTo(hederView.snp.centerY)
             label.centerX.equalTo(hederView.snp.centerX)
-
+            
         }
         containerView.snp.makeConstraints { containerView in
             containerView.centerX.equalTo(view.snp.centerX)
@@ -258,14 +253,14 @@ class TaskViewController: UIViewController{
     }
     
     private func getDataFromViewModels(){
-        for n in 0..<realm.objects(TaskRealm.self).count {
-            viewModels.append(TaskCellViewModel(taskText: realm.objects(TaskRealm.self)[n].taskName, taskType: realm.objects(TaskRealm.self)[n].category , isSelected: false ))
+        for n in 0..<realm.objects(TaskRealmBase.self).count {
+            viewModels.append(TaskCellViewModel(taskText: realm.objects(TaskRealmBase.self)[n].taskName, taskType: realm.objects(TaskRealmBase.self)[n].category , isSelected: false, id: realm.objects(TaskRealmBase.self)[n].id ))
         }
     }
     
     func addlastTask() {
-        guard let lastTask = realm.objects(TaskRealm.self).last else { return }
-        viewModels.append(TaskCellViewModel(taskText: lastTask.taskName, taskType: lastTask.category, isSelected: false))
+        guard let lastTask = realm.objects(TaskRealmBase.self).last else { return }
+        viewModels.append(TaskCellViewModel(taskText: lastTask.taskName, taskType: lastTask.category, isSelected: false, id: lastTask.id))
     }
     
     private func removeLastTask() {
@@ -273,7 +268,27 @@ class TaskViewController: UIViewController{
         viewModels.remove(at: last)
     }
     
-    private func removeFromDataBase(){
+    private func removeSelectedTask() {
+        var id = 0
+        var index = 0
+        for i in viewModels {
+            if i.isSelected == true {
+                viewModels.remove(at: index)
+                id = i.id
+                let deleteObject = realm.objects(TaskRealmBase.self).first { task in
+                    task.id == id
+                }
+                guard let object = deleteObject else { return }
+                try! realm.write({
+                    realm.delete(object)
+                })
+            }else {
+                index += 1
+            }
+        }
+    }
+    
+    private func removeFromDataBase() {
         // удалять выбранные объекты из базы
     }
     

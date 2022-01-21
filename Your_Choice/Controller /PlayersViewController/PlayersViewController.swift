@@ -12,7 +12,7 @@ class PlayersViewController: BaseViewController {
     
     //MARK:- Properties
     var index = 0
-    let realm = try! Realm()
+    var realm = try! Realm()
     var mainPlayerName: String {
         return UserDefaults.standard.value(forKey: "PlayersName") as! String
     }
@@ -163,6 +163,9 @@ class PlayersViewController: BaseViewController {
         registrationCell()
         сonfig()
         removePlayersDataBase()
+        try! realm.write {
+            realm.deleteAll()
+        }
     }
     
     

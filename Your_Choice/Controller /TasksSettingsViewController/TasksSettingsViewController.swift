@@ -15,6 +15,7 @@ class TasksSettingsViewController: UIViewController {
     let realm = try! Realm()
     var taskVC: TaskViewController?
     var taskSettingsView = TaskSettingView()
+    let task = TaskRealmBase()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,18 +40,32 @@ class TasksSettingsViewController: UIViewController {
         view.addSubview(taskSettingsView)
     }
     
+    private func fetchValueFromRealm() -> Int? {
+        if realm.objects(TaskRealmBase.self).count == 0 {
+            let lastId = task.id
+            let newId = lastId + 1
+            return newId
+        }else {
+            guard let lastId = realm.objects(TaskRealmBase.self).last?.id else { return nil }
+            let newID = lastId + 1
+            return newID
+        }
+    }
+    
     @objc private func done(){
+        guard let newId = fetchValueFromRealm() else { return }
         let taskName = taskSettingsView.taskName
         let category = taskSettingsView.taskType
-        let task = TaskRealm()
         task.category = category
         task.taskName = taskName
+        task.id = newId
         try! self.realm.write({
             self.realm.add(task)
         })
         self.taskVC?.addlastTask()
         self.taskVC?.tableView.reloadData()
         dismiss(animated: true)
+        
     }
     
     @objc private func exit(){
