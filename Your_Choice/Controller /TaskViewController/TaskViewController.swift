@@ -43,6 +43,16 @@ class TaskViewController: UIViewController{
         return label
     }()
     
+    var segmentedControl: UISegmentedControl = {
+        let segmentedControl = UISegmentedControl(items: ["Все", "Дом", "Личные", "Покупки", "Другие"])
+        segmentedControl.addTarget(self, action: #selector(segmentTapped), for: .valueChanged)
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        segmentedControl.layer.borderWidth = 1
+        segmentedControl.layer.cornerRadius = 25
+        return segmentedControl
+    }()
+    
     var tableView: UITableView = {
         var tableView = UITableView()
         tableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -140,6 +150,31 @@ class TaskViewController: UIViewController{
     }
     
     //MARK:- objc metods
+    
+    @objc private func segmentTapped(segmentedControl: UISegmentedControl){
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            getDataFromViewModels()
+            tableView.reloadData()
+        case 1:
+            sortedSegmentedControl(taskType: "home")
+            tableView.reloadData()
+        case 2:
+            sortedSegmentedControl(taskType: "person")
+            tableView.reloadData()
+        case 3:
+            sortedSegmentedControl(taskType: "shop")
+            tableView.reloadData()
+        case 4:
+            sortedSegmentedControl(taskType: "other")
+            tableView.reloadData()
+        default:
+            getDataFromViewModels()
+            tableView.reloadData()
+        }
+       
+    }
+    
     @objc private func addTask() {
         let taskVC = TasksSettingsViewController()
         taskVC.taskVC = self
@@ -171,6 +206,8 @@ class TaskViewController: UIViewController{
         view.addSubview(containerView)
         containerView.addSubview(tableView)
         view.addSubview(hederView)
+        view.addSubview(segmentedControl)
+        view.bringSubviewToFront(segmentedControl)
         hederView.addSubview(label)
         view.addSubview(nextButton)
         view.addSubview(buttonView)
@@ -180,7 +217,7 @@ class TaskViewController: UIViewController{
     }
     private func addConstraints() {
         hederView.snp.makeConstraints { hederView in
-            hederView.bottom.equalTo(containerView.snp.top).offset(-20)
+            hederView.bottom.equalTo(segmentedControl.snp.top).offset(-20)
             hederView.centerX.equalTo(view.snp.centerX)
             hederView.height.equalTo(60)
             hederView.left.equalTo(10)
@@ -189,7 +226,13 @@ class TaskViewController: UIViewController{
         label.snp.makeConstraints { label in
             label.centerY.equalTo(hederView.snp.centerY)
             label.centerX.equalTo(hederView.snp.centerX)
-            
+        }
+        segmentedControl.snp.makeConstraints { segmentedControl in
+            segmentedControl.bottom.equalTo(containerView.snp.top).offset(0)
+            segmentedControl.centerX.equalTo(view.snp.centerX)
+            segmentedControl.height.equalTo(40)
+            segmentedControl.left.equalTo(10)
+            segmentedControl.right.equalTo(-10)
         }
         containerView.snp.makeConstraints { containerView in
             containerView.centerX.equalTo(view.snp.centerX)
@@ -241,6 +284,7 @@ class TaskViewController: UIViewController{
     }
     
     private func getDataFromViewModels(){
+        viewModels.removeAll()
         for n in 0..<realm.objects(TaskRealmBase.self).count {
             viewModels.append(TaskCellViewModel(taskText: realm.objects(TaskRealmBase.self)[n].taskName, taskType: realm.objects(TaskRealmBase.self)[n].category , isSelected: false, id: realm.objects(TaskRealmBase.self)[n].id ))
         }
@@ -278,6 +322,15 @@ class TaskViewController: UIViewController{
         present(alert, animated: true, completion: nil)
     }
     
+    private func sortedSegmentedControl(taskType: String?) {
+        viewModels.removeAll()
+        for n in 0..<realm.objects(TaskRealmBase.self).count {
+            if realm.objects(TaskRealmBase.self)[n].category == taskType{
+                viewModels.append(TaskCellViewModel(taskText: realm.objects(TaskRealmBase.self)[n].taskName, taskType: realm.objects(TaskRealmBase.self)[n].category , isSelected: false, id: realm.objects(TaskRealmBase.self)[n].id ))
+            }
+        }
+    }
+
 }
 
 //MARK:- extensions TableView
