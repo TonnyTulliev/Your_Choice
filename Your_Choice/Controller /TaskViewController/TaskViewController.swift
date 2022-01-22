@@ -12,10 +12,12 @@ import RealmSwift
 
 class TaskViewController: UIViewController{
     
+    //MARK:- Properties
     var realm = try! Realm()
     var taskArray = [Int]()
     private var viewModels: [TaskCellViewModel] = []
     
+    //MARK:- UI
     private var hederView : UIView = {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.5057837963, green: 0.3098528385, blue: 0.9293116927, alpha: 1)
@@ -125,6 +127,7 @@ class TaskViewController: UIViewController{
         return button
     }()
     
+    //MARK:- life cycle VC
     override func viewDidLoad() {
         super.viewDidLoad()
         config()
@@ -136,6 +139,7 @@ class TaskViewController: UIViewController{
         tableView.reloadData()
     }
     
+    //MARK:- objc metods
     @objc private func addTask() {
         let taskVC = TasksSettingsViewController()
         taskVC.taskVC = self
@@ -145,34 +149,18 @@ class TaskViewController: UIViewController{
     @objc func  deleteLastTask() {
         let minTasks = 0
         if realm.objects(TaskRealmBase.self).count != minTasks && viewModels.count != minTasks {
-            removeSelectedTask()
+            removeSelectedTasks()
         }else{
             alert(title: "Внимание", message: "Создайте задание")
         }
         tableView.reloadData()
     }
     
-    func getIndexForArray(index: IndexPath){//delete
-        var mainIndex = 0
-        let index = index.row
-        if taskArray.contains(index){
-            for i in taskArray{
-                if i == index{
-                    taskArray.remove(at: mainIndex)
-                }
-                mainIndex += 1
-            }
-            print(taskArray)
-        }else{
-            taskArray.append(index)
-            print(taskArray)
-        }
-    }
-    
     @objc private func goNext() {
-        
+        //переход на следующий экран
     }
     
+    //MARK:- Metods
     private func config() {
         view.backgroundColor = .white
         navigationItem.title = "Задания"
@@ -263,12 +251,7 @@ class TaskViewController: UIViewController{
         viewModels.append(TaskCellViewModel(taskText: lastTask.taskName, taskType: lastTask.category, isSelected: false, id: lastTask.id))
     }
     
-    private func removeLastTask() {
-        let last = viewModels.count - 1
-        viewModels.remove(at: last)
-    }
-    
-    private func removeSelectedTask() {
+    private func removeSelectedTasks() {
         var id = 0
         var index = 0
         for i in viewModels {
@@ -288,10 +271,6 @@ class TaskViewController: UIViewController{
         }
     }
     
-    private func removeFromDataBase() {
-        // удалять выбранные объекты из базы
-    }
-    
     private func alert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -300,6 +279,8 @@ class TaskViewController: UIViewController{
     }
     
 }
+
+//MARK:- extensions TableView
 extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -318,7 +299,6 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        getIndexForArray(index: indexPath) // переделать через viewModels
         let viewModel = viewModels[indexPath.row]
         viewModel.isSelected = !viewModel.isSelected
         tableView.reloadRows(at: [indexPath], with: .automatic)

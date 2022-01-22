@@ -26,7 +26,6 @@
 		37A3512A2794B77800D4E903 /* TaskSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A351292794B77800D4E903 /* TaskSettingsView.swift */; };
 		37A3512D2794BA4000D4E903 /* TasksSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A3512C2794BA4000D4E903 /* TasksSettingsViewController.swift */; };
 		37A35133279954D600D4E903 /* TaskCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A35132279954D600D4E903 /* TaskCellViewModel.swift */; };
-		37A3513B279AD4D100D4E903 /* UniqueValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A3513A279AD4D100D4E903 /* UniqueValue.swift */; };
 		37A3513F279AF3B500D4E903 /* TaskRealBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A3513E279AF3B500D4E903 /* TaskRealBase.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,7 +51,6 @@
 		37A351292794B77800D4E903 /* TaskSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSettingsView.swift; sourceTree = "<group>"; };
 		37A3512C2794BA4000D4E903 /* TasksSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksSettingsViewController.swift; sourceTree = "<group>"; };
 		37A35132279954D600D4E903 /* TaskCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellViewModel.swift; sourceTree = "<group>"; };
-		37A3513A279AD4D100D4E903 /* UniqueValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueValue.swift; sourceTree = "<group>"; };
 		37A3513E279AF3B500D4E903 /* TaskRealBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRealBase.swift; sourceTree = "<group>"; };
 		890490CAD5D47D49DBF15081 /* Pods-Your_Choice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Your_Choice.debug.xcconfig"; path = "Target Support Files/Pods-Your_Choice/Pods-Your_Choice.debug.xcconfig"; sourceTree = "<group>"; };
 		D448B72406BE3BDE5E079EA0 /* Pods-Your_Choice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Your_Choice.release.xcconfig"; path = "Target Support Files/Pods-Your_Choice/Pods-Your_Choice.release.xcconfig"; sourceTree = "<group>"; };
@@ -158,7 +156,6 @@
 				3704F7FE277B217200145381 /* Player.swift */,
 				3704F800278C2C5900145381 /* PlayerRealm.swift */,
 				37A3513E279AF3B500D4E903 /* TaskRealBase.swift */,
-				37A3513A279AD4D100D4E903 /* UniqueValue.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -391,7 +388,6 @@
 				370BC4AD276204830077F2A9 /* PlayersTableViewCell.swift in Sources */,
 				37A3512D2794BA4000D4E903 /* TasksSettingsViewController.swift in Sources */,
 				370BC4A5275E47EA0077F2A9 /* RegistrationViewController.swift in Sources */,
-				37A3513B279AD4D100D4E903 /* UniqueValue.swift in Sources */,
 				3704F801278C2C5900145381 /* PlayerRealm.swift in Sources */,
 				37039D1527934EBD006B22B4 /* TaskTableViewCell.swift in Sources */,
 				370BC4A72761499C0077F2A9 /* PlayersViewController.swift in Sources */,

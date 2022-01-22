@@ -18,7 +18,6 @@ class PlayersViewController: BaseViewController {
     }
     
     //MARK:- UI
-    
     private var playersImageView: UIImageView = {
         var image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -163,9 +162,6 @@ class PlayersViewController: BaseViewController {
         registrationCell()
         сonfig()
         removePlayersDataBase()
-        try! realm.write {
-            realm.deleteAll()
-        }
     }
     
     

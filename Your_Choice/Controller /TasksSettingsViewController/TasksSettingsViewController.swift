@@ -12,11 +12,13 @@ import RealmSwift
 
 class TasksSettingsViewController: UIViewController {
     
+    //MARK:- Properties
     let realm = try! Realm()
     var taskVC: TaskViewController?
     var taskSettingsView = TaskSettingView()
     let task = TaskRealmBase()
     
+    //MARK:- UI
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.toolbar.isHidden = true
@@ -26,7 +28,7 @@ class TasksSettingsViewController: UIViewController {
         taskSettingsView.isHidden = false
         addElements()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -36,6 +38,7 @@ class TasksSettingsViewController: UIViewController {
         addConstraints()
     }
     
+    //MARK:- metods
     private func  addElements(){
         view.addSubview(taskSettingsView)
     }
@@ -52,6 +55,14 @@ class TasksSettingsViewController: UIViewController {
         }
     }
     
+    private func  addConstraints(){
+        taskSettingsView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 60).isActive = true
+        taskSettingsView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        taskSettingsView.heightAnchor.constraint(equalToConstant: 470).isActive = true
+        taskSettingsView.widthAnchor.constraint(equalToConstant: 350).isActive = true
+    }
+    
+    //MARK:- objc metods
     @objc private func done(){
         guard let newId = fetchValueFromRealm() else { return }
         let taskName = taskSettingsView.taskName
@@ -70,11 +81,5 @@ class TasksSettingsViewController: UIViewController {
     
     @objc private func exit(){
         dismiss(animated: true, completion: nil)
-    }
-    private func  addConstraints(){
-        taskSettingsView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 60).isActive = true
-        taskSettingsView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        taskSettingsView.heightAnchor.constraint(equalToConstant: 470).isActive = true
-        taskSettingsView.widthAnchor.constraint(equalToConstant: 350).isActive = true
     }
 }

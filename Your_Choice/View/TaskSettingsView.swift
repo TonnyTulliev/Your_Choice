@@ -55,12 +55,18 @@ class TaskSettingView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
-//        button.setBackgroundImage(UIImage(named: "shop"), for: .normal)
         button.setImage(UIImage(named: "shop"), for: .normal)
         button.clipsToBounds = true
         button.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(shoppingTaskTapped), for: .touchUpInside)
         return button
+    }()
+    
+    var shoppingLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Покупки"
+        label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        return label
     }()
     
     private var homeTaskButton: UIButton = {
@@ -74,6 +80,13 @@ class TaskSettingView: UIView {
         return button
     }()
     
+    var homeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Домашние"
+        label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        return label
+    }()
+    
     private var personalTaskButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "person"), for: .normal)
@@ -83,6 +96,13 @@ class TaskSettingView: UIView {
         button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(personalTaskTapped), for: .touchUpInside)
         return button
+    }()
+    
+    var personLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Личные"
+        label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        return label
     }()
     
     private var otherTaskButton: UIButton = {
@@ -96,6 +116,13 @@ class TaskSettingView: UIView {
         button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(otherTaskTapped), for: .touchUpInside)
         return button
+    }()
+    
+    var otherLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Другое"
+        label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        return label
     }()
     
     private var stackView: UIStackView = {
@@ -153,6 +180,10 @@ class TaskSettingView: UIView {
         self.addSubview(exitButton)
         self.addSubview(taskTextField)
         self.addSubview(doneButton)
+        self.addSubview(homeLabel)
+        self.addSubview(personLabel)
+        self.addSubview(shoppingLabel)
+        self.addSubview(otherLabel)
         self.addSubview(stackView)
         stackView.addArrangedSubview(homeTaskButton)
         stackView.addArrangedSubview(personalTaskButton)
@@ -186,24 +217,40 @@ class TaskSettingView: UIView {
         }
         doneButton.snp.makeConstraints { doneButton in
             doneButton.size.equalTo(CGSize(width: 250, height: 55))
-            doneButton.top.equalTo(stackView.snp.bottom).offset(20)
+            doneButton.top.equalTo(stackView.snp.bottom).offset(40)
             doneButton.centerX.equalTo(self.snp.centerX)
         }
         homeTaskButton.snp.makeConstraints { homeTaskButton in
             homeTaskButton.size.equalTo(CGSize(width: 60, height: 60))
             homeTaskButton.centerY.equalTo(stackView.snp.centerY)
         }
+        homeLabel.snp.makeConstraints { homeLabel in
+            homeLabel.centerX.equalTo(homeTaskButton.snp.centerX)
+            homeLabel.top.equalTo(homeTaskButton.snp.bottom)
+        }
         personalTaskButton.snp.makeConstraints { personalTaskButton in
             personalTaskButton.size.equalTo(CGSize(width: 60, height: 60))
             personalTaskButton.centerY.equalTo(stackView.snp.centerY)
+        }
+        personLabel.snp.makeConstraints { personLabel in
+            personLabel.centerX.equalTo(personalTaskButton.snp.centerX)
+            personLabel.top.equalTo(personalTaskButton.snp.bottom)
         }
         shoppingTaskButton.snp.makeConstraints { shoppingTaskButton in
             shoppingTaskButton.size.equalTo(CGSize(width: 60, height: 60))
             shoppingTaskButton.centerY.equalTo(stackView.snp.centerY)
         }
+        shoppingLabel.snp.makeConstraints { shoppingLabel in
+            shoppingLabel.centerX.equalTo(shoppingTaskButton.snp.centerX)
+            shoppingLabel.top.equalTo(shoppingTaskButton.snp.bottom)
+        }
         otherTaskButton.snp.makeConstraints { otherTaskButton in
             otherTaskButton.size.equalTo(CGSize(width: 60, height: 60))
             otherTaskButton.centerY.equalTo(stackView.snp.centerY)
+        }
+        otherLabel.snp.makeConstraints { otherLabel in
+            otherLabel.centerX.equalTo(otherTaskButton.snp.centerX)
+            otherLabel.top.equalTo(otherTaskButton.snp.bottom)
         }
     }
     
@@ -214,7 +261,7 @@ class TaskSettingView: UIView {
     @objc private func homeTaskTapped(){
         for i in buttons {
             if i == homeTaskButton{
-                i.layer.borderWidth = 4 // одну функцию  и логику
+                i.layer.borderWidth = 4
                 i.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 i.tintColor = .white
                 taskType = "home"
@@ -230,7 +277,7 @@ class TaskSettingView: UIView {
     @objc private func personalTaskTapped(){
         for i in buttons {
             if i == personalTaskButton{
-                i.layer.borderWidth = 4 // одну функцию  и логику
+                i.layer.borderWidth = 4
                 i.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 i.tintColor = .white
                 taskType = "person"
@@ -245,7 +292,7 @@ class TaskSettingView: UIView {
     @objc private func shoppingTaskTapped(){
         for i in buttons {
             if i == shoppingTaskButton{
-                i.layer.borderWidth = 4 // одну функцию  и логику
+                i.layer.borderWidth = 4
                 i.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 i.tintColor = .white
                 taskType = "shop"
