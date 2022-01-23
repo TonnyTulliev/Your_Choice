@@ -37,6 +37,10 @@ class StartViewController: BaseViewController {
         textfield.backgroundColor = #colorLiteral(red: 0.9697982669, green: 0.9640328288, blue: 0.9742299914, alpha: 1)
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Email"
+        textfield.layer.shadowColor = UIColor.black.cgColor
+        textfield.layer.shadowOffset = CGSize(width: 3, height: 3)
+        textfield.layer.shadowOpacity = 0.5
+        textfield.layer.shadowRadius = 3.0
         return textfield
     }()
     
@@ -52,6 +56,10 @@ class StartViewController: BaseViewController {
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Пароль"
         textfield.returnKeyType = .done
+        textfield.layer.shadowColor = UIColor.black.cgColor
+        textfield.layer.shadowOffset = CGSize(width: 3, height: 3)
+        textfield.layer.shadowOpacity = 0.5
+        textfield.layer.shadowRadius = 3.0
         return textfield
     }()
    

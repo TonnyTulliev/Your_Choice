@@ -32,8 +32,8 @@ class TaskSettingView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 3, height: 3)
-        button.layer.shadowOpacity = 0.6
-        button.layer.shadowRadius = 4.0
+        button.layer.shadowOpacity = 0.4
+        button.layer.shadowRadius = 2.0
         return button
     }()
     
@@ -45,9 +45,13 @@ class TaskSettingView: UIView {
         textfield.backgroundColor = #colorLiteral(red: 0.9697982669, green: 0.9640328288, blue: 0.9742299914, alpha: 1)
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Напишите задание"
-        textfield.font = UIFont.boldSystemFont(ofSize: 18)
+        textfield.font = UIFont.boldSystemFont(ofSize: 15)
         textfield.textAlignment = .center
         textfield.returnKeyType = .done
+        textfield.layer.shadowColor = UIColor.black.cgColor
+        textfield.layer.shadowOffset = CGSize(width: 3, height: 3)
+        textfield.layer.shadowOpacity = 0.5
+        textfield.layer.shadowRadius = 3.0
         return textfield
     }()
     

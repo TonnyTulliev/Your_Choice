@@ -33,8 +33,8 @@ class OptionsPlayersView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 3, height: 3)
-        button.layer.shadowOpacity = 0.6
-        button.layer.shadowRadius = 4.0
+        button.layer.shadowOpacity = 0.4
+        button.layer.shadowRadius = 3.0
         return button
         }()
     
@@ -46,10 +46,14 @@ class OptionsPlayersView: UIView {
         textfield.backgroundColor = #colorLiteral(red: 0.9697982669, green: 0.9640328288, blue: 0.9742299914, alpha: 1)
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Введите ваше имя"
-        textfield.font = UIFont.boldSystemFont(ofSize: 18)
+        textfield.font = UIFont.boldSystemFont(ofSize: 15)
         textfield.textAlignment = .center
         textfield.contentMode = .center
         textfield.returnKeyType = .done
+        textfield.layer.shadowColor = UIColor.black.cgColor
+        textfield.layer.shadowOffset = CGSize(width: 3, height: 3)
+        textfield.layer.shadowOpacity = 0.5
+        textfield.layer.shadowRadius = 3.0
         return textfield
         }()
     
@@ -59,6 +63,10 @@ class OptionsPlayersView: UIView {
         button.layer.cornerRadius = 15
         button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.4766717553, green: 0.2852187455, blue: 0.8323209882, alpha: 1))
         button.addTarget(self, action: #selector(purpleTapped), for: .touchUpInside)
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 3, height: 3)
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowRadius = 3.0
         return button
     }()
     
@@ -68,6 +76,10 @@ class OptionsPlayersView: UIView {
         button.layer.cornerRadius = 15
         button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.7909195423, green: 0.3310045898, blue: 0.3346687257, alpha: 1))
         button.addTarget(self, action: #selector(redTapped), for: .touchUpInside)
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 3, height: 3)
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowRadius = 3.0
         return button
     }()
     
@@ -77,6 +89,10 @@ class OptionsPlayersView: UIView {
         button.layer.cornerRadius = 15
         button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.3977680504, green: 0.4119620025, blue: 0.7987191081, alpha: 1))
         button.addTarget(self, action: #selector(blueTapped), for: .touchUpInside)
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 3, height: 3)
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowRadius = 3.0
         return button
     }()
     
@@ -87,6 +103,10 @@ class OptionsPlayersView: UIView {
         button.layer.cornerRadius = 15
         button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.340542227, green: 0.6136100292, blue: 0.3587245941, alpha: 1))
         button.addTarget(self, action: #selector(greenTapped), for: .touchUpInside)
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 3, height: 3)
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowRadius = 3.0
         return button
     }()
     

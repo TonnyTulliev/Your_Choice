@@ -53,7 +53,7 @@ class TaskTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.addSubview(taskImage)
         self.textLabel?.textAlignment = .center
-        self.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        self.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         addConstraints()
     }
     

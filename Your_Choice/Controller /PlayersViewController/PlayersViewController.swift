@@ -175,7 +175,7 @@ class PlayersViewController: BaseViewController {
         nextButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
         nextButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        nextButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 45).isActive = true
+        nextButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 55).isActive = true
         
         minusButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         minusButton.widthAnchor.constraint(equalToConstant: 140).isActive = true
@@ -196,13 +196,13 @@ class PlayersViewController: BaseViewController {
         containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         containerView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
         containerView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
-        containerView.heightAnchor.constraint(equalToConstant: 243).isActive = true
+        containerView.heightAnchor.constraint(equalToConstant: 240).isActive = true
         
         tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 60).isActive = true
         tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 10).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -10).isActive = true
-        tableView.heightAnchor.constraint(equalToConstant: 243).isActive = true
+        tableView.heightAnchor.constraint(equalToConstant: 240).isActive = true
        
         buttonView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         buttonView.widthAnchor.constraint(equalToConstant: 250).isActive = true

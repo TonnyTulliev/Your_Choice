@@ -31,7 +31,10 @@ class RegistrationViewController: BaseViewController {
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Email"
         textfield.returnKeyType = .next
-        
+        textfield.layer.shadowColor = UIColor.black.cgColor
+        textfield.layer.shadowOffset = CGSize(width: 3, height: 3)
+        textfield.layer.shadowOpacity = 0.5
+        textfield.layer.shadowRadius = 3.0
         return textfield
     }()
     
@@ -55,6 +58,10 @@ class RegistrationViewController: BaseViewController {
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Введите ваше имя"
         textfield.returnKeyType = .next
+        textfield.layer.shadowColor = UIColor.black.cgColor
+        textfield.layer.shadowOffset = CGSize(width: 3, height: 3)
+        textfield.layer.shadowOpacity = 0.5
+        textfield.layer.shadowRadius = 3.0
         return textfield
     }()
     
@@ -70,6 +77,10 @@ class RegistrationViewController: BaseViewController {
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Пароль"
         textfield.returnKeyType = .done
+        textfield.layer.shadowColor = UIColor.black.cgColor
+        textfield.layer.shadowOffset = CGSize(width: 3, height: 3)
+        textfield.layer.shadowOpacity = 0.5
+        textfield.layer.shadowRadius = 3.0
         return textfield
     }()
     
@@ -85,6 +96,10 @@ class RegistrationViewController: BaseViewController {
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Повторите пароль"
         textfield.returnKeyType = .done
+        textfield.layer.shadowColor = UIColor.black.cgColor
+        textfield.layer.shadowOffset = CGSize(width: 3, height: 3)
+        textfield.layer.shadowOpacity = 0.5
+        textfield.layer.shadowRadius = 3.0
         return textfield
     }()
     
