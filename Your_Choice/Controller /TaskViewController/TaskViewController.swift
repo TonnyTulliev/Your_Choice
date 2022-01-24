@@ -192,7 +192,8 @@ class TaskViewController: UIViewController{
     }
     
     @objc private func goNext() {
-        //переход на следующий экран
+        let gameVC = GameViewController()
+        navigationController?.pushViewController(gameVC, animated: true)
     }
     
     //MARK:- Metods

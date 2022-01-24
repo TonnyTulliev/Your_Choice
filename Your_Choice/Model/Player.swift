@@ -7,9 +7,14 @@
 
 import Foundation
 
-struct Player{
+class Player{
     let name: String
-    let id: Int?
     let color: String
     let task: [String?]
+    
+    init(name: String, color: String, task:[String?] ) {
+        self.name = name
+        self.color = color
+        self.task = task
+    }
 }

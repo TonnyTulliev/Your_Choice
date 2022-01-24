@@ -33,8 +33,8 @@ class RegistrationViewController: BaseViewController {
         textfield.returnKeyType = .next
         textfield.layer.shadowColor = UIColor.black.cgColor
         textfield.layer.shadowOffset = CGSize(width: 3, height: 3)
-        textfield.layer.shadowOpacity = 0.5
-        textfield.layer.shadowRadius = 3.0
+        textfield.layer.shadowOpacity = 0.4
+        textfield.layer.shadowRadius = 2.0
         return textfield
     }()
     
@@ -60,8 +60,8 @@ class RegistrationViewController: BaseViewController {
         textfield.returnKeyType = .next
         textfield.layer.shadowColor = UIColor.black.cgColor
         textfield.layer.shadowOffset = CGSize(width: 3, height: 3)
-        textfield.layer.shadowOpacity = 0.5
-        textfield.layer.shadowRadius = 3.0
+        textfield.layer.shadowOpacity = 0.4
+        textfield.layer.shadowRadius = 2.0
         return textfield
     }()
     
@@ -79,8 +79,8 @@ class RegistrationViewController: BaseViewController {
         textfield.returnKeyType = .done
         textfield.layer.shadowColor = UIColor.black.cgColor
         textfield.layer.shadowOffset = CGSize(width: 3, height: 3)
-        textfield.layer.shadowOpacity = 0.5
-        textfield.layer.shadowRadius = 3.0
+        textfield.layer.shadowOpacity = 0.4
+        textfield.layer.shadowRadius = 2.0
         return textfield
     }()
     
@@ -98,8 +98,8 @@ class RegistrationViewController: BaseViewController {
         textfield.returnKeyType = .done
         textfield.layer.shadowColor = UIColor.black.cgColor
         textfield.layer.shadowOffset = CGSize(width: 3, height: 3)
-        textfield.layer.shadowOpacity = 0.5
-        textfield.layer.shadowRadius = 3.0
+        textfield.layer.shadowOpacity = 0.4
+        textfield.layer.shadowRadius = 2.0
         return textfield
     }()
     
