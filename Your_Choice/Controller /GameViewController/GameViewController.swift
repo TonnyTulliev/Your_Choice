@@ -86,7 +86,7 @@ class GameViewController: UIViewController {
     private var startButton: UIButton = {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setBackgroundImage(UIImage(named: "phone"), for: .normal)
+        button.setBackgroundImage(UIImage(named: "rocket"), for: .normal)
         button.layer.cornerRadius = button.frame.height / 2
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(tappedButtonPlayer), for: .touchUpInside)
@@ -96,7 +96,7 @@ class GameViewController: UIViewController {
     private var imageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "loadingImageView")
+        image.image = UIImage(named: "loadingImageView1")
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -120,7 +120,6 @@ class GameViewController: UIViewController {
         view.addSubview(thirdlayerButton)
         view.addSubview(fourthPlayerButton)
         view.addSubview(imageView)
-        view.sendSubviewToBack(imageView)
         view.addSubview(startButton)
     }
     
@@ -187,8 +186,8 @@ class GameViewController: UIViewController {
             setConstraits(firstItem: firstPlayerButton, secondItem: secondPlayerButton, xItem: view, xOffsetLeft: 20, xOffsetRight: -20, yItem: view, yOffset: 120, height: 55, widht: 160)
         }
         imageView.snp.makeConstraints { imageView in
-            imageView.height.equalTo(250)
-            imageView.width.equalTo(250)
+            imageView.height.equalTo(450)
+            imageView.width.equalTo(450)
             imageView.centerX.equalTo(view.snp.centerX)
             imageView.centerY.equalTo(view.snp.centerY).offset(80)
         }
