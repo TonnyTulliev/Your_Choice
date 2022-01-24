@@ -25,7 +25,7 @@ class OptionsPlayersView: UIView {
     
     var exitButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
         button.setBackgroundImage(UIImage(systemName: "multiply.circle.fill"), for: .normal)
         button.contentMode = .scaleAspectFit
         button.tintColor = .white
@@ -41,8 +41,8 @@ class OptionsPlayersView: UIView {
     private var nameTextField: UITextField = {
         let textfield = UITextField()
         textfield.translatesAutoresizingMaskIntoConstraints = false
-        textfield.layer.borderWidth = 1.5
-        textfield.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        textfield.layer.borderWidth = 1
+        textfield.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         textfield.backgroundColor = #colorLiteral(red: 0.9697982669, green: 0.9640328288, blue: 0.9742299914, alpha: 1)
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Введите ваше имя"
@@ -61,7 +61,7 @@ class OptionsPlayersView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 15
-        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.4766717553, green: 0.2852187455, blue: 0.8323209882, alpha: 1))
+        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.692247808, green: 0.6088116169, blue: 0.931736052, alpha: 1))
         button.addTarget(self, action: #selector(purpleTapped), for: .touchUpInside)
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 3, height: 3)
@@ -74,7 +74,7 @@ class OptionsPlayersView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 15
-        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.7909195423, green: 0.3310045898, blue: 0.3346687257, alpha: 1))
+        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.8465180397, green: 0.6758248806, blue: 0.7737604976, alpha: 1))
         button.addTarget(self, action: #selector(redTapped), for: .touchUpInside)
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 3, height: 3)
@@ -87,7 +87,7 @@ class OptionsPlayersView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 15
-        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.3977680504, green: 0.4119620025, blue: 0.7987191081, alpha: 1))
+        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.281285584, green: 0.4995560646, blue: 0.7573058009, alpha: 1))
         button.addTarget(self, action: #selector(blueTapped), for: .touchUpInside)
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 3, height: 3)
@@ -101,7 +101,7 @@ class OptionsPlayersView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.borderColor = .none
         button.layer.cornerRadius = 15
-        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.340542227, green: 0.6136100292, blue: 0.3587245941, alpha: 1))
+        button.backgroundColor = UIColor(cgColor: #colorLiteral(red: 0.7582806945, green: 0.8539865613, blue: 0.8737122416, alpha: 1))
         button.addTarget(self, action: #selector(greenTapped), for: .touchUpInside)
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 3, height: 3)
@@ -123,7 +123,7 @@ class OptionsPlayersView: UIView {
     
      var doneButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
         button.setTitle("Готово", for: .normal)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
@@ -296,7 +296,7 @@ class OptionsPlayersView: UIView {
             doneButton.backgroundColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
             doneButton.isEnabled = false
         }else{
-            doneButton.backgroundColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+            doneButton.backgroundColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
             doneButton.isEnabled = true
         }
     }

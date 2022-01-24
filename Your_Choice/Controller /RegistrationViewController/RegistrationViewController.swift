@@ -14,9 +14,8 @@ class RegistrationViewController: BaseViewController {
    private var mainImageView: UIImageView = {
        var image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "Registration")
+        image.image = UIImage(named: "")
         image.contentMode = .scaleAspectFill
-        
         return image
     }()
     
@@ -25,8 +24,8 @@ class RegistrationViewController: BaseViewController {
         textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textfield.frame.height))
         textfield.leftViewMode = .always
         textfield.translatesAutoresizingMaskIntoConstraints = false
-        textfield.layer.borderWidth = 2.0
-        textfield.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        textfield.layer.borderWidth = 1.0
+        textfield.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         textfield.backgroundColor = #colorLiteral(red: 0.9697982669, green: 0.9640328288, blue: 0.9742299914, alpha: 1)
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Email"
@@ -41,7 +40,7 @@ class RegistrationViewController: BaseViewController {
     private var backgroundImageView: UIImageView = {
         var image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "smoke")
+        image.image = UIImage(named: "background3")
         image.contentMode = .scaleAspectFill
         image.alpha = 0.9
         return image
@@ -52,8 +51,8 @@ class RegistrationViewController: BaseViewController {
         textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textfield.frame.height))
         textfield.leftViewMode = .always
         textfield.translatesAutoresizingMaskIntoConstraints = false
-        textfield.layer.borderWidth = 2.0
-        textfield.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        textfield.layer.borderWidth = 1.0
+        textfield.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         textfield.backgroundColor = #colorLiteral(red: 0.9697982669, green: 0.9640328288, blue: 0.9742299914, alpha: 1)
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Введите ваше имя"
@@ -71,8 +70,8 @@ class RegistrationViewController: BaseViewController {
         textfield.leftViewMode = .always
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.isSecureTextEntry = true
-        textfield.layer.borderWidth = 2.0
-        textfield.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        textfield.layer.borderWidth = 1.0
+        textfield.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         textfield.backgroundColor = #colorLiteral(red: 0.9697982669, green: 0.9640328288, blue: 0.9742299914, alpha: 1)
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Пароль"
@@ -90,8 +89,8 @@ class RegistrationViewController: BaseViewController {
         textfield.leftViewMode = .always
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.isSecureTextEntry = true
-        textfield.layer.borderWidth = 2.0
-        textfield.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        textfield.layer.borderWidth = 1.0
+        textfield.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         textfield.backgroundColor = #colorLiteral(red: 0.9697982669, green: 0.9640328288, blue: 0.9742299914, alpha: 1)
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Повторите пароль"
@@ -108,7 +107,7 @@ class RegistrationViewController: BaseViewController {
         button.setTitle("Зарегистрировать", for: .normal)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.backgroundColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
         button.tintColor = .white
         button.layer.cornerRadius = 25
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -125,7 +124,7 @@ class RegistrationViewController: BaseViewController {
        button.setTitle("Назад", for: .normal)
        button.titleLabel?.textAlignment = .center
        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-       button.backgroundColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+       button.backgroundColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
        button.tintColor = .white
        button.layer.cornerRadius = 25
        button.translatesAutoresizingMaskIntoConstraints = false
@@ -151,10 +150,10 @@ class RegistrationViewController: BaseViewController {
     }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        backgroundImageView.heightAnchor.constraint(equalToConstant: 750).isActive = true
-        backgroundImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: 50).isActive = true
-        backgroundImageView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: 50).isActive = true
+        backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        backgroundImageView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        backgroundImageView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         
         backButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
         backButton.widthAnchor.constraint(equalToConstant: 250).isActive = true

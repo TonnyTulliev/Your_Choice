@@ -20,7 +20,7 @@ class TaskViewController: UIViewController{
     //MARK:- UI
     private var hederView : UIView = {
         let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.5057837963, green: 0.3098528385, blue: 0.9293116927, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
         view.layer.cornerRadius = 15
         view.layer.borderWidth = 1.5
         view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -30,6 +30,15 @@ class TaskViewController: UIViewController{
         view.layer.shadowOpacity = 0.6
         view.layer.shadowRadius = 4.0
         return view
+    }()
+    
+    private var backgroundImageView: UIImageView = {
+        var image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: "background2")
+        image.contentMode = .scaleAspectFill
+        image.alpha = 0.9
+        return image
     }()
     
     private var label : UILabel = {
@@ -77,12 +86,12 @@ class TaskViewController: UIViewController{
     private var plusButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "folder.badge.plus"), for: .normal)
-        button.layer.borderWidth = 2
-        button.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        button.layer.borderWidth = 1
+        button.layer.borderColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.backgroundColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
-        button.tintColor = .white
+        button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        button.tintColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
         button.layer.cornerRadius = 25
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.shadowColor = UIColor.black.cgColor
@@ -97,12 +106,12 @@ class TaskViewController: UIViewController{
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "folder.fill.badge.minus"), for: .normal)
         button.largeContentImage = .add
-        button.layer.borderWidth = 2
-        button.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        button.layer.borderWidth = 1
+        button.layer.borderColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        button.tintColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        button.tintColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
         button.layer.cornerRadius = 25
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.shadowColor = UIColor.black.cgColor
@@ -125,7 +134,7 @@ class TaskViewController: UIViewController{
         button.setTitle("Далее", for: .normal)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.backgroundColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
         button.tintColor = .white
         button.layer.cornerRadius = 25
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -204,6 +213,7 @@ class TaskViewController: UIViewController{
     }
     
     private func addElements() {
+        view.addSubview(backgroundImageView)
         view.addSubview(containerView)
         containerView.addSubview(tableView)
         view.addSubview(hederView)
@@ -217,6 +227,12 @@ class TaskViewController: UIViewController{
         
     }
     private func addConstraints() {
+        backgroundImageView.snp.makeConstraints { backgroundImageView in
+            backgroundImageView.bottom.equalTo(view.snp.bottom)
+            backgroundImageView.top.equalTo(view.snp.top)
+            backgroundImageView.left.equalTo(view.snp.left)
+            backgroundImageView.right.equalTo(view.snp.right)
+        }
         hederView.snp.makeConstraints { hederView in
             hederView.bottom.equalTo(segmentedControl.snp.top).offset(-20)
             hederView.centerX.equalTo(view.snp.centerX)
@@ -244,7 +260,7 @@ class TaskViewController: UIViewController{
         }
         tableView.snp.makeConstraints { tableView in
             tableView.centerX.equalTo(view.snp.centerX)
-            tableView.centerY.equalTo(view.snp.centerY).offset(40)
+            tableView.centerY.equalTo(view.snp.centerY).offset(70)
             tableView.left.equalTo(view.snp.left).offset(10)
             tableView.right.equalTo(view.snp.right).offset(-10)
             tableView.height.equalTo(300)
@@ -256,21 +272,21 @@ class TaskViewController: UIViewController{
             nextButton.width.equalTo(250)
         }
         buttonView.snp.makeConstraints { buttonView in
-            buttonView.centerY.equalTo(tableView.snp.bottom).offset(0)
+            buttonView.centerY.equalTo(tableView.snp.bottom).offset(10)
             buttonView.centerX.equalTo(tableView.snp.centerX)
             buttonView.height.equalTo(50)
-            buttonView.width.equalTo(250)
+            buttonView.width.equalTo(300)
         }
         minusButton.snp.makeConstraints { minusButton in
             minusButton.left.equalTo(buttonView.snp.left)
             minusButton.bottom.equalTo(buttonView.snp.bottom)
-            minusButton.height.equalTo(50)
+            minusButton.height.equalTo(45)
             minusButton.width.equalTo(140)
         }
         plusButton.snp.makeConstraints { plusButton in
             plusButton.right.equalTo(buttonView.snp.right)
             plusButton.bottom.equalTo(buttonView.snp.bottom)
-            plusButton.height.equalTo(50)
+            plusButton.height.equalTo(45)
             plusButton.width.equalTo(140)
         }
     }

@@ -21,10 +21,19 @@ class PlayersViewController: BaseViewController {
     private var playersImageView: UIImageView = {
         var image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "Players")
+        image.image = UIImage(named: "")
         image.contentMode = .scaleAspectFill
         image.isHidden = false
         
+        return image
+    }()
+    
+    private var backgroundImageView: UIImageView = {
+        var image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: "background2")
+        image.contentMode = .scaleAspectFill
+        image.alpha = 0.9
         return image
     }()
     
@@ -41,7 +50,7 @@ class PlayersViewController: BaseViewController {
     
     private var hederView : UIView = {
         let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.5057837963, green: 0.3098528385, blue: 0.9293116927, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.6477616429, green: 0.2397351265, blue: 0.5922383666, alpha: 1)
         view.layer.cornerRadius = 15
         view.layer.borderWidth = 1.5
         view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -55,13 +64,13 @@ class PlayersViewController: BaseViewController {
     
     var tableView: UITableView = {
         var tableView = UITableView()
-        let imageView = UIImageView(image: UIImage(named: "people"))
+        let imageView = UIImageView(image: UIImage(named: "people2"))
         imageView.contentMode = .scaleAspectFit
         tableView.backgroundView = imageView
         tableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.layer.borderWidth = 1.5
-        tableView.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        tableView.layer.borderWidth = 1
+        tableView.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         tableView.layer.cornerRadius = 15
         tableView.tableFooterView = UIView()
         tableView.layer.shadowColor = UIColor.black.cgColor
@@ -86,7 +95,7 @@ class PlayersViewController: BaseViewController {
         button.setTitle("Выбрать задание", for: .normal)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.backgroundColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
         button.tintColor = .white
         button.layer.cornerRadius = 25
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -101,12 +110,12 @@ class PlayersViewController: BaseViewController {
     private var plusButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "person.crop.circle.badge.plus"), for: .normal)
-        button.layer.borderWidth = 2
-        button.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        button.layer.borderWidth = 1
+        button.layer.borderColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.backgroundColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
-        button.tintColor = .white
+        button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        button.tintColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
         button.layer.cornerRadius = 25
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.shadowColor = UIColor.black.cgColor
@@ -121,12 +130,12 @@ class PlayersViewController: BaseViewController {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "person.crop.circle.fill.badge.minus"), for: .normal)
         button.largeContentImage = .add
-        button.layer.borderWidth = 2
-        button.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        button.layer.borderWidth = 1
+        button.layer.borderColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        button.tintColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        button.tintColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
         button.layer.cornerRadius = 25
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.shadowColor = UIColor.black.cgColor
@@ -149,7 +158,7 @@ class PlayersViewController: BaseViewController {
         view.backgroundColor = .white
         view.layer.cornerRadius = 15
         view.layer.borderWidth = 2
-        view.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        view.layer.borderColor = #colorLiteral(red: 0.6477616429, green: 0.2397351265, blue: 0.5922383666, alpha: 1)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -167,6 +176,12 @@ class PlayersViewController: BaseViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        
+        backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        backgroundImageView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        backgroundImageView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        
         playersImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         playersImageView.widthAnchor.constraint(equalToConstant: 250).isActive = true
         playersImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -187,7 +202,7 @@ class PlayersViewController: BaseViewController {
         plusButton.rightAnchor.constraint(equalTo: buttonView.rightAnchor  ).isActive = true
         plusButton.bottomAnchor.constraint(equalTo: buttonView.bottomAnchor).isActive = true
         
-        hederView.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: -20).isActive = true
+        hederView.bottomAnchor.constraint(equalTo: tableView.topAnchor).isActive = true
         hederView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
         hederView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
         hederView.heightAnchor.constraint(equalToConstant: 60).isActive = true
@@ -198,14 +213,14 @@ class PlayersViewController: BaseViewController {
         containerView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
         containerView.heightAnchor.constraint(equalToConstant: 240).isActive = true
         
-        tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 60).isActive = true
+        tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 90).isActive = true
         tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor,constant: 10).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -10).isActive = true
         tableView.heightAnchor.constraint(equalToConstant: 240).isActive = true
        
         buttonView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        buttonView.widthAnchor.constraint(equalToConstant: 250).isActive = true
+        buttonView.widthAnchor.constraint(equalToConstant: 300).isActive = true
         buttonView.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -20).isActive = true
         buttonView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
@@ -250,6 +265,7 @@ class PlayersViewController: BaseViewController {
     
     //MARK:- metods
     private func addElementsToView() {
+        view.addSubview(backgroundImageView)
         view.addSubview(nextButton)
         view.addSubview(containerView)
         containerView.addSubview(tableView)

@@ -30,13 +30,13 @@ class PlayersTableViewCell : UITableViewCell {
         self.textLabel?.textColor = .white
         switch player.color {
         case "red":
-            self.backgroundColor = #colorLiteral(red: 0.7909195423, green: 0.3310045898, blue: 0.3346687257, alpha: 1)
+            self.backgroundColor = #colorLiteral(red: 0.8465180397, green: 0.6758248806, blue: 0.7737604976, alpha: 1)
         case "blue":
-            self.backgroundColor = #colorLiteral(red: 0.3977680504, green: 0.4119620025, blue: 0.7987191081, alpha: 1)
+            self.backgroundColor = #colorLiteral(red: 0.281285584, green: 0.4995560646, blue: 0.7573058009, alpha: 1)
         case "purple":
-            self.backgroundColor = #colorLiteral(red: 0.4766717553, green: 0.2852187455, blue: 0.8323209882, alpha: 1)
+            self.backgroundColor = #colorLiteral(red: 0.692247808, green: 0.6088116169, blue: 0.931736052, alpha: 1)
         case "green":
-            self.backgroundColor = #colorLiteral(red: 0.340542227, green: 0.6136100292, blue: 0.3587245941, alpha: 1)
+            self.backgroundColor = #colorLiteral(red: 0.7582806945, green: 0.8539865613, blue: 0.8737122416, alpha: 1)
         default:
             self.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         }

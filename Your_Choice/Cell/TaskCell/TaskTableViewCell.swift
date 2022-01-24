@@ -17,7 +17,7 @@ class TaskTableViewCell: UITableViewCell {
     var viewModel: TaskCellViewModel? {
         didSet{
             guard let viewModel = viewModel else { return }
-            contentView.backgroundColor = viewModel.isSelected ? #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1) : #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            contentView.backgroundColor = viewModel.isSelected ? #colorLiteral(red: 0.4940527678, green: 0.7641897798, blue: 0.4149656594, alpha: 1) : #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             self.textLabel?.text = viewModel.taskText
             taskImage.image = UIImage(named: viewModel.taskType)
             layoutIfNeeded()

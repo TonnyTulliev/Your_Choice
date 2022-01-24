@@ -83,6 +83,32 @@ class GameViewController: UIViewController {
         return button
     }()
     
+    private var startButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setBackgroundImage(UIImage(named: "phone"), for: .normal)
+        button.layer.cornerRadius = button.frame.height / 2
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(tappedButtonPlayer), for: .touchUpInside)
+        return button
+    }()
+    
+    private var imageView: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: "loadingImageView")
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
+    
+    private var backImageView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = #colorLiteral(red: 0.866306603, green: 0.6959679723, blue: 1, alpha: 1)
+        view.alpha = 0.8
+        return view
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,10 +123,15 @@ class GameViewController: UIViewController {
     }
     
     private func addElements() {
+//        view.addSubview(backImageView)
+//        view.sendSubviewToBack(backImageView)
         view.addSubview(firstPlayerButton)
         view.addSubview(secondPlayerButton)
         view.addSubview(thirdlayerButton)
         view.addSubview(fourthPlayerButton)
+        view.addSubview(imageView)
+        view.sendSubviewToBack(imageView)
+        view.addSubview(startButton)
     }
     
     private func getButtonPlayersData(){
@@ -152,26 +183,33 @@ class GameViewController: UIViewController {
             firstPlayerButton.snp.makeConstraints { firstPlayerButton in
                 firstPlayerButton.height.equalTo(55)
                 firstPlayerButton.width.equalTo(160)
-                firstPlayerButton.top.equalTo(view.snp.top).offset(70)
+                firstPlayerButton.top.equalTo(view.snp.top).offset(90)
                 firstPlayerButton.left.equalTo(view.snp.left).offset(20)
             }
             secondPlayerButton.snp.makeConstraints { secondPlayerButton in
                 secondPlayerButton.height.equalTo(55)
                 secondPlayerButton.width.equalTo(160)
-                secondPlayerButton.top.equalTo(view.snp.top).offset(70)
+                secondPlayerButton.top.equalTo(view.snp.top).offset(90)
                 secondPlayerButton.right.equalTo(view.snp.right).offset(-20)
             }
+//            backImageView.snp.makeConstraints { backImageView in
+//                backImageView.height.equalTo(140)
+//                backImageView.top.equalTo(view.snp.top)
+//                backImageView.left.equalTo(view.snp.left)
+//                backImageView.right.equalTo(view.snp.right)
+//
+//            }
         case 3:
             firstPlayerButton.snp.makeConstraints { firstPlayerButton in
                 firstPlayerButton.height.equalTo(55)
                 firstPlayerButton.width.equalTo(160)
-                firstPlayerButton.top.equalTo(view.snp.top).offset(70)
+                firstPlayerButton.top.equalTo(view.snp.top).offset(90)
                 firstPlayerButton.left.equalTo(view.snp.left).offset(20)
             }
             secondPlayerButton.snp.makeConstraints { secondPlayerButton in
                 secondPlayerButton.height.equalTo(55)
                 secondPlayerButton.width.equalTo(160)
-                secondPlayerButton.top.equalTo(view.snp.top).offset(70)
+                secondPlayerButton.top.equalTo(view.snp.top).offset(90)
                 secondPlayerButton.right.equalTo(view.snp.right).offset(-20)
             }
             thirdlayerButton.snp.makeConstraints { thirdlayerButton in
@@ -180,17 +218,23 @@ class GameViewController: UIViewController {
                 thirdlayerButton.centerX.equalTo(view.snp.centerX)
                 thirdlayerButton.top.equalTo(secondPlayerButton.snp.bottom).offset(20)
             }
+//            backImageView.snp.makeConstraints { backImageView in
+//                backImageView.height.equalTo(220)
+//                backImageView.top.equalTo(view.snp.top)
+//                backImageView.left.equalTo(view.snp.left)
+//                backImageView.right.equalTo(view.snp.right)
+//            }
         case 4:
             firstPlayerButton.snp.makeConstraints { firstPlayerButton in
                 firstPlayerButton.height.equalTo(55)
                 firstPlayerButton.width.equalTo(160)
-                firstPlayerButton.top.equalTo(view.snp.top).offset(70)
+                firstPlayerButton.top.equalTo(view.snp.top).offset(90)
                 firstPlayerButton.left.equalTo(view.snp.left).offset(20)
             }
             secondPlayerButton.snp.makeConstraints { secondPlayerButton in
                 secondPlayerButton.height.equalTo(55)
                 secondPlayerButton.width.equalTo(160)
-                secondPlayerButton.top.equalTo(view.snp.top).offset(70)
+                secondPlayerButton.top.equalTo(view.snp.top).offset(90)
                 secondPlayerButton.right.equalTo(view.snp.right).offset(-20)
             }
             thirdlayerButton.snp.makeConstraints { thirdlayerButton in
@@ -205,19 +249,37 @@ class GameViewController: UIViewController {
                 fourthPlayerButton.top.equalTo(secondPlayerButton.snp.bottom).offset(20)
                 fourthPlayerButton.right.equalTo(view.snp.right).offset(-20)
             }
+//            backImageView.snp.makeConstraints { backImageView in
+//                backImageView.height.equalTo(220)
+//                backImageView.top.equalTo(view.snp.top)
+//                backImageView.left.equalTo(view.snp.left)
+//                backImageView.right.equalTo(view.snp.right)
+//            }
         default:
                 firstPlayerButton.snp.makeConstraints { firstPlayerButton in
                     firstPlayerButton.height.equalTo(55)
                     firstPlayerButton.width.equalTo(160)
-                    firstPlayerButton.top.equalTo(view.snp.top).offset(70)
+                    firstPlayerButton.top.equalTo(view.snp.top).offset(90)
                     firstPlayerButton.left.equalTo(view.snp.left).offset(20)
                 }
                 secondPlayerButton.snp.makeConstraints { secondPlayerButton in
                     secondPlayerButton.height.equalTo(55)
                     secondPlayerButton.width.equalTo(160)
-                    secondPlayerButton.top.equalTo(view.snp.top).offset(70)
+                    secondPlayerButton.top.equalTo(view.snp.top).offset(90)
                     secondPlayerButton.right.equalTo(view.snp.right).offset(-20)
                 }
+        }
+        imageView.snp.makeConstraints { imageView in
+            imageView.height.equalTo(250)
+            imageView.width.equalTo(250)
+            imageView.centerX.equalTo(view.snp.centerX)
+            imageView.centerY.equalTo(view.snp.centerY).offset(80)
+        }
+        startButton.snp.makeConstraints { startButton in
+            startButton.height.equalTo(150)
+            startButton.width.equalTo(150)
+            startButton.centerX.equalTo(view.snp.centerX)
+            startButton.centerY.equalTo(view.snp.centerY).offset(80)
         }
     }
     
