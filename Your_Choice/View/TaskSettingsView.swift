@@ -184,10 +184,6 @@ class TaskSettingView: UIView {
         self.addSubview(exitButton)
         self.addSubview(taskTextField)
         self.addSubview(doneButton)
-        self.addSubview(homeLabel)
-        self.addSubview(personLabel)
-        self.addSubview(shoppingLabel)
-        self.addSubview(otherLabel)
         self.addSubview(stackView)
         stackView.addArrangedSubview(homeTaskButton)
         stackView.addArrangedSubview(personalTaskButton)
@@ -197,6 +193,10 @@ class TaskSettingView: UIView {
         buttons.append(personalTaskButton)
         buttons.append(shoppingTaskButton)
         buttons.append(otherTaskButton)
+        self.addSubview(homeLabel)
+        self.addSubview(personLabel)
+        self.addSubview(shoppingLabel)
+        self.addSubview(otherLabel)
     }
     
     private func addConstraints() {
@@ -230,7 +230,7 @@ class TaskSettingView: UIView {
         }
         homeLabel.snp.makeConstraints { homeLabel in
             homeLabel.centerX.equalTo(homeTaskButton.snp.centerX)
-            homeLabel.top.equalTo(homeTaskButton.snp.bottom).offset(20)
+            homeLabel.top.equalTo(homeTaskButton.snp.bottom).offset(5)
         }
         personalTaskButton.snp.makeConstraints { personalTaskButton in
             personalTaskButton.size.equalTo(CGSize(width: 60, height: 60))
@@ -238,7 +238,7 @@ class TaskSettingView: UIView {
         }
         personLabel.snp.makeConstraints { personLabel in
             personLabel.centerX.equalTo(personalTaskButton.snp.centerX)
-            personLabel.top.equalTo(personalTaskButton.snp.bottom).offset(20)
+            personLabel.top.equalTo(personalTaskButton.snp.bottom).offset(5)
         }
         shoppingTaskButton.snp.makeConstraints { shoppingTaskButton in
             shoppingTaskButton.size.equalTo(CGSize(width: 60, height: 60))
@@ -246,7 +246,7 @@ class TaskSettingView: UIView {
         }
         shoppingLabel.snp.makeConstraints { shoppingLabel in
             shoppingLabel.centerX.equalTo(shoppingTaskButton.snp.centerX)
-            shoppingLabel.top.equalTo(shoppingTaskButton.snp.bottom).offset(20)
+            shoppingLabel.top.equalTo(shoppingTaskButton.snp.bottom).offset(5)
         }
         otherTaskButton.snp.makeConstraints { otherTaskButton in
             otherTaskButton.size.equalTo(CGSize(width: 60, height: 60))
@@ -254,7 +254,7 @@ class TaskSettingView: UIView {
         }
         otherLabel.snp.makeConstraints { otherLabel in
             otherLabel.centerX.equalTo(otherTaskButton.snp.centerX)
-            otherLabel.top.equalTo(otherTaskButton.snp.bottom).offset(20)
+            otherLabel.top.equalTo(otherTaskButton.snp.bottom).offset(5)
         }
     }
     

@@ -101,15 +101,6 @@ class GameViewController: UIViewController {
         return image
     }()
     
-    private var backImageView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = #colorLiteral(red: 0.866306603, green: 0.6959679723, blue: 1, alpha: 1)
-        view.alpha = 0.8
-        return view
-    }()
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         config()
@@ -179,31 +170,10 @@ class GameViewController: UIViewController {
     private func addConstraints() {
         switch realm.objects(PlayerRealm.self).count {
         case 2:
-            firstPlayerButton.snp.makeConstraints { firstPlayerButton in
-                firstPlayerButton.height.equalTo(55)
-                firstPlayerButton.width.equalTo(160)
-                firstPlayerButton.top.equalTo(view.snp.top).offset(90)
-                firstPlayerButton.left.equalTo(view.snp.left).offset(20)
-            }
-            secondPlayerButton.snp.makeConstraints { secondPlayerButton in
-                secondPlayerButton.height.equalTo(55)
-                secondPlayerButton.width.equalTo(160)
-                secondPlayerButton.top.equalTo(view.snp.top).offset(90)
-                secondPlayerButton.right.equalTo(view.snp.right).offset(-20)
-            }
+            setConstraits(firstItem: firstPlayerButton, secondItem: secondPlayerButton, xItem: view, xOffsetLeft: 20, xOffsetRight: -20, yItem: view, yOffset: 120, height: 55, widht: 160)
+           
         case 3:
-            firstPlayerButton.snp.makeConstraints { firstPlayerButton in
-                firstPlayerButton.height.equalTo(55)
-                firstPlayerButton.width.equalTo(160)
-                firstPlayerButton.top.equalTo(view.snp.top).offset(90)
-                firstPlayerButton.left.equalTo(view.snp.left).offset(20)
-            }
-            secondPlayerButton.snp.makeConstraints { secondPlayerButton in
-                secondPlayerButton.height.equalTo(55)
-                secondPlayerButton.width.equalTo(160)
-                secondPlayerButton.top.equalTo(view.snp.top).offset(90)
-                secondPlayerButton.right.equalTo(view.snp.right).offset(-20)
-            }
+            setConstraits(firstItem: firstPlayerButton, secondItem: secondPlayerButton, xItem: view, xOffsetLeft: 20, xOffsetRight: -20, yItem: view, yOffset: 120, height: 55, widht: 160)
             thirdlayerButton.snp.makeConstraints { thirdlayerButton in
                 thirdlayerButton.height.equalTo(55)
                 thirdlayerButton.width.equalTo(160)
@@ -211,43 +181,10 @@ class GameViewController: UIViewController {
                 thirdlayerButton.top.equalTo(secondPlayerButton.snp.bottom).offset(20)
             }
         case 4:
-            firstPlayerButton.snp.makeConstraints { firstPlayerButton in
-                firstPlayerButton.height.equalTo(55)
-                firstPlayerButton.width.equalTo(160)
-                firstPlayerButton.top.equalTo(view.snp.top).offset(90)
-                firstPlayerButton.left.equalTo(view.snp.left).offset(20)
-            }
-            secondPlayerButton.snp.makeConstraints { secondPlayerButton in
-                secondPlayerButton.height.equalTo(55)
-                secondPlayerButton.width.equalTo(160)
-                secondPlayerButton.top.equalTo(view.snp.top).offset(90)
-                secondPlayerButton.right.equalTo(view.snp.right).offset(-20)
-            }
-            thirdlayerButton.snp.makeConstraints { thirdlayerButton in
-                thirdlayerButton.height.equalTo(55)
-                thirdlayerButton.width.equalTo(160)
-                thirdlayerButton.top.equalTo(firstPlayerButton.snp.bottom).offset(20)
-                thirdlayerButton.left.equalTo(view.snp.left).offset(20)
-            }
-            fourthPlayerButton.snp.makeConstraints { fourthPlayerButton in
-                fourthPlayerButton.height.equalTo(55)
-                fourthPlayerButton.width.equalTo(160)
-                fourthPlayerButton.top.equalTo(secondPlayerButton.snp.bottom).offset(20)
-                fourthPlayerButton.right.equalTo(view.snp.right).offset(-20)
-            }
+            setConstraits(firstItem: firstPlayerButton, secondItem: secondPlayerButton, xItem: view, xOffsetLeft: 20, xOffsetRight: -20, yItem: view, yOffset: 120, height: 55, widht: 160)
+            setConstraits(firstItem: thirdlayerButton, secondItem: fourthPlayerButton, xItem: view, xOffsetLeft: 20, xOffsetRight: -20, yItem: firstPlayerButton, yOffset: 75, height: 55, widht: 160)
         default:
-                firstPlayerButton.snp.makeConstraints { firstPlayerButton in
-                    firstPlayerButton.height.equalTo(55)
-                    firstPlayerButton.width.equalTo(160)
-                    firstPlayerButton.top.equalTo(view.snp.top).offset(90)
-                    firstPlayerButton.left.equalTo(view.snp.left).offset(20)
-                }
-                secondPlayerButton.snp.makeConstraints { secondPlayerButton in
-                    secondPlayerButton.height.equalTo(55)
-                    secondPlayerButton.width.equalTo(160)
-                    secondPlayerButton.top.equalTo(view.snp.top).offset(90)
-                    secondPlayerButton.right.equalTo(view.snp.right).offset(-20)
-                }
+            setConstraits(firstItem: firstPlayerButton, secondItem: secondPlayerButton, xItem: view, xOffsetLeft: 20, xOffsetRight: -20, yItem: view, yOffset: 120, height: 55, widht: 160)
         }
         imageView.snp.makeConstraints { imageView in
             imageView.height.equalTo(250)
@@ -266,6 +203,22 @@ class GameViewController: UIViewController {
             backgroundImageView.top.equalTo(view.snp.top)
             backgroundImageView.left.equalTo(view.snp.left)
             backgroundImageView.right.equalTo(view.snp.right)
+        }
+    }
+    
+    private func setConstraits(firstItem: UIView, secondItem: UIView, xItem: UIView, xOffsetLeft:Int,
+                               xOffsetRight: Int, yItem: UIView, yOffset: Int, height: Int, widht: Int ) {
+        firstItem.snp.makeConstraints { firstItem in
+            firstItem.height.equalTo(height)
+            firstItem.width.equalTo(widht)
+            firstItem.top.equalTo(yItem.snp.top).offset(yOffset)
+            firstItem.left.equalTo(xItem.snp.left).offset(xOffsetLeft)
+        }
+        secondItem.snp.makeConstraints { secondItem in
+            secondItem.height.equalTo(height)
+            secondItem.width.equalTo(widht)
+            secondItem.top.equalTo(yItem.snp.top).offset(yOffset)
+            secondItem.right.equalTo(xItem.snp.right).offset(xOffsetRight)
         }
     }
     
