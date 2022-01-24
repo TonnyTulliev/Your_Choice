@@ -245,7 +245,7 @@ class TaskViewController: UIViewController{
             label.centerX.equalTo(hederView.snp.centerX)
         }
         segmentedControl.snp.makeConstraints { segmentedControl in
-            segmentedControl.bottom.equalTo(containerView.snp.top).offset(0)
+            segmentedControl.bottom.equalTo(containerView.snp.top).offset(-20)
             segmentedControl.centerX.equalTo(view.snp.centerX)
             segmentedControl.height.equalTo(40)
             segmentedControl.left.equalTo(10)
@@ -253,26 +253,26 @@ class TaskViewController: UIViewController{
         }
         containerView.snp.makeConstraints { containerView in
             containerView.centerX.equalTo(view.snp.centerX)
-            containerView.centerY.equalTo(view.snp.centerY).offset(40)
+            containerView.centerY.equalTo(view.snp.centerY).offset(50)
             containerView.left.equalTo(view.snp.left).offset(10)
             containerView.right.equalTo(view.snp.right).offset(-10)
             containerView.height.equalTo(300)
         }
         tableView.snp.makeConstraints { tableView in
             tableView.centerX.equalTo(view.snp.centerX)
-            tableView.centerY.equalTo(view.snp.centerY).offset(70)
+            tableView.centerY.equalTo(view.snp.centerY).offset(50)
             tableView.left.equalTo(view.snp.left).offset(10)
             tableView.right.equalTo(view.snp.right).offset(-10)
             tableView.height.equalTo(300)
         }
         nextButton.snp.makeConstraints { nextButton in
-            nextButton.top.equalTo(tableView.snp.bottom).offset(40)
+            nextButton.top.equalTo(tableView.snp.bottom).offset(50)
             nextButton.centerX.equalTo(view.snp.centerX)
             nextButton.height.equalTo(55)
             nextButton.width.equalTo(250)
         }
         buttonView.snp.makeConstraints { buttonView in
-            buttonView.centerY.equalTo(tableView.snp.bottom).offset(10)
+            buttonView.centerY.equalTo(tableView.snp.bottom).offset(5)
             buttonView.centerX.equalTo(tableView.snp.centerX)
             buttonView.height.equalTo(50)
             buttonView.width.equalTo(300)
@@ -280,13 +280,13 @@ class TaskViewController: UIViewController{
         minusButton.snp.makeConstraints { minusButton in
             minusButton.left.equalTo(buttonView.snp.left)
             minusButton.bottom.equalTo(buttonView.snp.bottom)
-            minusButton.height.equalTo(45)
+            minusButton.height.equalTo(50)
             minusButton.width.equalTo(140)
         }
         plusButton.snp.makeConstraints { plusButton in
             plusButton.right.equalTo(buttonView.snp.right)
             plusButton.bottom.equalTo(buttonView.snp.bottom)
-            plusButton.height.equalTo(45)
+            plusButton.height.equalTo(50)
             plusButton.width.equalTo(140)
         }
     }

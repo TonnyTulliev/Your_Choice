@@ -139,7 +139,7 @@ class StartViewController: BaseViewController {
         passwordTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
         passwordTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
         passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        passwordTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        passwordTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 20).isActive = true
         
         mainImageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         mainImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true

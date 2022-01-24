@@ -14,14 +14,20 @@ class GameViewController: UIViewController {
     
     let realm = try! Realm()
    
+    private var backgroundImageView: UIImageView = {
+        var image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: "background2")
+        image.contentMode = .scaleAspectFill
+        image.alpha = 0.9
+        return image
+    }()
     
     private var firstPlayerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("", for: .normal)
-//        button.titleLabel?.textAlignment = .center
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.backgroundColor = #colorLiteral(red: 0.7909195423, green: 0.3310045898, blue: 0.3346687257, alpha: 1)
         button.tintColor = .white
         button.layer.cornerRadius = 25
         button.layer.shadowColor = UIColor.black.cgColor
@@ -35,10 +41,8 @@ class GameViewController: UIViewController {
     private var secondPlayerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("", for: .normal)
-//        button.titleLabel?.textAlignment = .center
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.backgroundColor = #colorLiteral(red: 0.4766717553, green: 0.2852187455, blue: 0.8323209882, alpha: 1)
         button.tintColor = .white
         button.layer.cornerRadius = 25
         button.layer.shadowColor = UIColor.black.cgColor
@@ -51,11 +55,9 @@ class GameViewController: UIViewController {
     
     private var thirdlayerButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Третий", for: .normal)
-//        button.titleLabel?.textAlignment = .center
+        button.setTitle("", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.backgroundColor = #colorLiteral(red: 0.3977680504, green: 0.4119620025, blue: 0.7987191081, alpha: 1)
         button.tintColor = .white
         button.layer.cornerRadius = 25
         button.layer.shadowColor = UIColor.black.cgColor
@@ -68,11 +70,9 @@ class GameViewController: UIViewController {
     
     private var fourthPlayerButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Четвертый", for: .normal)
-//        button.titleLabel?.textAlignment = .center
+        button.setTitle("", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.backgroundColor = #colorLiteral(red: 0.340542227, green: 0.6136100292, blue: 0.3587245941, alpha: 1)
         button.tintColor = .white
         button.layer.cornerRadius = 25
         button.layer.shadowColor = UIColor.black.cgColor
@@ -125,6 +125,7 @@ class GameViewController: UIViewController {
     private func addElements() {
 //        view.addSubview(backImageView)
 //        view.sendSubviewToBack(backImageView)
+        view.addSubview(backgroundImageView)
         view.addSubview(firstPlayerButton)
         view.addSubview(secondPlayerButton)
         view.addSubview(thirdlayerButton)
@@ -159,16 +160,16 @@ class GameViewController: UIViewController {
     private func setSettings(color: String, title: String, button: UIButton) {
         switch color {
         case "red":
-            button.backgroundColor = #colorLiteral(red: 0.7909195423, green: 0.3310045898, blue: 0.3346687257, alpha: 1)
+            button.backgroundColor = #colorLiteral(red: 0.8465180397, green: 0.6758248806, blue: 0.7737604976, alpha: 1)
             button.setTitle(title, for: .normal)
         case "blue":
-            button.backgroundColor = #colorLiteral(red: 0.3977680504, green: 0.4119620025, blue: 0.7987191081, alpha: 1)
+            button.backgroundColor = #colorLiteral(red: 0.281285584, green: 0.4995560646, blue: 0.7573058009, alpha: 1)
             button.setTitle(title, for: .normal)
         case "purple":
-            button.backgroundColor = #colorLiteral(red: 0.4766717553, green: 0.2852187455, blue: 0.8323209882, alpha: 1)
+            button.backgroundColor = #colorLiteral(red: 0.692247808, green: 0.6088116169, blue: 0.931736052, alpha: 1)
             button.setTitle(title, for: .normal)
         case "green":
-            button.backgroundColor = #colorLiteral(red: 0.340542227, green: 0.6136100292, blue: 0.3587245941, alpha: 1)
+            button.backgroundColor = #colorLiteral(red: 0.7582806945, green: 0.8539865613, blue: 0.8737122416, alpha: 1)
             button.setTitle(title, for: .normal)
         default:
             button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -280,6 +281,12 @@ class GameViewController: UIViewController {
             startButton.width.equalTo(150)
             startButton.centerX.equalTo(view.snp.centerX)
             startButton.centerY.equalTo(view.snp.centerY).offset(80)
+        }
+        backgroundImageView.snp.makeConstraints { backgroundImageView in
+            backgroundImageView.bottom.equalTo(view.snp.bottom)
+            backgroundImageView.top.equalTo(view.snp.top)
+            backgroundImageView.left.equalTo(view.snp.left)
+            backgroundImageView.right.equalTo(view.snp.right)
         }
     }
     
