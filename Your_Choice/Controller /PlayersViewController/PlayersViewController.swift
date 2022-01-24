@@ -43,7 +43,7 @@ class PlayersViewController: BaseViewController {
         label.textAlignment = .center
         label.textColor = .white
         label.text = "Выберите от 2 до 4 игроков"
-        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         label.numberOfLines = 0
         return label
     }()

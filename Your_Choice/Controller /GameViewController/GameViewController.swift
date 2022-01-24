@@ -123,8 +123,6 @@ class GameViewController: UIViewController {
     }
     
     private func addElements() {
-//        view.addSubview(backImageView)
-//        view.sendSubviewToBack(backImageView)
         view.addSubview(backgroundImageView)
         view.addSubview(firstPlayerButton)
         view.addSubview(secondPlayerButton)
@@ -193,13 +191,6 @@ class GameViewController: UIViewController {
                 secondPlayerButton.top.equalTo(view.snp.top).offset(90)
                 secondPlayerButton.right.equalTo(view.snp.right).offset(-20)
             }
-//            backImageView.snp.makeConstraints { backImageView in
-//                backImageView.height.equalTo(140)
-//                backImageView.top.equalTo(view.snp.top)
-//                backImageView.left.equalTo(view.snp.left)
-//                backImageView.right.equalTo(view.snp.right)
-//
-//            }
         case 3:
             firstPlayerButton.snp.makeConstraints { firstPlayerButton in
                 firstPlayerButton.height.equalTo(55)
@@ -219,12 +210,6 @@ class GameViewController: UIViewController {
                 thirdlayerButton.centerX.equalTo(view.snp.centerX)
                 thirdlayerButton.top.equalTo(secondPlayerButton.snp.bottom).offset(20)
             }
-//            backImageView.snp.makeConstraints { backImageView in
-//                backImageView.height.equalTo(220)
-//                backImageView.top.equalTo(view.snp.top)
-//                backImageView.left.equalTo(view.snp.left)
-//                backImageView.right.equalTo(view.snp.right)
-//            }
         case 4:
             firstPlayerButton.snp.makeConstraints { firstPlayerButton in
                 firstPlayerButton.height.equalTo(55)
@@ -250,12 +235,6 @@ class GameViewController: UIViewController {
                 fourthPlayerButton.top.equalTo(secondPlayerButton.snp.bottom).offset(20)
                 fourthPlayerButton.right.equalTo(view.snp.right).offset(-20)
             }
-//            backImageView.snp.makeConstraints { backImageView in
-//                backImageView.height.equalTo(220)
-//                backImageView.top.equalTo(view.snp.top)
-//                backImageView.left.equalTo(view.snp.left)
-//                backImageView.right.equalTo(view.snp.right)
-//            }
         default:
                 firstPlayerButton.snp.makeConstraints { firstPlayerButton in
                     firstPlayerButton.height.equalTo(55)

@@ -17,7 +17,7 @@ class TaskTableViewCell: UITableViewCell {
     var viewModel: TaskCellViewModel? {
         didSet{
             guard let viewModel = viewModel else { return }
-            contentView.backgroundColor = viewModel.isSelected ? #colorLiteral(red: 0.4940527678, green: 0.7641897798, blue: 0.4149656594, alpha: 1) : #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            self.backgroundColor = viewModel.isSelected ? #colorLiteral(red: 0.4940527678, green: 0.7641897798, blue: 0.4149656594, alpha: 1) : #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             self.textLabel?.text = viewModel.taskText
             taskImage.image = UIImage(named: viewModel.taskType)
             layoutIfNeeded()
@@ -35,8 +35,8 @@ class TaskTableViewCell: UITableViewCell {
         taskImage.snp.makeConstraints { taskImage in
             taskImage.centerY.equalTo(self.snp.centerY)
             taskImage.left.equalTo(self.snp.left).offset(20)
-            taskImage.height.equalTo(45)
-            taskImage.width.equalTo(45)
+            taskImage.height.equalTo(40)
+            taskImage.width.equalTo(40)
         }
     }
     
@@ -52,9 +52,10 @@ class TaskTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.addSubview(taskImage)
+        self.bringSubviewToFront(taskImage)
+        addConstraints()
         self.textLabel?.textAlignment = .center
         self.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-        addConstraints()
     }
     
     required init?(coder: NSCoder) {

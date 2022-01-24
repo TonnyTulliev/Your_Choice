@@ -24,7 +24,7 @@ class TaskSettingView: UIView {
     
     var exitButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
         button.setBackgroundImage(UIImage(systemName: "multiply.circle.fill"), for: .normal)
         button.contentMode = .scaleAspectFit
         button.tintColor = .white
@@ -40,8 +40,8 @@ class TaskSettingView: UIView {
     private var taskTextField: UITextField = {
         let textfield = UITextField()
         textfield.translatesAutoresizingMaskIntoConstraints = false
-        textfield.layer.borderWidth = 1.5
-        textfield.layer.borderColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        textfield.layer.borderWidth = 1
+        textfield.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         textfield.backgroundColor = #colorLiteral(red: 0.9697982669, green: 0.9640328288, blue: 0.9742299914, alpha: 1)
         textfield.layer.cornerRadius = 15
         textfield.placeholder = "Напишите задание"
@@ -142,7 +142,7 @@ class TaskSettingView: UIView {
     
     var doneButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.5555383563, green: 0, blue: 1, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
         button.setTitle("Создать", for: .normal)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
@@ -230,7 +230,7 @@ class TaskSettingView: UIView {
         }
         homeLabel.snp.makeConstraints { homeLabel in
             homeLabel.centerX.equalTo(homeTaskButton.snp.centerX)
-            homeLabel.top.equalTo(homeTaskButton.snp.bottom)
+            homeLabel.top.equalTo(homeTaskButton.snp.bottom).offset(20)
         }
         personalTaskButton.snp.makeConstraints { personalTaskButton in
             personalTaskButton.size.equalTo(CGSize(width: 60, height: 60))
@@ -238,7 +238,7 @@ class TaskSettingView: UIView {
         }
         personLabel.snp.makeConstraints { personLabel in
             personLabel.centerX.equalTo(personalTaskButton.snp.centerX)
-            personLabel.top.equalTo(personalTaskButton.snp.bottom)
+            personLabel.top.equalTo(personalTaskButton.snp.bottom).offset(20)
         }
         shoppingTaskButton.snp.makeConstraints { shoppingTaskButton in
             shoppingTaskButton.size.equalTo(CGSize(width: 60, height: 60))
@@ -246,7 +246,7 @@ class TaskSettingView: UIView {
         }
         shoppingLabel.snp.makeConstraints { shoppingLabel in
             shoppingLabel.centerX.equalTo(shoppingTaskButton.snp.centerX)
-            shoppingLabel.top.equalTo(shoppingTaskButton.snp.bottom)
+            shoppingLabel.top.equalTo(shoppingTaskButton.snp.bottom).offset(20)
         }
         otherTaskButton.snp.makeConstraints { otherTaskButton in
             otherTaskButton.size.equalTo(CGSize(width: 60, height: 60))
@@ -254,7 +254,7 @@ class TaskSettingView: UIView {
         }
         otherLabel.snp.makeConstraints { otherLabel in
             otherLabel.centerX.equalTo(otherTaskButton.snp.centerX)
-            otherLabel.top.equalTo(otherTaskButton.snp.bottom)
+            otherLabel.top.equalTo(otherTaskButton.snp.bottom).offset(20)
         }
     }
     
