@@ -35,8 +35,8 @@ class TaskTableViewCell: UITableViewCell {
         taskImage.snp.makeConstraints { taskImage in
             taskImage.centerY.equalTo(self.snp.centerY)
             taskImage.left.equalTo(self.snp.left).offset(20)
-            taskImage.height.equalTo(40)
-            taskImage.width.equalTo(40)
+            taskImage.height.equalTo(50)
+            taskImage.width.equalTo(50)
         }
     }
     
