@@ -143,7 +143,7 @@ class OptionsPlayersView: UIView {
         config()
         addElements()
         addConstraints()
-        checkButtonEnable()
+        checkValidationPOVC()
         nameTextField.delegate = self
         }
 
@@ -196,7 +196,7 @@ class OptionsPlayersView: UIView {
                 i.setImage(UIImage(named: ""), for: .normal)
             }
         }
-        checkButtonEnable()
+        checkValidationPOVC()
     }
     
     @objc private func blueTapped(){
@@ -212,7 +212,7 @@ class OptionsPlayersView: UIView {
                 i.setImage(UIImage(named: ""), for: .normal)
             }
         }
-        checkButtonEnable()
+        checkValidationPOVC()
     }
     
     @objc private func purpleTapped(){
@@ -228,7 +228,7 @@ class OptionsPlayersView: UIView {
                 i.setImage(UIImage(named: ""), for: .normal)
             }
         }
-        checkButtonEnable()
+        checkValidationPOVC()
     }
     
     @objc private func greenTapped(){
@@ -244,7 +244,7 @@ class OptionsPlayersView: UIView {
                 i.setImage(UIImage(named: ""), for: .normal)
             }
         }
-        checkButtonEnable()
+        checkValidationPOVC()
     }
     
     private func addConstraints() {
@@ -256,7 +256,6 @@ class OptionsPlayersView: UIView {
         label.snp.makeConstraints { label in
             label.top.equalTo(self.snp.top).offset(60)
             label.centerX.equalTo(self.snp.centerX)
-//            label.centerY.equalTo(exitButton.snp.centerY)
         }
         nameTextField.snp.makeConstraints { nameTextField in
             nameTextField.size.equalTo(CGSize(width: 300, height: 55))
@@ -291,7 +290,7 @@ class OptionsPlayersView: UIView {
         }
         
     }
-    private func checkButtonEnable(){
+    private func checkValidationPOVC(){
         if name == "" || color == "" {
             doneButton.backgroundColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
             doneButton.isEnabled = false
@@ -308,7 +307,7 @@ extension OptionsPlayersView: UITextFieldDelegate {
         default:
             name = textField.text ?? ""
             textField.resignFirstResponder()
-            checkButtonEnable()
+            checkValidationPOVC()
         }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -316,7 +315,7 @@ extension OptionsPlayersView: UITextFieldDelegate {
         default:
             name = textField.text ?? ""
             textField.resignFirstResponder()
-            checkButtonEnable()
+            checkValidationPOVC()
         }
         return false 
     }

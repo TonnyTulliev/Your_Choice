@@ -177,6 +177,7 @@ class TaskSettingView: UIView {
         self.layer.cornerRadius = 30
         self.layer.borderWidth = 1.5
         self.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        checkValidationTSVC()
     }
     
     private func addElements() {
@@ -262,6 +263,16 @@ class TaskSettingView: UIView {
         taskTextField.delegate = self
     }
     
+    private func checkValidationTSVC(){
+        if taskName == "" || taskType == "" {
+            doneButton.backgroundColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+            doneButton.isEnabled = false
+        }else{
+            doneButton.backgroundColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
+            doneButton.isEnabled = true
+        }
+    }
+    
     @objc private func homeTaskTapped(){
         for i in buttons {
             if i == homeTaskButton{
@@ -275,7 +286,7 @@ class TaskSettingView: UIView {
                 i.layer.borderColor = .none
             }
         }
-        //        checkButtonEnable()
+        checkValidationTSVC()
     }
     
     @objc private func personalTaskTapped(){
@@ -290,7 +301,7 @@ class TaskSettingView: UIView {
                 i.layer.borderColor = .none
             }
         }
-        //        checkButtonEnable()
+        checkValidationTSVC()
     }
     
     @objc private func shoppingTaskTapped(){
@@ -305,7 +316,7 @@ class TaskSettingView: UIView {
                 i.layer.borderColor = .none
             }
         }
-        //        checkButtonEnable()
+        checkValidationTSVC()
     }
     
     @objc private func otherTaskTapped(){
@@ -319,7 +330,7 @@ class TaskSettingView: UIView {
                 i.layer.borderColor = .none
             }
         }
-        //        checkButtonEnable()
+        checkValidationTSVC()
     }
     
     @objc private func done(){
@@ -333,7 +344,7 @@ extension TaskSettingView: UITextFieldDelegate {
         default:
             taskName = textField.text ?? ""
             textField.resignFirstResponder()
-        //            checkButtonEnable()
+            checkValidationTSVC()
         }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -341,6 +352,7 @@ extension TaskSettingView: UITextFieldDelegate {
         default:
             taskName = textField.text ?? ""
             textField.resignFirstResponder()
+            checkValidationTSVC()
         }
         return false
     }
