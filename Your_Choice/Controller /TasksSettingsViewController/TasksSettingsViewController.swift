@@ -10,7 +10,7 @@ import  UIKit
 import SnapKit
 import RealmSwift
 
-class TasksSettingsViewController: UIViewController {
+class TasksSettingsViewController: BaseViewController {
     
     //MARK:- Properties
     let realm = try! Realm()

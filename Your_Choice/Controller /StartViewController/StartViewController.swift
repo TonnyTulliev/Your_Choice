@@ -103,7 +103,6 @@ class StartViewController: BaseViewController {
         super.viewDidLoad()
         addElementsToView()
         addTFDelegate()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -145,14 +144,11 @@ class StartViewController: BaseViewController {
         mainImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
         mainImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         mainImageView.bottomAnchor.constraint(equalTo: emailTextField.topAnchor, constant: -40).isActive = true
-        
-        
     }
     
     //MARK:- objc metods
     @objc private func tappedButton() {
         let nextVC = RegistrationViewController()
-//        nextVC.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(nextVC, animated: true)
     }
     

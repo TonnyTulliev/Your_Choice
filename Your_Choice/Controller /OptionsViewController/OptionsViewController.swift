@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import RealmSwift
 
-class OptionsViewControoler: UIViewController{
+class OptionsViewControoler: BaseViewController{
     
     let realm = try! Realm()
     var optionPlayersView = OptionsPlayersView()

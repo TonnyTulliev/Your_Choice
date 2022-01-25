@@ -8,7 +8,7 @@ import UIKit
 import SnapKit
 import RealmSwift
 
-class PlayersViewController: BaseViewController {
+class PlayersViewController: UIViewController {
     
     //MARK:- Properties
     var index = 0
@@ -289,6 +289,7 @@ class PlayersViewController: BaseViewController {
     }
     
     private func сonfig(){
+        view.backgroundColor = .white
         view.alpha = 1
         navigationController?.isNavigationBarHidden = false
         navigationItem.title = "Игроки"
