@@ -13,6 +13,7 @@ import SnapKit
 class GameViewController: UIViewController {
     
     let realm = try! Realm()
+//    var rotationState: Bool? = nil
    
     private var backgroundImageView: UIImageView = {
         var image = UIImageView()
@@ -83,17 +84,29 @@ class GameViewController: UIViewController {
         return button
     }()
     
+    private var tableView: UITableView = {
+        var tableView = UITableView()
+        tableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.layer.borderWidth = 1.5
+        tableView.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        tableView.layer.cornerRadius = 15
+        tableView.tableFooterView = UIView()
+        tableView.alpha = 0.0
+        return tableView
+    }()
+    
     private var startButton: UIButton = {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setBackgroundImage(UIImage(named: "rocket"), for: .normal)
         button.layer.cornerRadius = button.frame.height / 2
         button.clipsToBounds = true
-        button.addTarget(self, action: #selector(tappedButtonPlayer), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tappedStartButton), for: .touchUpInside)
         return button
     }()
     
-    private var imageView: UIImageView = {
+    private var loadingImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "loadingImageView1")
@@ -119,8 +132,9 @@ class GameViewController: UIViewController {
         view.addSubview(secondPlayerButton)
         view.addSubview(thirdlayerButton)
         view.addSubview(fourthPlayerButton)
-        view.addSubview(imageView)
+        view.addSubview(loadingImageView)
         view.addSubview(startButton)
+        view.addSubview(tableView)
     }
     
     private func getButtonPlayersData(){
@@ -169,10 +183,9 @@ class GameViewController: UIViewController {
     private func addConstraints() {
         switch realm.objects(PlayerRealm.self).count {
         case 2:
-            setConstraits(firstItem: firstPlayerButton, secondItem: secondPlayerButton, xItem: view, xOffsetLeft: 20, xOffsetRight: -20, yItem: view, yOffset: 120, height: 55, widht: 160)
-           
+            setConstraits(firstItem: firstPlayerButton, secondItem: secondPlayerButton, tableItem: firstPlayerButton, xItem: view, xOffsetLeft: 20, xOffsetRight: -20, yItem: view, yOffset: 120, height: 55, widht: 160, imageOffset: 80)
         case 3:
-            setConstraits(firstItem: firstPlayerButton, secondItem: secondPlayerButton, xItem: view, xOffsetLeft: 20, xOffsetRight: -20, yItem: view, yOffset: 120, height: 55, widht: 160)
+            setConstraits(firstItem: firstPlayerButton, secondItem: secondPlayerButton, tableItem: thirdlayerButton, xItem: view, xOffsetLeft: 20, xOffsetRight: -20, yItem: view, yOffset: 120, height: 55, widht: 160, imageOffset: 140)
             thirdlayerButton.snp.makeConstraints { thirdlayerButton in
                 thirdlayerButton.height.equalTo(55)
                 thirdlayerButton.width.equalTo(160)
@@ -180,22 +193,10 @@ class GameViewController: UIViewController {
                 thirdlayerButton.top.equalTo(secondPlayerButton.snp.bottom).offset(20)
             }
         case 4:
-            setConstraits(firstItem: firstPlayerButton, secondItem: secondPlayerButton, xItem: view, xOffsetLeft: 20, xOffsetRight: -20, yItem: view, yOffset: 120, height: 55, widht: 160)
-            setConstraits(firstItem: thirdlayerButton, secondItem: fourthPlayerButton, xItem: view, xOffsetLeft: 20, xOffsetRight: -20, yItem: firstPlayerButton, yOffset: 75, height: 55, widht: 160)
+            setConstraits(firstItem: firstPlayerButton, secondItem: secondPlayerButton, tableItem: fourthPlayerButton, xItem: view, xOffsetLeft: 20, xOffsetRight: -20, yItem: view, yOffset: 120, height: 55, widht: 160, imageOffset: 130)
+            setConstraits(firstItem: thirdlayerButton, secondItem: fourthPlayerButton, tableItem: fourthPlayerButton, xItem: view, xOffsetLeft: 20, xOffsetRight: -20, yItem: firstPlayerButton, yOffset: 75, height: 55, widht: 160, imageOffset: 140)
         default:
-            setConstraits(firstItem: firstPlayerButton, secondItem: secondPlayerButton, xItem: view, xOffsetLeft: 20, xOffsetRight: -20, yItem: view, yOffset: 120, height: 55, widht: 160)
-        }
-        imageView.snp.makeConstraints { imageView in
-            imageView.height.equalTo(450)
-            imageView.width.equalTo(450)
-            imageView.centerX.equalTo(view.snp.centerX)
-            imageView.centerY.equalTo(view.snp.centerY).offset(80)
-        }
-        startButton.snp.makeConstraints { startButton in
-            startButton.height.equalTo(150)
-            startButton.width.equalTo(150)
-            startButton.centerX.equalTo(view.snp.centerX)
-            startButton.centerY.equalTo(view.snp.centerY).offset(80)
+            setConstraits(firstItem: firstPlayerButton, secondItem: secondPlayerButton, tableItem: firstPlayerButton, xItem: view, xOffsetLeft: 20, xOffsetRight: -20, yItem: view, yOffset: 120, height: 55, widht: 160, imageOffset: 80)
         }
         backgroundImageView.snp.makeConstraints { backgroundImageView in
             backgroundImageView.bottom.equalTo(view.snp.bottom)
@@ -203,10 +204,14 @@ class GameViewController: UIViewController {
             backgroundImageView.left.equalTo(view.snp.left)
             backgroundImageView.right.equalTo(view.snp.right)
         }
+        
     }
     
-    private func setConstraits(firstItem: UIView, secondItem: UIView, xItem: UIView, xOffsetLeft:Int,
-                               xOffsetRight: Int, yItem: UIView, yOffset: Int, height: Int, widht: Int ) {
+    private func setConstraits(firstItem: UIView, secondItem: UIView, tableItem: UIView?,
+                                                  xItem: UIView, xOffsetLeft:Int,
+                                                  xOffsetRight: Int, yItem: UIView,
+                                                  yOffset: Int, height: Int, widht: Int, imageOffset: Int) {
+        guard let tableItem = tableItem else { return }
         firstItem.snp.makeConstraints { firstItem in
             firstItem.height.equalTo(height)
             firstItem.width.equalTo(widht)
@@ -219,10 +224,51 @@ class GameViewController: UIViewController {
             secondItem.top.equalTo(yItem.snp.top).offset(yOffset)
             secondItem.right.equalTo(xItem.snp.right).offset(xOffsetRight)
         }
+        tableView.snp.makeConstraints { tableView in
+            tableView.bottom.equalTo(view.snp.bottom)
+            tableView.left.equalTo(view.snp.left)
+            tableView.right.equalTo(view.snp.right)
+            tableView.top.equalTo(tableItem.snp.bottom).offset(40)
+        }
+        loadingImageView.snp.makeConstraints { loadingImageView in
+            loadingImageView.height.equalTo(400)
+            loadingImageView.width.equalTo(400)
+            loadingImageView.centerX.equalTo(view.snp.centerX)
+            loadingImageView.centerY.equalTo(view.snp.centerY).offset(imageOffset)
+        }
+        startButton.snp.makeConstraints { startButton in
+            startButton.height.equalTo(150)
+            startButton.width.equalTo(150)
+            startButton.centerX.equalTo(view.snp.centerX)
+            startButton.centerY.equalTo(view.snp.centerY).offset(imageOffset)
+        }
     }
     
     @objc private func tappedButtonPlayer() {
         
     }
+    @objc private func tappedStartButton() {
+        loadingImageView.rotate()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+            self.hide()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+            self.show()
+        }
+    }
     
+    
+}
+extension GameViewController {
+    func show(_ duration: TimeInterval = 1, delay: TimeInterval = 0.0, completion: @escaping ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
+        UIView.animate(withDuration: duration, delay: delay, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            self.tableView.alpha = 1.0
+    }, completion: completion)  }
+
+    func hide(_ duration: TimeInterval = 2, delay: TimeInterval = 0.0, completion: @escaping (Bool) -> Void = {(finished: Bool) -> Void in}) {
+        UIView.animate(withDuration: duration, delay: delay, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            self.loadingImageView.alpha = 0.0
+            self.startButton.alpha = 0.0
+    }, completion: completion)
+   }
 }
