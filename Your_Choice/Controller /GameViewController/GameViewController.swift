@@ -113,10 +113,9 @@ class GameViewController: UIViewController {
     
     private var tableView: UITableView = {
         var tableView = UITableView()
+        tableView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
         tableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-//        tableView.layer.borderWidth = 1.5
-//        tableView.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         tableView.layer.cornerRadius = 12
         tableView.tableFooterView = UIView()
         tableView.alpha = 0.0
