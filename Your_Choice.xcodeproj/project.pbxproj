@@ -30,6 +30,7 @@
 		37A35142279EA18200D4E903 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A35141279EA18200D4E903 /* GameViewController.swift */; };
 		37A3514427A15E2900D4E903 /* UIImageView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A3514327A15E2900D4E903 /* UIImageView + Extension.swift */; };
 		37A3514B27A1855400D4E903 /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A3514A27A1855400D4E903 /* UIView + Extension.swift */; };
+		37A3515027A2E1FC00D4E903 /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A3514F27A2E1FC00D4E903 /* GameTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		37A35141279EA18200D4E903 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		37A3514327A15E2900D4E903 /* UIImageView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImageView + Extension.swift"; path = "Your_Choice/Extensions/UIImageView + Extension.swift"; sourceTree = SOURCE_ROOT; };
 		37A3514A27A1855400D4E903 /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
+		37A3514F27A2E1FC00D4E903 /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
 		890490CAD5D47D49DBF15081 /* Pods-Your_Choice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Your_Choice.debug.xcconfig"; path = "Target Support Files/Pods-Your_Choice/Pods-Your_Choice.debug.xcconfig"; sourceTree = "<group>"; };
 		D448B72406BE3BDE5E079EA0 /* Pods-Your_Choice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Your_Choice.release.xcconfig"; path = "Target Support Files/Pods-Your_Choice/Pods-Your_Choice.release.xcconfig"; sourceTree = "<group>"; };
 		EF33D9C7DDB040FC61597E76 /* Pods_Your_Choice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Your_Choice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +79,7 @@
 		37039D0C27906DB5006B22B4 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				37A3514C27A2E16E00D4E903 /* GameTableViewCell  */,
 				37039D1327934EAD006B22B4 /* TaskCell */,
 				370BC4AE276204920077F2A9 /* PlayersCell */,
 			);
@@ -267,6 +270,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		37A3514C27A2E16E00D4E903 /* GameTableViewCell  */ = {
+			isa = PBXGroup;
+			children = (
+				37A3514F27A2E1FC00D4E903 /* GameTableViewCell.swift */,
+			);
+			path = "GameTableViewCell ";
+			sourceTree = "<group>";
+		};
 		C8233CBB3751DC63C2CD1D3E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,6 +425,7 @@
 				37A3512A2794B77800D4E903 /* TaskSettingsView.swift in Sources */,
 				370BC4A3275E09B20077F2A9 /* BaseViewController.swift in Sources */,
 				37039D0B278E2B46006B22B4 /* OptionsPlayersView.swift in Sources */,
+				37A3515027A2E1FC00D4E903 /* GameTableViewCell.swift in Sources */,
 				37A35133279954D600D4E903 /* TaskCellViewModel.swift in Sources */,
 				37039D12279086B6006B22B4 /* TaskViewController.swift in Sources */,
 				3704F7F62775CE1200145381 /* PlayerHeaderTableView.swift in Sources */,

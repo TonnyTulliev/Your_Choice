@@ -13,7 +13,8 @@ import SnapKit
 class GameViewController: UIViewController {
     
     let realm = try! Realm()
-//    var rotationState: Bool? = nil
+    var gameControllerViewModels: [TaskCellViewModel] = []
+
    
     private var backgroundImageView: UIImageView = {
         var image = UIImageView()
@@ -84,24 +85,52 @@ class GameViewController: UIViewController {
         return button
     }()
     
+    private var headerlabel : UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.textColor = .white
+        label.text = "Задания для каждого игрока выделены его цветом, вы можете отсортировать задания нажав на иконку игрока"
+        label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        label.numberOfLines = 3
+        return label
+    }()
+    
+    private var headerView : UIView = {
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 0.6477616429, green: 0.2397351265, blue: 0.5922383666, alpha: 1)
+        view.layer.cornerRadius = 15
+        view.layer.borderWidth = 1.5
+        view.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOffset = CGSize(width: 3, height: 3)
+        view.layer.shadowOpacity = 0.6
+        view.layer.shadowRadius = 4.0
+        view.alpha = 0.0
+        return view
+    }()
+    
     private var tableView: UITableView = {
         var tableView = UITableView()
         tableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.layer.borderWidth = 1.5
-        tableView.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-        tableView.layer.cornerRadius = 15
+//        tableView.layer.borderWidth = 1.5
+//        tableView.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        tableView.layer.cornerRadius = 12
         tableView.tableFooterView = UIView()
         tableView.alpha = 0.0
         return tableView
     }()
     
     private var startButton: UIButton = {
-        let button = UIButton(type: .custom)
+        let button = UIButton()
+        button.backgroundColor = #colorLiteral(red: 0.5998318791, green: 0.3434704244, blue: 0.6207976937, alpha: 1)
+        button.tintColor = .white
+        button.layer.cornerRadius = 65
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setBackgroundImage(UIImage(named: "rocket"), for: .normal)
-        button.layer.cornerRadius = button.frame.height / 2
-        button.clipsToBounds = true
+        button.setImage(UIImage(named: "startButton"), for: .normal)
+        button.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(tappedStartButton), for: .touchUpInside)
         return button
     }()
@@ -119,6 +148,8 @@ class GameViewController: UIViewController {
         config()
         addElements()
         addConstraints()
+        registrationCell()
+        addDelegate()
         getButtonPlayersData()
     }
     
@@ -135,6 +166,17 @@ class GameViewController: UIViewController {
         view.addSubview(loadingImageView)
         view.addSubview(startButton)
         view.addSubview(tableView)
+        view.addSubview(headerView)
+        headerView.addSubview(headerlabel)
+    }
+    
+    private func registrationCell(){
+        tableView.register(GameTableViewCell.self, forCellReuseIdentifier: GameTableViewCell.reuseID)
+    }
+    
+    private func addDelegate() {
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
     private func getButtonPlayersData(){
@@ -156,7 +198,6 @@ class GameViewController: UIViewController {
             setSettings(color: playersRealm[0].color, title: playersRealm[0].name, button: firstPlayerButton)
             setSettings(color: playersRealm[1].color, title: playersRealm[1].name, button: secondPlayerButton)
         }
-        
     }
 
     private func setSettings(color: String, title: String, button: UIButton) {
@@ -228,7 +269,18 @@ class GameViewController: UIViewController {
             tableView.bottom.equalTo(view.snp.bottom)
             tableView.left.equalTo(view.snp.left)
             tableView.right.equalTo(view.snp.right)
-            tableView.top.equalTo(tableItem.snp.bottom).offset(40)
+            tableView.top.equalTo(tableItem.snp.bottom).offset(70)
+        }
+        headerView.snp.makeConstraints { headerView in
+            headerView.centerY.equalTo(tableView.snp.top).offset(5)
+            headerView.left.equalTo(tableView.snp.left)
+            headerView.right.equalTo(tableView.snp.right)
+            headerView.height.equalTo(60)
+        }
+        headerlabel.snp.makeConstraints { headerlabel in
+            headerlabel.centerY.equalTo(headerView.snp.centerY)
+            headerlabel.left.equalTo(headerView.snp.left).offset(20)
+            headerlabel.right.equalTo(headerView.snp.right).offset(-20)
         }
         loadingImageView.snp.makeConstraints { loadingImageView in
             loadingImageView.height.equalTo(400)
@@ -237,8 +289,8 @@ class GameViewController: UIViewController {
             loadingImageView.centerY.equalTo(view.snp.centerY).offset(imageOffset)
         }
         startButton.snp.makeConstraints { startButton in
-            startButton.height.equalTo(150)
-            startButton.width.equalTo(150)
+            startButton.height.equalTo(130)
+            startButton.width.equalTo(130)
             startButton.centerX.equalTo(view.snp.centerX)
             startButton.centerY.equalTo(view.snp.centerY).offset(imageOffset)
         }
@@ -249,6 +301,7 @@ class GameViewController: UIViewController {
     }
     @objc private func tappedStartButton() {
         loadingImageView.rotate()
+        self.startButton.isEnabled = false
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
             self.hide()
         }
@@ -256,12 +309,31 @@ class GameViewController: UIViewController {
             self.show()
         }
     }
+}
+extension GameViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return gameControllerViewModels.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: GameTableViewCell.reuseID) as? GameTableViewCell else { return UITableViewCell()}
+        let viewModel = gameControllerViewModels[indexPath.row]
+        cell.setViewModel(viewModel)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
     
     
 }
+
 extension GameViewController {
     func show(_ duration: TimeInterval = 1, delay: TimeInterval = 0.0, completion: @escaping ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
         UIView.animate(withDuration: duration, delay: delay, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            self.headerView.alpha = 1.0
             self.tableView.alpha = 1.0
     }, completion: completion)  }
 

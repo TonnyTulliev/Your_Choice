@@ -201,7 +201,9 @@ class TaskViewController: UIViewController{
     }
     
     @objc private func goNext() {
+        let viewModelsArray = sortingViewModelsByIsSelected()
         let gameVC = GameViewController()
+        gameVC.gameControllerViewModels = viewModelsArray
         navigationController?.pushViewController(gameVC, animated: true)
     }
     
@@ -347,7 +349,17 @@ class TaskViewController: UIViewController{
             }
         }
     }
-
+    
+    private func sortingViewModelsByIsSelected() -> [TaskCellViewModel]{
+        var viewModelsArray = [TaskCellViewModel]()
+        for i in viewModels {
+            if i.isSelected {
+                viewModelsArray.append(i)
+            }
+        }
+        viewModelsArray.shuffle()
+        return viewModelsArray
+    }
 }
 
 //MARK:- extensions TableView

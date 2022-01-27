@@ -1,33 +1,30 @@
 //
-//  TaskCell.swift
+//  GameTableViewCell.swift
 //  Your_Choice
 //
-//  Created by Антон Скуратов on 15.01.2022.
+//  Created by Антон Скуратов on 27.01.2022.
 //
 
 import Foundation
 import UIKit
 import SnapKit
 
-class TaskTableViewCell: UITableViewCell {
+class GameTableViewCell: UITableViewCell {
     
-    var task: TaskRealmBase?
     static let reuseID = String(describing: self)
     
-    private var viewModel: TaskCellViewModel? {
+    var viewModel : TaskCellViewModel? {
         didSet{
             guard let viewModel = viewModel else { return }
-            self.backgroundColor = viewModel.isSelected ? #colorLiteral(red: 0.4940527678, green: 0.7641897798, blue: 0.4149656594, alpha: 1) : #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             self.textLabel?.text = viewModel.taskText
             taskImage.image = UIImage(named: viewModel.taskType)
-            layoutIfNeeded()
         }
     }
     
     private var taskImage: UIImageView = {
     let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
     return image
     }()
     
@@ -61,4 +58,5 @@ class TaskTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }
