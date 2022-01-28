@@ -98,6 +98,7 @@ class TasksSettingsViewController: BaseViewController {
         })
         self.taskVC?.addlastTask()
         addTaskToTableViewBySC(taskType: category)
+        self.taskVC?.changeIndexSegmentedControl(taskType: category)
         dismiss(animated: true)
         
     }

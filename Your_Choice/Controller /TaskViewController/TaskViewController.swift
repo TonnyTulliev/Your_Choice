@@ -15,6 +15,7 @@ class TaskViewController: UIViewController{
     //MARK:- Properties
     var realm = try! Realm()
     var taskArray = [Int]()
+    var segmentedType: String?
     private var viewModels: [TaskCellViewModel] = []
     private var viewModelsSortedByType: [TaskCellViewModel] = []
     
@@ -161,7 +162,7 @@ class TaskViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getDataFromViewModels()
-        segmentedControl.selectedSegmentIndex = 0 
+        segmentedControl.selectedSegmentIndex = 0
         
     }
     
@@ -345,6 +346,7 @@ class TaskViewController: UIViewController{
                 index += 1
             }
         }
+        sortedSegmentedControl(taskType: segmentedType)
         tableView.reloadData()
     }
     
@@ -353,6 +355,25 @@ class TaskViewController: UIViewController{
         let action = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
+    }
+    
+    func changeIndexSegmentedControl(taskType: String) {
+        if segmentedControl.selectedSegmentIndex != 0 {
+            switch taskType {
+            case "home":
+                self.segmentedControl.selectedSegmentIndex = 1
+            case "person":
+                self.segmentedControl.selectedSegmentIndex = 2
+            case "shop":
+                self.segmentedControl.selectedSegmentIndex = 3
+            case "other":
+                self.segmentedControl.selectedSegmentIndex = 4
+            default:
+                self.segmentedControl.selectedSegmentIndex = 0
+            }
+        }
+       
+   
     }
     
     func sortedSegmentedControl(taskType: String?) {
@@ -380,6 +401,7 @@ class TaskViewController: UIViewController{
             }
             viewModelsSortedByType = viewModels
         }
+        segmentedType = taskType
     }
     
     private func sortingViewModelsByIsSelected() -> [TaskCellViewModel]{
