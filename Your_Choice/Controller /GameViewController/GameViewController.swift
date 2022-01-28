@@ -14,6 +14,9 @@ class GameViewController: UIViewController {
     
     let realm = try! Realm()
     var gameControllerViewModels: [TaskCellViewModel] = []
+    var sectionsArray = [[TaskCellViewModel]]()
+    var sectionsName: [String?] = []
+    
 
    
     private var backgroundImageView: UIImageView = {
@@ -150,6 +153,8 @@ class GameViewController: UIViewController {
         registrationCell()
         addDelegate()
         getButtonPlayersData()
+        getPlayersName()
+        sortedGameArray()
     }
     
     private func config() {
@@ -300,6 +305,7 @@ class GameViewController: UIViewController {
     }
     @objc private func tappedStartButton() {
         loadingImageView.rotate()
+        sortedGameArray()
         self.startButton.isEnabled = false
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
             self.hide()
@@ -308,22 +314,61 @@ class GameViewController: UIViewController {
             self.show()
         }
     }
+    
+    private func sortedGameArray() {
+        let sortedresult = gameControllerViewModels.splitGameArray(array: gameControllerViewModels, playersCount: realm.objects(PlayerRealm.self).count)
+        switch  realm.objects(PlayerRealm.self).count {
+
+        case 2:
+            let firstSection = sortedresult[0]
+            let secondSection = sortedresult[1]
+            sectionsArray = [firstSection,secondSection]
+            case 3:
+            let firstSection = sortedresult[0]
+            let secondSection = sortedresult[1]
+            let thirdSection = sortedresult[2]
+            sectionsArray = [firstSection,secondSection,thirdSection]
+        default:
+            let firstSection = sortedresult[0]
+            let secondSection = sortedresult[1]
+            let thirdSection = sortedresult[2]
+            let fourthSection = sortedresult[3]
+            sectionsArray = [firstSection,secondSection,thirdSection,fourthSection]
+        }
+    }
+    
+    private func getPlayersName() {
+        let playersRealm = realm.objects(PlayerRealm.self)
+        for n in 0..<playersRealm.count{
+            sectionsName.append(playersRealm[n].name)
+        }
+    }
+   
 }
 extension GameViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sectionsName.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return gameControllerViewModels.count
+        return sectionsArray[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: GameTableViewCell.reuseID) as? GameTableViewCell else { return UITableViewCell()}
-        let viewModel = gameControllerViewModels[indexPath.row]
+        let viewModel = sectionsArray[indexPath.section][indexPath.row]
         cell.setViewModel(viewModel)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let section = realm.objects(PlayerRealm.self)[section].name
+    return section
     }
 }
 
@@ -340,4 +385,32 @@ extension GameViewController {
             self.startButton.alpha = 0.0
     }, completion: completion)
    }
+}
+extension Array {
+     func splitGameArray(array: [Element], playersCount: Int ) -> [[Element]]{
+        let remainderOfDivision = Float(Float(array.count) / Float(playersCount))
+        let remainderOfDivisionInt = Int(remainderOfDivision.rounded())
+        print(array.count,playersCount,remainderOfDivision,remainderOfDivisionInt)
+        switch playersCount {
+        case 2:
+            let firstPlayer = self[0...remainderOfDivisionInt]
+            let secondPlayer = self[remainderOfDivisionInt...array.count]
+            return [Array(firstPlayer),Array(secondPlayer)]
+        case 3:
+            let firstPlayer = self[0..<remainderOfDivisionInt]
+            let secondPlayer = self[remainderOfDivisionInt..<(remainderOfDivisionInt * 2)]
+            let thirdPlayer = self[(remainderOfDivisionInt * 2)..<array.count]
+            return [Array(firstPlayer),Array(secondPlayer),Array(thirdPlayer)]
+            
+        default:
+            let firstPlayer = self[0..<remainderOfDivisionInt]
+            let secondPlayer = self[remainderOfDivisionInt..<(remainderOfDivisionInt * 2)]
+            let thirdPlayer = self[(remainderOfDivisionInt * 2)..<(remainderOfDivisionInt * 3)]
+            let fourthPlayer = self[(remainderOfDivisionInt * 3)..<array.count]
+            return [Array(firstPlayer),Array(secondPlayer),Array(thirdPlayer),Array(fourthPlayer)]
+            
+            
+        }
+        
+    }
 }
