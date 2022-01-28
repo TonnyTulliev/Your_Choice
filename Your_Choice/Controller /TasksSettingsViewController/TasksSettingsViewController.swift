@@ -62,6 +62,29 @@ class TasksSettingsViewController: BaseViewController {
         taskSettingsView.widthAnchor.constraint(equalToConstant: 350).isActive = true
     }
     
+    private func addTaskToTableViewBySC(taskType: String?){
+        switch self.taskVC?.segmentedControl.selectedSegmentIndex {
+        case 0:
+            self.taskVC?.sortedSegmentedControl(taskType: nil)
+            self.taskVC?.tableView.reloadData()
+        case 1:
+            self.taskVC?.sortedSegmentedControl(taskType: taskType)
+            self.taskVC?.tableView.reloadData()
+        case 2:
+            self.taskVC?.sortedSegmentedControl(taskType: taskType)
+            self.taskVC?.tableView.reloadData()
+        case 3:
+            self.taskVC?.sortedSegmentedControl(taskType: taskType)
+            self.taskVC?.tableView.reloadData()
+        case 4:
+            self.taskVC?.sortedSegmentedControl(taskType: taskType)
+            self.taskVC?.tableView.reloadData()
+        default:
+            self.taskVC?.sortedSegmentedControl(taskType: taskType)
+            self.taskVC?.tableView.reloadData()
+        }
+    }
+    
     //MARK:- objc metods
     @objc private func done(){
         guard let newId = fetchValueFromRealm() else { return }
@@ -74,7 +97,7 @@ class TasksSettingsViewController: BaseViewController {
             self.realm.add(task)
         })
         self.taskVC?.addlastTask()
-        self.taskVC?.tableView.reloadData()
+        addTaskToTableViewBySC(taskType: category)
         dismiss(animated: true)
         
     }

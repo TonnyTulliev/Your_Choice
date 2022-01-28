@@ -16,6 +16,7 @@ class TaskViewController: UIViewController{
     var realm = try! Realm()
     var taskArray = [Int]()
     private var viewModels: [TaskCellViewModel] = []
+    private var viewModelsSortedByType: [TaskCellViewModel] = []
     
     //MARK:- UI
     private var hederView : UIView = {
@@ -155,15 +156,21 @@ class TaskViewController: UIViewController{
         addDelegate()
         registrationCell()
         getDataFromViewModels()
-        tableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getDataFromViewModels()
+        segmentedControl.selectedSegmentIndex = 0 
+        
     }
     
     //MARK:- objc metods
     
-    @objc private func segmentTapped(segmentedControl: UISegmentedControl){
+    @objc func segmentTapped(segmentedControl: UISegmentedControl){
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            getDataFromViewModels()
+            sortedSegmentedControl(taskType: nil)
             tableView.reloadData()
         case 1:
             sortedSegmentedControl(taskType: "home")
@@ -178,7 +185,7 @@ class TaskViewController: UIViewController{
             sortedSegmentedControl(taskType: "other")
             tableView.reloadData()
         default:
-            getDataFromViewModels()
+            sortedSegmentedControl(taskType: nil)
             tableView.reloadData()
         }
        
@@ -192,7 +199,7 @@ class TaskViewController: UIViewController{
     
     @objc func  deleteLastTask() {
         let minTasks = 0
-        if realm.objects(TaskRealmBase.self).count != minTasks && viewModels.count != minTasks {
+        if realm.objects(TaskRealmBase.self).count != minTasks && viewModelsSortedByType.count != minTasks {
             removeSelectedTasks()
         }else{
             alert(title: "Внимание", message: "Создайте задание")
@@ -303,15 +310,21 @@ class TaskViewController: UIViewController{
     }
     
     private func getDataFromViewModels(){
-        viewModels.removeAll()
+        viewModelsSortedByType.removeAll()
         for n in 0..<realm.objects(TaskRealmBase.self).count {
-            viewModels.append(TaskCellViewModel(taskText: realm.objects(TaskRealmBase.self)[n].taskName, taskType: realm.objects(TaskRealmBase.self)[n].category , isSelected: false, id: realm.objects(TaskRealmBase.self)[n].id ))
+            viewModelsSortedByType.append(TaskCellViewModel(taskText: realm.objects(TaskRealmBase.self)[n].taskName, taskType: realm.objects(TaskRealmBase.self)[n].category , isSelected: false, id: realm.objects(TaskRealmBase.self)[n].id ))
         }
+        viewModels = viewModelsSortedByType
+        for i in viewModels {
+            i.isSelected = false
+        }
+        tableView.reloadData()
     }
     
     func addlastTask() {
         guard let lastTask = realm.objects(TaskRealmBase.self).last else { return }
         viewModels.append(TaskCellViewModel(taskText: lastTask.taskName, taskType: lastTask.category, isSelected: false, id: lastTask.id))
+        tableView.reloadData()
     }
     
     private func removeSelectedTasks() {
@@ -332,6 +345,7 @@ class TaskViewController: UIViewController{
                 index += 1
             }
         }
+        tableView.reloadData()
     }
     
     private func alert(title: String, message: String) {
@@ -341,12 +355,30 @@ class TaskViewController: UIViewController{
         present(alert, animated: true, completion: nil)
     }
     
-    private func sortedSegmentedControl(taskType: String?) {
-        viewModels.removeAll()
-        for n in 0..<realm.objects(TaskRealmBase.self).count {
-            if realm.objects(TaskRealmBase.self)[n].category == taskType{
-                viewModels.append(TaskCellViewModel(taskText: realm.objects(TaskRealmBase.self)[n].taskName, taskType: realm.objects(TaskRealmBase.self)[n].category , isSelected: false, id: realm.objects(TaskRealmBase.self)[n].id ))
+    func sortedSegmentedControl(taskType: String?) {
+        if taskType != nil {
+            for i in viewModelsSortedByType {
+                if i.isSelected == true{
+                    for h in viewModels {
+                        if h.taskText == i.taskText {
+                            h.isSelected = i.isSelected
+                        }
+                    }
+                }
             }
+            let viewModelsTask = viewModels.filter() {$0.taskType == taskType}
+            viewModelsSortedByType = viewModelsTask
+        }else {
+            for i in viewModelsSortedByType {
+                if i.isSelected == true{
+                    for h in viewModels {
+                        if h.taskText == i.taskText {
+                            h.isSelected = i.isSelected
+                        }
+                    }
+                }
+            }
+            viewModelsSortedByType = viewModels
         }
     }
     
@@ -370,18 +402,18 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModels.count
+        return viewModelsSortedByType.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TaskTableViewCell.reuseID ) as? TaskTableViewCell else { return UITableViewCell() }
-        let viewModel = viewModels[indexPath.row]
+        let viewModel = viewModelsSortedByType[indexPath.row]
         cell.setViewModel(viewModel)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let viewModel = viewModels[indexPath.row]
+        let viewModel = viewModelsSortedByType[indexPath.row]
         viewModel.isSelected = !viewModel.isSelected
         tableView.reloadRows(at: [indexPath], with: .automatic)
         tableView.deselectRow(at: indexPath, animated: true)
