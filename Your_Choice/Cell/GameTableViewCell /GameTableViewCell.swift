@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
+import RealmSwift
 
 class GameTableViewCell: UITableViewCell {
     
@@ -44,8 +45,41 @@ class GameTableViewCell: UITableViewCell {
         viewModel = nil
     }
     
-    func setViewModel(_ viewModel: TaskCellViewModel) {
+    private func setColor(color: String) {
+        switch color{
+        case "red":
+            self.backgroundColor = #colorLiteral(red: 0.8465180397, green: 0.6758248806, blue: 0.7737604976, alpha: 1)
+        case "blue":
+            self.backgroundColor = #colorLiteral(red: 0.281285584, green: 0.4995560646, blue: 0.7573058009, alpha: 1)
+        case "purple":
+            self.backgroundColor = #colorLiteral(red: 0.692247808, green: 0.6088116169, blue: 0.931736052, alpha: 1)
+        case "green":
+            self.backgroundColor = #colorLiteral(red: 0.7582806945, green: 0.8539865613, blue: 0.8737122416, alpha: 1)
+        default:
+            self.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        }
+    }
+    
+    func setViewModel(_ viewModel: TaskCellViewModel, section: Int, players: [PlayerRealm]) {
         self.viewModel = viewModel
+        switch section {
+        case 0:
+            setColor(color: players[0].color)
+        case 1:
+            setColor(color: players[0].color)
+            setColor(color: players[1].color)
+        case 2:
+            setColor(color: players[0].color)
+            setColor(color: players[1].color)
+            setColor(color: players[2].color)
+        case 3:
+            setColor(color: players[0].color)
+            setColor(color: players[1].color)
+            setColor(color: players[2].color)
+            setColor(color: players[3].color)
+        default:
+            self.backgroundColor = UIColor(named: "white")
+        }
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

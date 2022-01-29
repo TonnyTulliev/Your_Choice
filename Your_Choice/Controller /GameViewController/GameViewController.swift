@@ -122,6 +122,8 @@ class GameViewController: UIViewController {
         tableView.layer.cornerRadius = 12
         tableView.tableFooterView = UIView()
         tableView.alpha = 0.0
+        tableView.backgroundView = UIImageView(image: UIImage(named: "background2"))
+        tableView.backgroundView?.contentMode = .bottom
         return tableView
     }()
     
@@ -358,7 +360,8 @@ extension GameViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: GameTableViewCell.reuseID) as? GameTableViewCell else { return UITableViewCell()}
         let viewModel = sectionsArray[indexPath.section][indexPath.row]
-        cell.setViewModel(viewModel)
+        let playersArray = Array(realm.objects(PlayerRealm.self))
+        cell.setViewModel(viewModel, section: indexPath.section, players: playersArray)
         return cell
     }
     
@@ -371,10 +374,15 @@ extension GameViewController: UITableViewDelegate, UITableViewDataSource {
         return section
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.tintColor = #colorLiteral(red: 0.6775150299, green: 0.2533541024, blue: 0.6248179674, alpha: 1)
         guard let header = view as? UITableViewHeaderFooterView else { return }
         header.textLabel?.textColor = .white
+
     }
 }
 
