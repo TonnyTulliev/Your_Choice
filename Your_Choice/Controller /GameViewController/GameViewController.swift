@@ -116,14 +116,14 @@ class GameViewController: UIViewController {
     
     private var tableView: UITableView = {
         var tableView = UITableView()
-        tableView.contentInset = UIEdgeInsets(top: 35, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         tableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.layer.cornerRadius = 12
         tableView.tableFooterView = UIView()
         tableView.alpha = 0.0
         tableView.backgroundView = UIImageView(image: UIImage(named: "background2"))
-        tableView.backgroundView?.contentMode = .bottom
+        tableView.backgroundView?.contentMode = .center
         return tableView
     }()
     
@@ -275,10 +275,10 @@ class GameViewController: UIViewController {
             tableView.bottom.equalTo(view.snp.bottom)
             tableView.left.equalTo(view.snp.left)
             tableView.right.equalTo(view.snp.right)
-            tableView.top.equalTo(tableItem.snp.bottom).offset(70)
+            tableView.top.equalTo(tableItem.snp.bottom).offset(90)
         }
         headerView.snp.makeConstraints { headerView in
-            headerView.centerY.equalTo(tableView.snp.top).offset(5)
+            headerView.bottom.equalTo(tableView.snp.top).offset(-10)
             headerView.left.equalTo(tableView.snp.left)
             headerView.right.equalTo(tableView.snp.right)
             headerView.height.equalTo(60)
@@ -303,13 +303,14 @@ class GameViewController: UIViewController {
     }
     
     @objc private func tappedButtonPlayer() {
-        
+        // сортировать результаты по приоритету
     }
+    
     @objc private func tappedStartButton() {
         loadingImageView.rotate()
         sortedGameArray()
         self.startButton.isEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(Int(2.5))) {
             self.hide()
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
@@ -320,7 +321,6 @@ class GameViewController: UIViewController {
     private func sortedGameArray() {
         let sortedresult = gameControllerViewModels.splitGameArray(array: gameControllerViewModels, playersCount: realm.objects(PlayerRealm.self).count)
         switch  realm.objects(PlayerRealm.self).count {
-        
         case 2:
             let firstSection = sortedresult[0]
             let secondSection = sortedresult[1]
@@ -343,6 +343,43 @@ class GameViewController: UIViewController {
         let playersRealm = realm.objects(PlayerRealm.self)
         for n in 0..<playersRealm.count{
             sectionsName.append(playersRealm[n].name)
+        }
+    }
+    
+    func setBackgroundColorForHeader(section: Int, header: UIView){
+        let players = realm.objects(PlayerRealm.self)
+        switch section {
+        case 0:
+            setColor(color: players[0].color, header: header)
+        case 1:
+            setColor(color: players[0].color, header: header)
+            setColor(color: players[1].color, header: header)
+        case 2:
+            setColor(color: players[0].color, header: header)
+            setColor(color: players[1].color, header: header)
+            setColor(color: players[2].color, header: header)
+        case 3:
+            setColor(color: players[0].color, header: header)
+            setColor(color: players[1].color, header: header)
+            setColor(color: players[2].color, header: header)
+            setColor(color: players[3].color, header: header)
+        default:
+            header.backgroundColor = UIColor(named: "white")
+        }
+    }
+    
+    private func setColor(color: String, header: UIView) {
+        switch color{
+        case "red":
+            header.tintColor = #colorLiteral(red: 0.8465180397, green: 0.6758248806, blue: 0.7737604976, alpha: 1)
+        case "blue":
+            header.tintColor = #colorLiteral(red: 0.281285584, green: 0.4995560646, blue: 0.7573058009, alpha: 1)
+        case "purple":
+            header.tintColor = #colorLiteral(red: 0.692247808, green: 0.6088116169, blue: 0.931736052, alpha: 1)
+        case "green":
+            header.tintColor = #colorLiteral(red: 0.7582806945, green: 0.8539865613, blue: 0.8737122416, alpha: 1)
+        default:
+            header.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         }
     }
     
@@ -379,10 +416,9 @@ extension GameViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        view.tintColor = #colorLiteral(red: 0.6775150299, green: 0.2533541024, blue: 0.6248179674, alpha: 1)
+        setBackgroundColorForHeader(section: section, header: view)
         guard let header = view as? UITableViewHeaderFooterView else { return }
         header.textLabel?.textColor = .white
-
     }
 }
 
@@ -400,6 +436,7 @@ extension GameViewController {
         }, completion: completion)
     }
 }
+
 extension Array {
     func splitGameArray(array: [Element], playersCount: Int ) -> [[Element]]{
         let remainderOfDivision = Float(Float(array.count) / Float(playersCount))
