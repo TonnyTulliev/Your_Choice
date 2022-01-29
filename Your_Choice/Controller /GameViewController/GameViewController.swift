@@ -17,8 +17,8 @@ class GameViewController: UIViewController {
     var sectionsArray = [[TaskCellViewModel]]()
     var sectionsName: [String?] = []
     
-
-   
+    
+    
     private var backgroundImageView: UIImageView = {
         var image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -116,7 +116,7 @@ class GameViewController: UIViewController {
     
     private var tableView: UITableView = {
         var tableView = UITableView()
-        tableView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 35, left: 0, bottom: 0, right: 0)
         tableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.layer.cornerRadius = 12
@@ -203,7 +203,7 @@ class GameViewController: UIViewController {
             setSettings(color: playersRealm[1].color, title: playersRealm[1].name, button: secondPlayerButton)
         }
     }
-
+    
     private func setSettings(color: String, title: String, button: UIButton) {
         switch color {
         case "red":
@@ -223,7 +223,7 @@ class GameViewController: UIViewController {
             button.setTitle(title, for: .normal)
         }
     }
-   
+    
     
     private func addConstraints() {
         switch realm.objects(PlayerRealm.self).count {
@@ -253,9 +253,9 @@ class GameViewController: UIViewController {
     }
     
     private func setConstraits(firstItem: UIView, secondItem: UIView, tableItem: UIView?,
-                                                  xItem: UIView, xOffsetLeft:Int,
-                                                  xOffsetRight: Int, yItem: UIView,
-                                                  yOffset: Int, height: Int, widht: Int, imageOffset: Int) {
+                               xItem: UIView, xOffsetLeft:Int,
+                               xOffsetRight: Int, yItem: UIView,
+                               yOffset: Int, height: Int, widht: Int, imageOffset: Int) {
         guard let tableItem = tableItem else { return }
         firstItem.snp.makeConstraints { firstItem in
             firstItem.height.equalTo(height)
@@ -318,12 +318,12 @@ class GameViewController: UIViewController {
     private func sortedGameArray() {
         let sortedresult = gameControllerViewModels.splitGameArray(array: gameControllerViewModels, playersCount: realm.objects(PlayerRealm.self).count)
         switch  realm.objects(PlayerRealm.self).count {
-
+        
         case 2:
             let firstSection = sortedresult[0]
             let secondSection = sortedresult[1]
             sectionsArray = [firstSection,secondSection]
-            case 3:
+        case 3:
             let firstSection = sortedresult[0]
             let secondSection = sortedresult[1]
             let thirdSection = sortedresult[2]
@@ -343,7 +343,7 @@ class GameViewController: UIViewController {
             sectionsName.append(playersRealm[n].name)
         }
     }
-   
+    
 }
 extension GameViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -368,7 +368,13 @@ extension GameViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let section = realm.objects(PlayerRealm.self)[section].name
-    return section
+        return section
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.tintColor = #colorLiteral(red: 0.6775150299, green: 0.2533541024, blue: 0.6248179674, alpha: 1)
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+        header.textLabel?.textColor = .white
     }
 }
 
@@ -377,24 +383,24 @@ extension GameViewController {
         UIView.animate(withDuration: duration, delay: delay, options: UIView.AnimationOptions.curveEaseIn, animations: {
             self.headerView.alpha = 1.0
             self.tableView.alpha = 1.0
-    }, completion: completion)  }
-
+        }, completion: completion)  }
+    
     func hide(_ duration: TimeInterval = 2, delay: TimeInterval = 0.0, completion: @escaping (Bool) -> Void = {(finished: Bool) -> Void in}) {
         UIView.animate(withDuration: duration, delay: delay, options: UIView.AnimationOptions.curveEaseIn, animations: {
             self.loadingImageView.alpha = 0.0
             self.startButton.alpha = 0.0
-    }, completion: completion)
-   }
+        }, completion: completion)
+    }
 }
 extension Array {
-     func splitGameArray(array: [Element], playersCount: Int ) -> [[Element]]{
+    func splitGameArray(array: [Element], playersCount: Int ) -> [[Element]]{
         let remainderOfDivision = Float(Float(array.count) / Float(playersCount))
         let remainderOfDivisionInt = Int(remainderOfDivision.rounded())
         print(array.count,playersCount,remainderOfDivision,remainderOfDivisionInt)
         switch playersCount {
         case 2:
-            let firstPlayer = self[0...remainderOfDivisionInt]
-            let secondPlayer = self[remainderOfDivisionInt...array.count]
+            let firstPlayer = self[0..<remainderOfDivisionInt]
+            let secondPlayer = self[remainderOfDivisionInt..<array.count]
             return [Array(firstPlayer),Array(secondPlayer)]
         case 3:
             let firstPlayer = self[0..<remainderOfDivisionInt]

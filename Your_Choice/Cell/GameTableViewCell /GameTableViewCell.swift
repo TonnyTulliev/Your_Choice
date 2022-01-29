@@ -18,6 +18,8 @@ class GameTableViewCell: UITableViewCell {
             guard let viewModel = viewModel else { return }
             self.textLabel?.text = viewModel.taskText
             taskImage.image = UIImage(named: viewModel.taskType)
+            
+            
         }
     }
     
