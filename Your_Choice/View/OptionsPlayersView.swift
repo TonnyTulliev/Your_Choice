@@ -57,7 +57,7 @@ class OptionsPlayersView: UIView {
         return textfield
         }()
     
-    private var purpleButton: UIButton = {
+     var purpleButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 15
@@ -70,7 +70,7 @@ class OptionsPlayersView: UIView {
         return button
     }()
     
-    private var redButton: UIButton = {
+     var redButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 15
@@ -83,7 +83,7 @@ class OptionsPlayersView: UIView {
         return button
     }()
     
-    private var blueButton: UIButton = {
+     var blueButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 15
@@ -96,7 +96,7 @@ class OptionsPlayersView: UIView {
         return button
     }()
     
-    private var greenButton: UIButton = {
+     var greenButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.borderColor = .none

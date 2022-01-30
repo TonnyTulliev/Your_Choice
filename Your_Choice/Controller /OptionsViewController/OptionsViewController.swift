@@ -24,6 +24,7 @@ class OptionsViewControoler: BaseViewController{
         optionPlayersView.exitButton.addTarget(self, action: #selector(exit), for: .touchUpInside)
         optionPlayersView.isHidden = false
         addElements()
+        changePlayersState()
     }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -34,7 +35,7 @@ class OptionsViewControoler: BaseViewController{
         view.addSubview(optionPlayersView)
     }
     
-    @objc private func done(){
+    private func savePlayerInRealm(){
         let name = optionPlayersView.name
         let color = optionPlayersView.color
         let player = PlayerRealm()
@@ -43,6 +44,36 @@ class OptionsViewControoler: BaseViewController{
         try! self.realm.write({
             self.realm.add(player)
         })
+    }
+    
+    private func changePlayersState(){
+        let players = realm.objects(PlayerRealm.self)
+        for i in players{
+            getButtonColor(color: i.color)
+        }
+    }
+    
+    private func getButtonColor(color: String) {
+        switch color {
+        case "red":
+            self.optionPlayersView.redButton.isEnabled = false
+            self.optionPlayersView.redButton.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        case "blue":
+            self.optionPlayersView.blueButton.isEnabled = false
+            self.optionPlayersView.blueButton.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        case "purple":
+            self.optionPlayersView.purpleButton.isEnabled = false
+            self.optionPlayersView.purpleButton.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        case "green":
+            self.optionPlayersView.greenButton.isEnabled = false
+            self.optionPlayersView.greenButton.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+            
+        default: break
+        }
+    }
+    
+    @objc private func done(){
+        savePlayerInRealm()
         self.playersVC?.tableView.reloadData()
         self.playersVC?.showAndHidePlayersImage()
         dismiss(animated: true)
