@@ -157,6 +157,7 @@ class TaskViewController: UIViewController{
         addDelegate()
         registrationCell()
         getDataFromViewModels()
+        checkDoneButtonValidation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -372,8 +373,6 @@ class TaskViewController: UIViewController{
                 self.segmentedControl.selectedSegmentIndex = 0
             }
         }
-       
-   
     }
     
     func sortedSegmentedControl(taskType: String?) {
@@ -414,6 +413,18 @@ class TaskViewController: UIViewController{
         viewModelsArray.shuffle()
         return viewModelsArray
     }
+    
+    private func checkDoneButtonValidation(){
+        let viewModelsArray = sortingViewModelsByIsSelected()
+        if viewModelsArray.count >= realm.objects(PlayerRealm.self).count{
+            nextButton.isEnabled = true
+            nextButton.backgroundColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
+            nextButton.tintColor = .white
+        }else{
+            nextButton.backgroundColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+            nextButton.isEnabled = false
+        }
+    }
 }
 
 //MARK:- extensions TableView
@@ -439,6 +450,7 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
         viewModel.isSelected = !viewModel.isSelected
         tableView.reloadRows(at: [indexPath], with: .automatic)
         tableView.deselectRow(at: indexPath, animated: true)
+        checkDoneButtonValidation()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

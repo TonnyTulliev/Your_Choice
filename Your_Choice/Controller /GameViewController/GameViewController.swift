@@ -12,13 +12,14 @@ import SnapKit
 
 class GameViewController: UIViewController {
     
+    //MARK:- Properties
     let realm = try! Realm()
     var gameControllerViewModels: [TaskCellViewModel] = []
     var sectionsArray = [[TaskCellViewModel]]()
     var sectionsName: [String?] = []
     
     
-    
+    //MARK:- UI
     private var backgroundImageView: UIImageView = {
         var image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -133,7 +134,10 @@ class GameViewController: UIViewController {
         button.tintColor = .white
         button.layer.cornerRadius = 65
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "startButton"), for: .normal)
+//        button.setImage(UIImage(named: "startButton"), for: .normal)
+        button.setTitle("Начать", for: .normal)
+        button.titleLabel?.textColor = .white
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(tappedStartButton), for: .touchUpInside)
         return button
@@ -147,6 +151,7 @@ class GameViewController: UIViewController {
         return image
     }()
     
+    //MARK:- life cycle VC
     override func viewDidLoad() {
         super.viewDidLoad()
         config()
@@ -159,6 +164,7 @@ class GameViewController: UIViewController {
         sortedGameArray()
     }
     
+    //MARK:- metods
     private func config() {
         view.backgroundColor = .white
     }
@@ -301,23 +307,7 @@ class GameViewController: UIViewController {
             startButton.centerY.equalTo(view.snp.centerY).offset(imageOffset)
         }
     }
-    
-    @objc private func tappedButtonPlayer() {
-        // сортировать результаты по приоритету
-    }
-    
-    @objc private func tappedStartButton() {
-        loadingImageView.rotate()
-        sortedGameArray()
-        self.startButton.isEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(Int(2.5))) {
-            self.hide()
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
-            self.show()
-        }
-    }
-    
+   
     private func sortedGameArray() {
         let sortedresult = gameControllerViewModels.splitGameArray(array: gameControllerViewModels, playersCount: realm.objects(PlayerRealm.self).count)
         switch  realm.objects(PlayerRealm.self).count {
@@ -383,7 +373,26 @@ class GameViewController: UIViewController {
         }
     }
     
+    //MARK:- objc metods
+    @objc private func tappedButtonPlayer() {
+        // сортировать результаты по приоритету
+    }
+    
+    @objc private func tappedStartButton() {
+        loadingImageView.rotate()
+        sortedGameArray()
+        self.startButton.isEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(Int(2.5))) {
+            self.hide()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+            self.show()
+        }
+    }
+    
+    
 }
+//MARK:- extensions TableView
 extension GameViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
