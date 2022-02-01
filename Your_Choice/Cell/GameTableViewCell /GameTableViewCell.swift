@@ -60,25 +60,46 @@ class GameTableViewCell: UITableViewCell {
         }
     }
     
-    func setViewModel(_ viewModel: TaskCellViewModel, section: Int, players: [PlayerRealm]) {
+    func setViewModel(_ viewModel: TaskCellViewModel, section: Int, players: [PlayerRealm], buttonState : Int?) {
         self.viewModel = viewModel
-        switch section {
-        case 0:
-            setColor(color: players[0].color)
-        case 1:
-            setColor(color: players[0].color)
-            setColor(color: players[1].color)
-        case 2:
-            setColor(color: players[0].color)
-            setColor(color: players[1].color)
-            setColor(color: players[2].color)
-        case 3:
-            setColor(color: players[0].color)
-            setColor(color: players[1].color)
-            setColor(color: players[2].color)
-            setColor(color: players[3].color)
-        default:
-            self.backgroundColor = UIColor(named: "white")
+        if buttonState != nil {
+            switch buttonState {
+            case 0:
+                setColor(color: players[0].color)
+            case 1:
+                setColor(color: players[0].color)
+                setColor(color: players[1].color)
+            case 2:
+                setColor(color: players[0].color)
+                setColor(color: players[1].color)
+                setColor(color: players[2].color)
+            case 3:
+                setColor(color: players[0].color)
+                setColor(color: players[1].color)
+                setColor(color: players[2].color)
+                setColor(color: players[3].color)
+            default:
+                self.backgroundColor = UIColor(named: "white")
+            }
+        }else{
+            switch section {
+            case 0:
+                setColor(color: players[0].color)
+            case 1:
+                setColor(color: players[0].color)
+                setColor(color: players[1].color)
+            case 2:
+                setColor(color: players[0].color)
+                setColor(color: players[1].color)
+                setColor(color: players[2].color)
+            case 3:
+                setColor(color: players[0].color)
+                setColor(color: players[1].color)
+                setColor(color: players[2].color)
+                setColor(color: players[3].color)
+            default:
+                self.backgroundColor = UIColor(named: "white")
+            }
         }
     }
     

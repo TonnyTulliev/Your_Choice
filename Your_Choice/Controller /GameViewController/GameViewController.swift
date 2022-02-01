@@ -16,7 +16,9 @@ class GameViewController: UIViewController {
     let realm = try! Realm()
     var gameControllerViewModels: [TaskCellViewModel] = []
     var sectionsArray = [[TaskCellViewModel]]()
+    var saveSectionsArray = [[TaskCellViewModel]]()
     var sectionsName: [String?] = []
+    var buttonState: Int?
     
     
     //MARK:- UI
@@ -40,7 +42,7 @@ class GameViewController: UIViewController {
         button.layer.shadowOffset = CGSize(width: 3, height: 3)
         button.layer.shadowOpacity = 0.6
         button.layer.shadowRadius = 4.0
-        button.addTarget(self, action: #selector(tappedButtonPlayer), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tappedFirstButtonPlayer), for: .touchUpInside)
         return button
     }()
     
@@ -55,7 +57,7 @@ class GameViewController: UIViewController {
         button.layer.shadowOffset = CGSize(width: 3, height: 3)
         button.layer.shadowOpacity = 0.6
         button.layer.shadowRadius = 4.0
-        button.addTarget(self, action: #selector(tappedButtonPlayer), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tappedSecondButtonPlayer), for: .touchUpInside)
         return button
     }()
     
@@ -70,7 +72,7 @@ class GameViewController: UIViewController {
         button.layer.shadowOffset = CGSize(width: 3, height: 3)
         button.layer.shadowOpacity = 0.6
         button.layer.shadowRadius = 4.0
-        button.addTarget(self, action: #selector(tappedButtonPlayer), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tappedThirdButtonPlayer), for: .touchUpInside)
         return button
     }()
     
@@ -85,7 +87,7 @@ class GameViewController: UIViewController {
         button.layer.shadowOffset = CGSize(width: 3, height: 3)
         button.layer.shadowOpacity = 0.6
         button.layer.shadowRadius = 4.0
-        button.addTarget(self, action: #selector(tappedButtonPlayer), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tappedFourthButtonPlayer), for: .touchUpInside)
         return button
     }()
     
@@ -134,7 +136,6 @@ class GameViewController: UIViewController {
         button.tintColor = .white
         button.layer.cornerRadius = 65
         button.translatesAutoresizingMaskIntoConstraints = false
-//        button.setImage(UIImage(named: "startButton"), for: .normal)
         button.setTitle("Начать", for: .normal)
         button.titleLabel?.textColor = .white
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
@@ -307,7 +308,7 @@ class GameViewController: UIViewController {
             startButton.centerY.equalTo(view.snp.centerY).offset(imageOffset)
         }
     }
-   
+    
     private func sortedGameArray() {
         let sortedresult = gameControllerViewModels.splitGameArray(array: gameControllerViewModels, playersCount: realm.objects(PlayerRealm.self).count)
         switch  realm.objects(PlayerRealm.self).count {
@@ -327,6 +328,7 @@ class GameViewController: UIViewController {
             let fourthSection = sortedresult[3]
             sectionsArray = [firstSection,secondSection,thirdSection,fourthSection]
         }
+        saveSectionsArray = sectionsArray
     }
     
     private func getPlayersName() {
@@ -336,25 +338,46 @@ class GameViewController: UIViewController {
         }
     }
     
-    func setBackgroundColorForHeader(section: Int, header: UIView){
+    func setBackgroundColorForHeader(section: Int, header: UIView, buttonstate: Int?){
         let players = realm.objects(PlayerRealm.self)
-        switch section {
-        case 0:
-            setColor(color: players[0].color, header: header)
-        case 1:
-            setColor(color: players[0].color, header: header)
-            setColor(color: players[1].color, header: header)
-        case 2:
-            setColor(color: players[0].color, header: header)
-            setColor(color: players[1].color, header: header)
-            setColor(color: players[2].color, header: header)
-        case 3:
-            setColor(color: players[0].color, header: header)
-            setColor(color: players[1].color, header: header)
-            setColor(color: players[2].color, header: header)
-            setColor(color: players[3].color, header: header)
-        default:
-            header.backgroundColor = UIColor(named: "white")
+        if buttonstate != nil {
+            switch buttonstate {
+            case 0:
+                setColor(color: players[0].color, header: header)
+            case 1:
+                setColor(color: players[0].color, header: header)
+                setColor(color: players[1].color, header: header)
+            case 2:
+                setColor(color: players[0].color, header: header)
+                setColor(color: players[1].color, header: header)
+                setColor(color: players[2].color, header: header)
+            case 3:
+                setColor(color: players[0].color, header: header)
+                setColor(color: players[1].color, header: header)
+                setColor(color: players[2].color, header: header)
+                setColor(color: players[3].color, header: header)
+            default:
+                header.backgroundColor = UIColor(named: "white")
+            }
+        }else{
+            switch section {
+            case 0:
+                setColor(color: players[0].color, header: header)
+            case 1:
+                setColor(color: players[0].color, header: header)
+                setColor(color: players[1].color, header: header)
+            case 2:
+                setColor(color: players[0].color, header: header)
+                setColor(color: players[1].color, header: header)
+                setColor(color: players[2].color, header: header)
+            case 3:
+                setColor(color: players[0].color, header: header)
+                setColor(color: players[1].color, header: header)
+                setColor(color: players[2].color, header: header)
+                setColor(color: players[3].color, header: header)
+            default:
+                header.backgroundColor = UIColor(named: "white")
+            }
         }
     }
     
@@ -373,9 +396,60 @@ class GameViewController: UIViewController {
         }
     }
     
+    private func sortingSectionArray(index: Int) -> [[TaskCellViewModel]] {
+        var sortedSectionsArray = [[TaskCellViewModel]]()
+        let array = saveSectionsArray[index]
+        sortedSectionsArray.append(array)
+        return sortedSectionsArray
+    }
+    
     //MARK:- objc metods
-    @objc private func tappedButtonPlayer() {
-        // сортировать результаты по приоритету
+    @objc private func tappedFirstButtonPlayer() {
+        if buttonState == 0 {
+            buttonState = nil
+            sectionsArray = saveSectionsArray
+        }else{
+            buttonState = 0
+            guard let buttonState = buttonState else { return }
+            sectionsArray = sortingSectionArray(index: buttonState)
+        }
+        tableView.reloadData()
+    }
+    
+    @objc private func tappedSecondButtonPlayer() {
+        if buttonState == 1 {
+            buttonState = nil
+            sectionsArray = saveSectionsArray
+        }else{
+            buttonState = 1
+            guard let buttonState = buttonState else { return }
+            sectionsArray = sortingSectionArray(index: buttonState)
+        }
+        tableView.reloadData()
+    }
+    
+    @objc private func tappedThirdButtonPlayer() {
+        if buttonState == 2 {
+            buttonState = nil
+            sectionsArray = saveSectionsArray
+        }else{
+            buttonState = 2
+            guard let buttonState = buttonState else { return }
+            sectionsArray = sortingSectionArray(index: buttonState)
+        }
+        tableView.reloadData()
+    }
+    
+    @objc private func tappedFourthButtonPlayer() {
+        if buttonState == 3 {
+            buttonState = nil
+            sectionsArray = saveSectionsArray
+        }else{
+            buttonState = 3
+            guard let buttonState = buttonState else { return }
+            sectionsArray = sortingSectionArray(index: buttonState)
+        }
+        tableView.reloadData()
     }
     
     @objc private func tappedStartButton() {
@@ -396,7 +470,7 @@ class GameViewController: UIViewController {
 extension GameViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionsName.count
+        return sectionsArray.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -407,7 +481,7 @@ extension GameViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: GameTableViewCell.reuseID) as? GameTableViewCell else { return UITableViewCell()}
         let viewModel = sectionsArray[indexPath.section][indexPath.row]
         let playersArray = Array(realm.objects(PlayerRealm.self))
-        cell.setViewModel(viewModel, section: indexPath.section, players: playersArray)
+        cell.setViewModel(viewModel, section: indexPath.section, players: playersArray, buttonState: buttonState)
         return cell
     }
     
@@ -416,7 +490,8 @@ extension GameViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let section = realm.objects(PlayerRealm.self)[section].name
+        guard let buttonState = buttonState else { return realm.objects(PlayerRealm.self)[section].name }
+        let section = realm.objects(PlayerRealm.self)[buttonState].name
         return section
     }
     
@@ -425,7 +500,7 @@ extension GameViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        setBackgroundColorForHeader(section: section, header: view)
+        setBackgroundColorForHeader(section: section, header: view, buttonstate: buttonState)
         guard let header = view as? UITableViewHeaderFooterView else { return }
         header.textLabel?.textColor = .white
     }
