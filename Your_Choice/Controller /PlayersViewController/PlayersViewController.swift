@@ -42,7 +42,7 @@ class PlayersViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.textColor = .white
-        label.text = "Выберите от 2 до 4 игроков"
+        label.text = "Создайте от 2 до 4 игроков, выберите цвет и задайте имя."
         label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         label.numberOfLines = 0
         return label
