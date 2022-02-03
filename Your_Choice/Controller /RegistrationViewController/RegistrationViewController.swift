@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class RegistrationViewController: BaseViewController {
     
@@ -17,6 +19,18 @@ class RegistrationViewController: BaseViewController {
         image.image = UIImage(named: "")
         image.contentMode = .scaleAspectFill
         return image
+    }()
+    
+    private var warningLabel : UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.textColor = .black
+        label.text = "Поля заполненны некорректно"
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        label.numberOfLines = 0
+        label.alpha = 0
+        return label
     }()
     
     private var emailTextField: UITextField = {
@@ -155,6 +169,9 @@ class RegistrationViewController: BaseViewController {
         backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         backgroundImageView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         
+        warningLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        warningLabel.bottomAnchor.constraint(equalTo: nameTextField.topAnchor,constant: -30).isActive = true
+        
         backButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
         backButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         backButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -200,13 +217,37 @@ class RegistrationViewController: BaseViewController {
         navigationController?.popToRootViewController(animated: true)
     }
     @objc func registrationAction() {
-        let playersVC = PlayersViewController()
-    // navigationController?.setViewControllers([playersVC], animated: true)
-        navigationController?.pushViewController(playersVC, animated: true)
+        if checkValidation() != nil {
+            warningLabel.alpha = 1
+            print("warning")
+        }else {
+                Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { [weak self] (result,error) in
+                    if error != nil {
+                        self?.warningLabel.text = "\(String(describing: error?.localizedDescription))"
+                    }else{
+                        let dataBase = Firestore.firestore()
+                        dataBase.collection("users").addDocument(data: [
+                            "name": self?.nameTextField.text!,
+                            "email" : self?.emailTextField.text!,
+                            "uid" : result?.user.uid
+                        ]) { (error) in
+                            if error != nil {
+                                self?.warningLabel.text = "Error saving user in database"
+                            }
+                            print(result!  .user.uid)
+                        }
+                        // jump to the next screen
+                    }
+                }
+            }
+        
+//        let playersVC = PlayersViewController()
+//        navigationController?.pushViewController(playersVC, animated: true)
     }
     
     //MARK:- Metods
     private func addElementsToView(){
+        view.addSubview(warningLabel)
         view.addSubview(nameTextField)
         view.addSubview(registerButton)
         view.addSubview(emailTextField)
@@ -217,6 +258,18 @@ class RegistrationViewController: BaseViewController {
         view.addSubview(backgroundImageView)
         view.sendSubviewToBack(backgroundImageView)
     
+    }
+    
+    private func checkValidation() -> String? {
+        if  nameTextField.text == ""  ||
+            emailTextField.text == ""  ||
+            passwordTextField.text == "" ||
+            nameTextField.text == nil ||
+            emailTextField.text == nil  ||
+            passwordTextField.text == nil {
+            return "Поля заполненны некорректно, проверьте данные"
+        }
+        return nil
     }
     
     private func addTFDelegate() {

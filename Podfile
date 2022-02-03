@@ -6,6 +6,9 @@ target 'Your_Choice' do
   use_frameworks!
   pod 'SnapKit', '~> 5.0.0'
   pod 'RealmSwift', '~>10'
+
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
   # Pods for Your_Choice
 
 end
