@@ -225,11 +225,15 @@ class RegistrationViewController: BaseViewController {
                     if error != nil {
                         self?.warningLabel.text = "\(String(describing: error?.localizedDescription))"
                     }else{
+                        guard let name = self?.nameTextField.text else { return }
+                        guard let email = self?.emailTextField.text else { return }
+                        guard let password = self?.passwordTextField.text else { return }
+                        guard let userID = result?.user.uid else { return }
                         let dataBase = Firestore.firestore()
                         dataBase.collection("users").addDocument(data: [
-                            "name": self?.nameTextField.text!,
-                            "email" : self?.emailTextField.text!,
-                            "uid" : result?.user.uid
+                            "name": name,
+                            "email" : email,
+                            "uid" : userID
                         ]) { (error) in
                             if error != nil {
                                 self?.warningLabel.text = "Error saving user in database"

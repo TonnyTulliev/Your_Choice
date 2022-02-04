@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import Firebase
 
 class StartViewController: BaseViewController {
     
@@ -77,6 +79,7 @@ class StartViewController: BaseViewController {
         button.layer.shadowOffset = CGSize(width: 3, height: 3)
         button.layer.shadowOpacity = 0.6
         button.layer.shadowRadius = 4.0
+        button.addTarget(self, action: #selector(tappedLoginButton), for: .touchUpInside)
         return button
     }()
     
@@ -93,7 +96,7 @@ class StartViewController: BaseViewController {
         button.layer.shadowOffset = CGSize(width: 3, height: 3)
         button.layer.shadowOpacity = 0.6
         button.layer.shadowRadius = 4.0
-        button.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tappedRegistrationButton), for: .touchUpInside)
         return button
     }()
     
@@ -147,10 +150,23 @@ class StartViewController: BaseViewController {
     }
     
     //MARK:- objc metods
-    @objc private func tappedButton() {
+    @objc private func tappedRegistrationButton() {
         let nextVC = RegistrationViewController()
         navigationController?.pushViewController(nextVC, animated: true)
     }
+    
+    @objc private func   tappedLoginButton() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+            if error != nil {
+                //error description
+            }else {
+                //jump to the next screen
+            }
+        }
+    }
+  
     
     //MARK:- metods
     private func addElementsToView(){
