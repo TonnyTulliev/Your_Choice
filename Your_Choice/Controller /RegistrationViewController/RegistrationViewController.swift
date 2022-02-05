@@ -11,17 +11,17 @@ import FirebaseAuth
 
 class RegistrationViewController: BaseViewController {
     
-
+    
     //MARK:- UI elements
-   private var mainImageView: UIImageView = {
-       var image = UIImageView()
+    private var mainImageView: UIImageView = {
+        var image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "")
         image.contentMode = .scaleAspectFill
         return image
     }()
     
-    private var warningLabel : UILabel = {
+    private var errorLabel : UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -116,7 +116,7 @@ class RegistrationViewController: BaseViewController {
         return textfield
     }()
     
-  private var registerButton: UIButton = {
+    private var registerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Зарегистрировать", for: .normal)
         button.titleLabel?.textAlignment = .center
@@ -131,32 +131,31 @@ class RegistrationViewController: BaseViewController {
         button.layer.shadowRadius = 4.0
         button.addTarget(self, action: #selector(registrationAction), for: .touchUpInside)
         return button
-   }()
+    }()
     
     private var backButton: UIButton = {
-       let button = UIButton(type: .system)
-       button.setTitle("Назад", for: .normal)
-       button.titleLabel?.textAlignment = .center
-       button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-       button.backgroundColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
-       button.tintColor = .white
-       button.layer.cornerRadius = 25
-       button.translatesAutoresizingMaskIntoConstraints = false
-       button.layer.shadowColor = UIColor.black.cgColor
-       button.layer.shadowOffset = CGSize(width: 3, height: 3)
-       button.layer.shadowOpacity = 0.6
-       button.layer.shadowRadius = 4.0
-       button.addTarget(self, action: #selector(actionForBackButton), for: .allTouchEvents)
-       return button
-   }()
+        let button = UIButton(type: .system)
+        button.setTitle("Назад", for: .normal)
+        button.titleLabel?.textAlignment = .center
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.backgroundColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
+        button.tintColor = .white
+        button.layer.cornerRadius = 25
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 3, height: 3)
+        button.layer.shadowOpacity = 0.6
+        button.layer.shadowRadius = 4.0
+        button.addTarget(self, action: #selector(actionForBackButton), for: .allTouchEvents)
+        return button
+    }()
     
     //MARK:- Life cycle VC
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.backButtonTitle = "Выйти"
         addTFDelegate()
         addElementsToView()
-        //  addRule()
+        addRule()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -169,8 +168,8 @@ class RegistrationViewController: BaseViewController {
         backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         backgroundImageView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         
-        warningLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        warningLabel.bottomAnchor.constraint(equalTo: nameTextField.topAnchor,constant: -30).isActive = true
+        errorLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        errorLabel.topAnchor.constraint(equalTo: repeatPasswordTextField.bottomAnchor,constant: 15).isActive = true
         
         backButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
         backButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
@@ -180,7 +179,7 @@ class RegistrationViewController: BaseViewController {
         registerButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
         registerButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         registerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        registerButton.topAnchor.constraint(equalTo: repeatPasswordTextField.bottomAnchor, constant: 40).isActive = true
+        registerButton.topAnchor.constraint(equalTo: repeatPasswordTextField.bottomAnchor, constant: 50).isActive = true
         
         emailTextField.heightAnchor.constraint(equalToConstant: 55).isActive = true
         emailTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
@@ -218,40 +217,43 @@ class RegistrationViewController: BaseViewController {
     }
     @objc func registrationAction() {
         if checkValidation() != nil {
-            warningLabel.alpha = 1
-            print("warning")
+            errorLabel.alpha = 1
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.errorLabel.alpha = 0
+            }
         }else {
-                Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { [weak self] (result,error) in
-                    if error != nil {
-                        self?.warningLabel.text = "\(String(describing: error?.localizedDescription))"
-                    }else{
-                        guard let name = self?.nameTextField.text else { return }
-                        guard let email = self?.emailTextField.text else { return }
-                        guard let password = self?.passwordTextField.text else { return }
-                        guard let userID = result?.user.uid else { return }
-                        let dataBase = Firestore.firestore()
-                        dataBase.collection("users").addDocument(data: [
-                            "name": name,
-                            "email" : email,
-                            "uid" : userID
-                        ]) { (error) in
-                            if error != nil {
-                                self?.warningLabel.text = "Error saving user in database"
-                            }
-                            print(result!  .user.uid)
-                        }
-                        // jump to the next screen
+            Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { [weak self] (result,error) in
+                if error != nil {
+                    self?.errorLabel.text = "\(String(describing: error?.localizedDescription))"
+                    self?.errorLabel.alpha = 1
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        self?.errorLabel.alpha = 0
                     }
+                }else{
+                    guard let name = self?.nameTextField.text else { return }
+                    guard let email = self?.emailTextField.text else { return }
+                    guard let userID = result?.user.uid else { return }
+                    let dataBase = Firestore.firestore()
+                    dataBase.collection("users").addDocument(data: [
+                        "name": name,
+                        "email" : email,
+                        "uid" : userID
+                    ]) { (error) in
+                        if error != nil {
+                            self?.errorLabel.text = "Error saving user in database"
+                        }
+                        print(result!  .user.uid)
+                    }
+                    let playersVC = PlayersViewController()
+                    self?.navigationController?.pushViewController(playersVC, animated: true)
                 }
             }
-        
-//        let playersVC = PlayersViewController()
-//        navigationController?.pushViewController(playersVC, animated: true)
+        }
     }
     
     //MARK:- Metods
     private func addElementsToView(){
-        view.addSubview(warningLabel)
+        view.addSubview(errorLabel)
         view.addSubview(nameTextField)
         view.addSubview(registerButton)
         view.addSubview(emailTextField)
@@ -261,16 +263,16 @@ class RegistrationViewController: BaseViewController {
         view.addSubview(repeatPasswordTextField)
         view.addSubview(backgroundImageView)
         view.sendSubviewToBack(backgroundImageView)
-    
+        
     }
     
     private func checkValidation() -> String? {
         if  nameTextField.text == ""  ||
-            emailTextField.text == ""  ||
-            passwordTextField.text == "" ||
-            nameTextField.text == nil ||
-            emailTextField.text == nil  ||
-            passwordTextField.text == nil {
+                emailTextField.text == ""  ||
+                passwordTextField.text == "" ||
+                nameTextField.text == nil ||
+                emailTextField.text == nil  ||
+                passwordTextField.text == nil {
             return "Поля заполненны некорректно, проверьте данные"
         }
         return nil
@@ -284,7 +286,10 @@ class RegistrationViewController: BaseViewController {
     }
     
     private func addRule(){
-        if nameTextField.text == nil || nameTextField.text == "" {
+        if nameTextField.text == nil || nameTextField.text == "" ||
+            emailTextField.text == nil || emailTextField.text == "" ||
+            passwordTextField.text == nil || passwordTextField.text == "" ||
+            repeatPasswordTextField.text == nil || repeatPasswordTextField.text == "" {
             registerButton.isEnabled = false
         }else {
             registerButton.isEnabled = true
@@ -298,7 +303,7 @@ extension RegistrationViewController : UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         let name = nameTextField.text
         UserDefaults.standard.setValue(name, forKey: "PlayersName")
-        // addRule()
+         addRule()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -315,5 +320,5 @@ extension RegistrationViewController : UITextFieldDelegate{
         }
         return false
     }
-   
+    
 }

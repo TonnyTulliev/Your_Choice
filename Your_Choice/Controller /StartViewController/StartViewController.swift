@@ -29,6 +29,18 @@ class StartViewController: BaseViewController {
         return image
     }()
     
+    private var errorLabel : UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.textColor = .black
+        label.text = "Email и пароль введены неверно"
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        label.numberOfLines = 0
+        label.alpha = 0
+        return label
+    }()
+    
     private var emailTextField: UITextField = {
         var textfield = UITextField()
         textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textfield.frame.height))
@@ -126,10 +138,13 @@ class StartViewController: BaseViewController {
         registerButtons.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         registerButtons.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20).isActive = true
         
+        errorLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        errorLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor,constant: 15).isActive = true
+        
         loginButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
         loginButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
         loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 40).isActive = true
+        loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 50).isActive = true
         
         emailTextField.heightAnchor.constraint(equalToConstant: 55).isActive = true
         emailTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
@@ -155,18 +170,21 @@ class StartViewController: BaseViewController {
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
-    @objc private func   tappedLoginButton() {
+    @objc private func tappedLoginButton() {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
-        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] (result, error) in
             if error != nil {
-                //error description
+                self?.errorLabel.alpha = 1
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self?.errorLabel.alpha = 0
+                }
             }else {
-                //jump to the next screen
+                let playersVC = PlayersViewController()
+                self?.navigationController?.pushViewController(playersVC, animated: true)
             }
         }
     }
-  
     
     //MARK:- metods
     private func addElementsToView(){
@@ -177,6 +195,7 @@ class StartViewController: BaseViewController {
         view.addSubview(mainImageView)
         view.addSubview(backgroundImageView)
         view.sendSubviewToBack(backgroundImageView)
+        view.addSubview(errorLabel)
     }
     
     private func addTFDelegate() {
@@ -184,6 +203,7 @@ class StartViewController: BaseViewController {
         passwordTextField.delegate = self
     }
 }
+
 //MARK:- Extensions
 extension StartViewController: UITextFieldDelegate {
     

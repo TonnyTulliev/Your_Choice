@@ -95,7 +95,7 @@ class PlayersViewController: UIViewController {
         button.setTitle("Выбрать задание", for: .normal)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.backgroundColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.6477616429, green: 0.2397351265, blue: 0.5922383666, alpha: 1)
         button.tintColor = .white
         button.layer.cornerRadius = 25
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -258,9 +258,16 @@ class PlayersViewController: UIViewController {
     }
     
     @objc private func taskScreenAction() {
-//        changeStateTheTaskButton()
-        let taskVC = TaskViewController()
-        navigationController?.pushViewController(taskVC, animated: true)
+        if realm.objects(PlayerRealm.self).count >= 2 {
+            let taskVC = TaskViewController()
+            navigationController?.pushViewController(taskVC, animated: true)
+        }else {
+            alert(title: "Внимание", message: "Недостаточное количество игроков")
+        }
+    }
+    
+    @objc private func exitTapped() {
+        navigationController?.popToRootViewController(animated: true)
     }
     
     //MARK:- metods
@@ -292,6 +299,8 @@ class PlayersViewController: UIViewController {
         view.backgroundColor = .white
         view.alpha = 1
         navigationController?.isNavigationBarHidden = false
+        let rightBarButton = UIBarButtonItem(title: "Выйти", style: .plain, target: self, action: #selector(exitTapped))
+        navigationItem.leftBarButtonItem = rightBarButton
         navigationItem.title = "Игроки"
        
     }
