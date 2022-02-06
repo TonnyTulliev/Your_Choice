@@ -34,7 +34,7 @@ class StartViewController: BaseViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.textColor = .black
-        label.text = "Email и пароль введены неверно"
+        label.text = "Неверный email или пароль"
         label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         label.numberOfLines = 0
         label.alpha = 0
