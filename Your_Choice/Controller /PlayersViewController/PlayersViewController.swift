@@ -21,7 +21,7 @@ class PlayersViewController: UIViewController {
     private var playersImageView: UIImageView = {
         var image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "")
+        image.image = UIImage(named: "YouChoice")
         image.contentMode = .scaleAspectFill
         image.isHidden = false
         
@@ -48,7 +48,7 @@ class PlayersViewController: UIViewController {
         return label
     }()
     
-    private var hederView : UIView = {
+    private var headerView : UIView = {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.6477616429, green: 0.2397351265, blue: 0.5922383666, alpha: 1)
         view.layer.cornerRadius = 15
@@ -182,10 +182,10 @@ class PlayersViewController: UIViewController {
         backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         backgroundImageView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         
-        playersImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        playersImageView.widthAnchor.constraint(equalToConstant: 250).isActive = true
+        playersImageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        playersImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
         playersImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        playersImageView.bottomAnchor.constraint(equalTo: hederView.topAnchor, constant: -30).isActive = true
+        playersImageView.bottomAnchor.constraint(equalTo: headerView.topAnchor, constant: -20).isActive = true
         
         nextButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
         nextButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
@@ -202,10 +202,10 @@ class PlayersViewController: UIViewController {
         plusButton.rightAnchor.constraint(equalTo: buttonView.rightAnchor  ).isActive = true
         plusButton.bottomAnchor.constraint(equalTo: buttonView.bottomAnchor).isActive = true
         
-        hederView.bottomAnchor.constraint(equalTo: tableView.topAnchor).isActive = true
-        hederView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
-        hederView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
-        hederView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        headerView.bottomAnchor.constraint(equalTo: tableView.topAnchor).isActive = true
+        headerView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        headerView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+        headerView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
         containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 60).isActive = true
         containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -226,7 +226,7 @@ class PlayersViewController: UIViewController {
         
         label.heightAnchor.constraint(equalToConstant: 50).isActive = true
         label.widthAnchor.constraint(equalToConstant: 250).isActive = true
-        label.centerXAnchor.constraint(equalTo: hederView.centerXAnchor).isActive = true
+        label.centerXAnchor.constraint(equalTo: headerView.centerXAnchor).isActive = true
         
     }
     
@@ -277,11 +277,11 @@ class PlayersViewController: UIViewController {
         view.addSubview(containerView)
         containerView.addSubview(tableView)
         view.addSubview(buttonView)
-        view.addSubview(hederView)
+        view.addSubview(headerView)
         view.addSubview(playersImageView)
         buttonView.addSubview(minusButton)
         buttonView.addSubview(plusButton)
-        hederView.addSubview(label)
+        headerView.addSubview(label)
     
     }
     
@@ -302,6 +302,7 @@ class PlayersViewController: UIViewController {
         let rightBarButton = UIBarButtonItem(title: "Выйти", style: .plain, target: self, action: #selector(exitTapped))
         navigationItem.leftBarButtonItem = rightBarButton
         navigationItem.title = "Игроки"
+        navigationController?.navigationBar.isTranslucent = true
        
     }
     
@@ -363,4 +364,3 @@ extension PlayersViewController: UITextFieldDelegate {
         return false
     }
 }
-

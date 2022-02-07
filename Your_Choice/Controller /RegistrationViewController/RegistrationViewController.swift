@@ -16,7 +16,7 @@ class RegistrationViewController: BaseViewController {
     private var mainImageView: UIImageView = {
         var image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "")
+        image.image = UIImage(named: "registration")
         image.contentMode = .scaleAspectFill
         return image
     }()
@@ -156,11 +156,14 @@ class RegistrationViewController: BaseViewController {
         addTFDelegate()
         addElementsToView()
         addRule()
+        navigationController?.navigationBar.backgroundColor = .clear
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
     }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -205,16 +208,17 @@ class RegistrationViewController: BaseViewController {
         nameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         nameTextField.bottomAnchor.constraint(equalTo: emailTextField.topAnchor, constant: -10).isActive = true
         
-        mainImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        mainImageView.widthAnchor.constraint(equalToConstant: 250).isActive = true
+        mainImageView.heightAnchor.constraint(equalToConstant: 170).isActive = true
+        mainImageView.widthAnchor.constraint(equalToConstant: 170).isActive = true
         mainImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        mainImageView.bottomAnchor.constraint(equalTo: nameTextField.topAnchor, constant: -40).isActive = true
+        mainImageView.bottomAnchor.constraint(equalTo: nameTextField.topAnchor, constant: -20).isActive = true
     }
     
     //MARK:- objc Metods
     @objc private func actionForBackButton() {
         navigationController?.popToRootViewController(animated: true)
     }
+    
     @objc func registrationAction() {
         if checkValidation() != nil {
             errorLabel.alpha = 1

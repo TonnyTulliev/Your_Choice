@@ -158,10 +158,10 @@ class StartViewController: BaseViewController {
         passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         passwordTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 20).isActive = true
         
-        mainImageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        mainImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        mainImageView.heightAnchor.constraint(equalToConstant: 190).isActive = true
+        mainImageView.widthAnchor.constraint(equalToConstant: 190).isActive = true
         mainImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        mainImageView.bottomAnchor.constraint(equalTo: emailTextField.topAnchor, constant: -40).isActive = true
+        mainImageView.bottomAnchor.constraint(equalTo: emailTextField.topAnchor, constant: -30).isActive = true
     }
     
     //MARK:- objc metods
