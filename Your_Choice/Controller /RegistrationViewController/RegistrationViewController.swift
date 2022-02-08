@@ -156,7 +156,6 @@ class RegistrationViewController: BaseViewController {
         addTFDelegate()
         addElementsToView()
         addRule()
-        navigationController?.navigationBar.backgroundColor = .clear
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -220,7 +219,8 @@ class RegistrationViewController: BaseViewController {
     }
     
     @objc func registrationAction() {
-        if checkValidation() != nil {
+        if checkValidation() != nil ||
+           checkPasswordValidation() {
             errorLabel.alpha = 1
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 self.errorLabel.alpha = 0
@@ -228,7 +228,8 @@ class RegistrationViewController: BaseViewController {
         }else {
             Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { [weak self] (result,error) in
                 if error != nil {
-                    self?.errorLabel.text = "\(String(describing: error?.localizedDescription))"
+                    guard let error = error?.localizedDescription else { return }
+                    self?.errorLabel.text = error
                     self?.errorLabel.alpha = 1
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         self?.errorLabel.alpha = 0
@@ -272,14 +273,22 @@ class RegistrationViewController: BaseViewController {
     
     private func checkValidation() -> String? {
         if  nameTextField.text == ""  ||
-                emailTextField.text == ""  ||
-                passwordTextField.text == "" ||
-                nameTextField.text == nil ||
-                emailTextField.text == nil  ||
-                passwordTextField.text == nil {
+            emailTextField.text == ""  ||
+            passwordTextField.text == "" ||
+            nameTextField.text == nil ||
+            emailTextField.text == nil  ||
+            passwordTextField.text == nil {
             return "Поля заполненны некорректно, проверьте данные"
         }
         return nil
+    }
+    
+    private func checkPasswordValidation() -> Bool {
+        if passwordTextField.text != repeatPasswordTextField.text {
+            errorLabel.text = "Введенные пароли несовпадают"
+            return true
+        }
+        return false
     }
     
     private func addTFDelegate() {
