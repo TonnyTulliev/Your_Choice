@@ -17,7 +17,7 @@ class TaskSettingView: UIView {
     
     var label: UILabel = {
         let label = UILabel()
-        label.text = "Настройка задания"
+        label.text = GlobalString.taskSettings
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         return label
     }()
@@ -44,7 +44,7 @@ class TaskSettingView: UIView {
         textfield.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         textfield.backgroundColor = #colorLiteral(red: 0.9697982669, green: 0.9640328288, blue: 0.9742299914, alpha: 1)
         textfield.layer.cornerRadius = 15
-        textfield.placeholder = "Напишите задание"
+        textfield.placeholder = GlobalString.taskTextFieldPH
         textfield.font = UIFont.boldSystemFont(ofSize: 15)
         textfield.textAlignment = .center
         textfield.returnKeyType = .done
@@ -52,6 +52,7 @@ class TaskSettingView: UIView {
         textfield.layer.shadowOffset = CGSize(width: 3, height: 3)
         textfield.layer.shadowOpacity = 0.5
         textfield.layer.shadowRadius = 3.0
+        textfield.autocorrectionType = .no
         return textfield
     }()
     
@@ -143,7 +144,7 @@ class TaskSettingView: UIView {
     var doneButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
-        button.setTitle("Создать", for: .normal)
+        button.setTitle(GlobalString.doneButton, for: .normal)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.tintColor = .white

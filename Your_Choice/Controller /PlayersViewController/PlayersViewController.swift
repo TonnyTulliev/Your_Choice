@@ -42,7 +42,7 @@ class PlayersViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.textColor = .white
-        label.text = "Создайте от 2 до 4 игроков, выберите цвет и задайте имя."
+        label.text = GlobalString.infoLabel
         label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         label.numberOfLines = 0
         return label
@@ -92,7 +92,7 @@ class PlayersViewController: UIViewController {
     
     private var nextButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Выбрать задание", for: .normal)
+        button.setTitle(GlobalString.nextButton, for: .normal)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.backgroundColor = #colorLiteral(red: 0.6477616429, green: 0.2397351265, blue: 0.5922383666, alpha: 1)
@@ -239,7 +239,7 @@ class PlayersViewController: UIViewController {
             optionsVC.playersVC = self
             navigationController?.present(optionsVC, animated: true)
         }else {
-            alert(title: "Внимание", message: "Достигнуто максимальное количество игроков")
+            alert(title: GlobalString.alertAtention, message: GlobalString.alertPlusInfo)
         }
     }
     
@@ -253,7 +253,7 @@ class PlayersViewController: UIViewController {
             tableView.reloadData()
             showAndHidePlayersImage()
         }else {
-            alert(title: "Внимание", message: "Необходимо минимум 2 игрока")
+            alert(title: GlobalString.alertAtention, message: GlobalString.alertMinusInfo )
         }
     }
     
@@ -262,7 +262,7 @@ class PlayersViewController: UIViewController {
             let taskVC = TaskViewController()
             navigationController?.pushViewController(taskVC, animated: true)
         }else {
-            alert(title: "Внимание", message: "Недостаточное количество игроков")
+            alert(title: GlobalString.alertAtention, message: GlobalString.taskActionAlert)
         }
     }
     
@@ -299,9 +299,9 @@ class PlayersViewController: UIViewController {
         view.backgroundColor = .white
         view.alpha = 1
         navigationController?.isNavigationBarHidden = false
-        let rightBarButton = UIBarButtonItem(title: "Выйти", style: .plain, target: self, action: #selector(exitTapped))
+        let rightBarButton = UIBarButtonItem(title: GlobalString.barBackButton, style: .plain, target: self, action: #selector(exitTapped))
         navigationItem.leftBarButtonItem = rightBarButton
-        navigationItem.title = "Игроки"
+        navigationItem.title = GlobalString.barTitle
         navigationController?.navigationBar.isTranslucent = true
        
     }
@@ -315,7 +315,7 @@ class PlayersViewController: UIViewController {
     
     private func alert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let action = UIAlertAction(title: GlobalString.alertOk, style: .default, handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }

@@ -96,7 +96,7 @@ class GameViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.textColor = .white
-        label.text = "Задания для каждого игрока выделены его цветом, вы можете отсортировать задания нажав на иконку игрока"
+        label.text = GlobalString.headerLabel
         label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
         label.numberOfLines = 3
         return label
@@ -136,7 +136,7 @@ class GameViewController: UIViewController {
         button.tintColor = .white
         button.layer.cornerRadius = 65
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Начать", for: .normal)
+        button.setTitle(GlobalString.startButton, for: .normal)
         button.titleLabel?.textColor = .white
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.contentMode = .scaleAspectFit

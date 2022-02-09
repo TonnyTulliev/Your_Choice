@@ -18,7 +18,7 @@ class OptionsPlayersView: UIView {
     
     var label: UILabel = {
         let label = UILabel()
-        label.text = "Настройка игрока"
+        label.text = GlobalString.playerSettings
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         return label
     }()
@@ -45,7 +45,7 @@ class OptionsPlayersView: UIView {
         textfield.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         textfield.backgroundColor = #colorLiteral(red: 0.9697982669, green: 0.9640328288, blue: 0.9742299914, alpha: 1)
         textfield.layer.cornerRadius = 15
-        textfield.placeholder = "Введите ваше имя"
+        textfield.placeholder = GlobalString.playersNamePH
         textfield.font = UIFont.boldSystemFont(ofSize: 15)
         textfield.textAlignment = .center
         textfield.contentMode = .center
@@ -54,6 +54,7 @@ class OptionsPlayersView: UIView {
         textfield.layer.shadowOffset = CGSize(width: 3, height: 3)
         textfield.layer.shadowOpacity = 0.5
         textfield.layer.shadowRadius = 3.0
+        textfield.autocorrectionType = .no
         return textfield
         }()
     

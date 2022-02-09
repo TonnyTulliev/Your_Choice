@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 import FirebaseAuth
 import Firebase
 
@@ -34,7 +35,7 @@ class StartViewController: BaseViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.textColor = .black
-        label.text = "Неверный email или пароль"
+        label.text = GlobalString.startErrorLabel
         label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         label.numberOfLines = 0
         label.alpha = 0
@@ -55,6 +56,7 @@ class StartViewController: BaseViewController {
         textfield.layer.shadowOffset = CGSize(width: 3, height: 3)
         textfield.layer.shadowOpacity = 0.4
         textfield.layer.shadowRadius = 2.0
+        textfield.autocorrectionType = .no
         return textfield
     }()
     
@@ -74,6 +76,7 @@ class StartViewController: BaseViewController {
         textfield.layer.shadowOffset = CGSize(width: 3, height: 3)
         textfield.layer.shadowOpacity = 0.4
         textfield.layer.shadowRadius = 2.0
+        textfield.autocorrectionType = .no
         return textfield
     }()
    

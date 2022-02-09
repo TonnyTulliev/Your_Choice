@@ -14,7 +14,7 @@ class PlayerHeaderTableView: UITableViewHeaderFooterView {
    
     var label : UILabel = {
         var label = UILabel()
-        label.text = "Игроки"
+        label.text = GlobalString.players
         label.font = UIFont(name: "Arial", size: 40)
         label.font = UIFont.boldSystemFont(ofSize: 40)
         label.contentMode = .center
@@ -23,7 +23,7 @@ class PlayerHeaderTableView: UITableViewHeaderFooterView {
     
     var favorites : UILabel = {
         var label = UILabel()
-        label.text = "Выберите имя и цвет игрока"
+        label.text = GlobalString.nameAndColor
         return label
     }()
     

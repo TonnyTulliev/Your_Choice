@@ -26,7 +26,7 @@ class RegistrationViewController: BaseViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.textColor = .black
-        label.text = "Поля заполненны некорректно"
+        label.text = GlobalString.registrationErrorLabel
         label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         label.numberOfLines = 0
         label.alpha = 0
@@ -42,12 +42,13 @@ class RegistrationViewController: BaseViewController {
         textfield.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         textfield.backgroundColor = #colorLiteral(red: 0.9697982669, green: 0.9640328288, blue: 0.9742299914, alpha: 1)
         textfield.layer.cornerRadius = 15
-        textfield.placeholder = "Email"
+        textfield.placeholder = GlobalString.emailTextFieldPH
         textfield.returnKeyType = .next
         textfield.layer.shadowColor = UIColor.black.cgColor
         textfield.layer.shadowOffset = CGSize(width: 3, height: 3)
         textfield.layer.shadowOpacity = 0.4
         textfield.layer.shadowRadius = 2.0
+        textfield.autocorrectionType = .no
         return textfield
     }()
     
@@ -69,12 +70,13 @@ class RegistrationViewController: BaseViewController {
         textfield.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         textfield.backgroundColor = #colorLiteral(red: 0.9697982669, green: 0.9640328288, blue: 0.9742299914, alpha: 1)
         textfield.layer.cornerRadius = 15
-        textfield.placeholder = "Введите ваше имя"
+        textfield.placeholder = GlobalString.nameTextFieldPH
         textfield.returnKeyType = .next
         textfield.layer.shadowColor = UIColor.black.cgColor
         textfield.layer.shadowOffset = CGSize(width: 3, height: 3)
         textfield.layer.shadowOpacity = 0.4
         textfield.layer.shadowRadius = 2.0
+        textfield.autocorrectionType = .no
         return textfield
     }()
     
@@ -88,12 +90,13 @@ class RegistrationViewController: BaseViewController {
         textfield.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         textfield.backgroundColor = #colorLiteral(red: 0.9697982669, green: 0.9640328288, blue: 0.9742299914, alpha: 1)
         textfield.layer.cornerRadius = 15
-        textfield.placeholder = "Пароль"
+        textfield.placeholder = GlobalString.passwordTextFieldPH
         textfield.returnKeyType = .done
         textfield.layer.shadowColor = UIColor.black.cgColor
         textfield.layer.shadowOffset = CGSize(width: 3, height: 3)
         textfield.layer.shadowOpacity = 0.4
         textfield.layer.shadowRadius = 2.0
+        textfield.autocorrectionType = .no
         return textfield
     }()
     
@@ -107,18 +110,19 @@ class RegistrationViewController: BaseViewController {
         textfield.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         textfield.backgroundColor = #colorLiteral(red: 0.9697982669, green: 0.9640328288, blue: 0.9742299914, alpha: 1)
         textfield.layer.cornerRadius = 15
-        textfield.placeholder = "Повторите пароль"
+        textfield.placeholder = GlobalString.repeatPasswordTextFieldPH
         textfield.returnKeyType = .done
         textfield.layer.shadowColor = UIColor.black.cgColor
         textfield.layer.shadowOffset = CGSize(width: 3, height: 3)
         textfield.layer.shadowOpacity = 0.4
         textfield.layer.shadowRadius = 2.0
+        textfield.autocorrectionType = .no
         return textfield
     }()
     
     private var registerButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Зарегистрировать", for: .normal)
+        button.setTitle(GlobalString.registerButton, for: .normal)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.backgroundColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
@@ -135,7 +139,7 @@ class RegistrationViewController: BaseViewController {
     
     private var backButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Назад", for: .normal)
+        button.setTitle(GlobalString.backButton, for: .normal)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.backgroundColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
@@ -245,7 +249,7 @@ class RegistrationViewController: BaseViewController {
                         "uid" : userID
                     ]) { (error) in
                         if error != nil {
-                            self?.errorLabel.text = "Error saving user in database"
+                            self?.errorLabel.text = GlobalString.dataBaseError
                         }
                         print(result!  .user.uid)
                     }
@@ -278,14 +282,14 @@ class RegistrationViewController: BaseViewController {
             nameTextField.text == nil ||
             emailTextField.text == nil  ||
             passwordTextField.text == nil {
-            return "Поля заполненны некорректно, проверьте данные"
+            return GlobalString.validationError
         }
         return nil
     }
     
     private func checkPasswordValidation() -> Bool {
         if passwordTextField.text != repeatPasswordTextField.text {
-            errorLabel.text = "Введенные пароли несовпадают"
+            errorLabel.text = GlobalString.passwordValidationError
             return true
         }
         return false

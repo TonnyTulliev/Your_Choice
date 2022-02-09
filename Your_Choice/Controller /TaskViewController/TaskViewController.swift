@@ -48,7 +48,7 @@ class TaskViewController: UIViewController{
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.textColor = .white
-        label.text = "Выберите задание"
+        label.text = GlobalString.infoTaskLabel
         label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         label.numberOfLines = 0
         return label
@@ -133,7 +133,7 @@ class TaskViewController: UIViewController{
     
     private var nextButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Далее", for: .normal)
+        button.setTitle(GlobalString.nextTaskButton, for: .normal)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.backgroundColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
@@ -204,7 +204,7 @@ class TaskViewController: UIViewController{
         if realm.objects(TaskRealmBase.self).count != minTasks && viewModelsSortedByType.count != minTasks {
             removeSelectedTasks()
         }else{
-            alert(title: "Внимание", message: "Создайте задание")
+            alert(title: GlobalString.alertAtention, message: GlobalString.alertTaskCreate)
         }
         tableView.reloadData()
     }
@@ -219,7 +219,7 @@ class TaskViewController: UIViewController{
     //MARK:- Metods
     private func config() {
         view.backgroundColor = .white
-        navigationItem.title = "Задания"
+        navigationItem.title = GlobalString.tasks
         tableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
     
@@ -353,7 +353,7 @@ class TaskViewController: UIViewController{
     
     private func alert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let action = UIAlertAction(title: GlobalString.alertOk, style: .default, handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
