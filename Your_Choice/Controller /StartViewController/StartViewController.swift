@@ -183,6 +183,16 @@ class StartViewController: BaseViewController {
                     self?.errorLabel.alpha = 0
                 }
             }else {
+                let dataBase = Firestore.firestore()
+                let docRef = dataBase.collection("users").document(email)
+                docRef.getDocument { (document, error) in
+                    if let document = document, document.exists {
+                        let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                        print("Document data: \(dataDescription)")
+                    } else {
+                        print("Document does not exist")
+                    }
+                }
                 let playersVC = PlayersViewController()
                 self?.navigationController?.pushViewController(playersVC, animated: true)
             }
