@@ -243,7 +243,8 @@ class RegistrationViewController: BaseViewController {
                     guard let email = self?.emailTextField.text else { return }
                     guard let userID = result?.user.uid else { return }
                     let dataBase = Firestore.firestore()
-                    dataBase.collection("users").addDocument(data: [
+                    let usersRef = dataBase.collection("users")
+                    usersRef.document(email).setData([
                         "name": name,
                         "email" : email,
                         "uid" : userID
@@ -251,8 +252,8 @@ class RegistrationViewController: BaseViewController {
                         if error != nil {
                             self?.errorLabel.text = GlobalString.dataBaseError
                         }
-                        print(result!  .user.uid)
                     }
+                    PlayerInfo.shared.userName = name
                     let playersVC = PlayersViewController()
                     self?.navigationController?.pushViewController(playersVC, animated: true)
                 }

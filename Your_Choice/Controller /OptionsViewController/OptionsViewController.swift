@@ -18,11 +18,7 @@ class OptionsViewControoler: BaseViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.toolbar.isHidden = true
-        view.backgroundColor = .clear
-        optionPlayersView.doneButton.addTarget(self, action: #selector(done), for: .touchUpInside)
-        optionPlayersView.exitButton.addTarget(self, action: #selector(exit), for: .touchUpInside)
-        optionPlayersView.isHidden = false
+        config()
         addElements()
         changePlayersState()
     }
@@ -33,6 +29,15 @@ class OptionsViewControoler: BaseViewController{
 
     private func  addElements(){
         view.addSubview(optionPlayersView)
+    }
+    
+    private func config() {
+        navigationController?.toolbar.isHidden = true
+        view.backgroundColor = .clear
+        optionPlayersView.doneButton.addTarget(self, action: #selector(done), for: .touchUpInside)
+        optionPlayersView.exitButton.addTarget(self, action: #selector(exit), for: .touchUpInside)
+        optionPlayersView.isHidden = false
+        getFirstPlayerName()
     }
     
     private func savePlayerInRealm(){
@@ -50,6 +55,14 @@ class OptionsViewControoler: BaseViewController{
         let players = realm.objects(PlayerRealm.self)
         for i in players{
             getButtonColor(color: i.color)
+        }
+    }
+    
+    private func getFirstPlayerName() {
+        guard let name = PlayerInfo.shared.userName else { return }
+        if realm.objects(PlayerRealm.self).count == 0 {
+            optionPlayersView.nameTextField.text = name
+            optionPlayersView.name = name
         }
     }
     

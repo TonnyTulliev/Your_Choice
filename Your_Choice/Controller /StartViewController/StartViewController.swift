@@ -173,7 +173,7 @@ class StartViewController: BaseViewController {
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
-    @objc private func tappedLoginButton() {
+    @objc func tappedLoginButton() {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] (result, error) in
@@ -187,10 +187,16 @@ class StartViewController: BaseViewController {
                 let docRef = dataBase.collection("users").document(email)
                 docRef.getDocument { (document, error) in
                     if let document = document, document.exists {
-                        let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                        guard let dataDescription = document.data() else { return }
                         print("Document data: \(dataDescription)")
-                    } else {
-                        print("Document does not exist")
+                        let name = dataDescription.filter { (key, value) in
+                            key.lowercased().contains("name")
+                        }
+                        let uid = dataDescription.filter { (key, value) in
+                            key.lowercased().contains("uid")
+                        }
+                        PlayerInfo.shared.saveUsersInfo(userNames: name, usersId: uid)
+                        
                     }
                 }
                 let playersVC = PlayersViewController()

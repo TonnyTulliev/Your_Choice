@@ -25,6 +25,7 @@
 		370BC4AD276204830077F2A9 /* PlayersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370BC4AC276204830077F2A9 /* PlayersTableViewCell.swift */; };
 		3790DE3D27B3D6C7002A3BCF /* Localization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3790DE3C27B3D6C7002A3BCF /* Localization.strings */; };
 		3790DE3F27B3DA14002A3BCF /* GlobalString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3790DE3E27B3DA14002A3BCF /* GlobalString.swift */; };
+		3790DE4327B6720C002A3BCF /* PlayerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3790DE4227B6720C002A3BCF /* PlayerInfo.swift */; };
 		37A3512A2794B77800D4E903 /* TaskSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A351292794B77800D4E903 /* TaskSettingsView.swift */; };
 		37A3512D2794BA4000D4E903 /* TasksSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A3512C2794BA4000D4E903 /* TasksSettingsViewController.swift */; };
 		37A35133279954D600D4E903 /* TaskCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A35132279954D600D4E903 /* TaskCellViewModel.swift */; };
@@ -58,6 +59,7 @@
 		370BC4AC276204830077F2A9 /* PlayersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersTableViewCell.swift; sourceTree = "<group>"; };
 		3790DE3C27B3D6C7002A3BCF /* Localization.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localization.strings; sourceTree = "<group>"; };
 		3790DE3E27B3DA14002A3BCF /* GlobalString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalString.swift; sourceTree = "<group>"; };
+		3790DE4227B6720C002A3BCF /* PlayerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInfo.swift; sourceTree = "<group>"; };
 		37A351292794B77800D4E903 /* TaskSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSettingsView.swift; sourceTree = "<group>"; };
 		37A3512C2794BA4000D4E903 /* TasksSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksSettingsViewController.swift; sourceTree = "<group>"; };
 		37A35132279954D600D4E903 /* TaskCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellViewModel.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				3704F7FE277B217200145381 /* Player.swift */,
+				3790DE4227B6720C002A3BCF /* PlayerInfo.swift */,
 				3704F800278C2C5900145381 /* PlayerRealm.swift */,
 				37A3513E279AF3B500D4E903 /* TaskRealBase.swift */,
 			);
@@ -449,6 +452,7 @@
 				37039D0B278E2B46006B22B4 /* OptionsPlayersView.swift in Sources */,
 				37A3515027A2E1FC00D4E903 /* GameTableViewCell.swift in Sources */,
 				37A35133279954D600D4E903 /* TaskCellViewModel.swift in Sources */,
+				3790DE4327B6720C002A3BCF /* PlayerInfo.swift in Sources */,
 				37039D12279086B6006B22B4 /* TaskViewController.swift in Sources */,
 				3704F7F62775CE1200145381 /* PlayerHeaderTableView.swift in Sources */,
 				37A3513F279AF3B500D4E903 /* TaskRealBase.swift in Sources */,

@@ -36,9 +36,9 @@ class OptionsPlayersView: UIView {
         button.layer.shadowOpacity = 0.4
         button.layer.shadowRadius = 3.0
         return button
-        }()
+    }()
     
-    private var nameTextField: UITextField = {
+    var nameTextField: UITextField = {
         let textfield = UITextField()
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.layer.borderWidth = 1
@@ -56,9 +56,9 @@ class OptionsPlayersView: UIView {
         textfield.layer.shadowRadius = 3.0
         textfield.autocorrectionType = .no
         return textfield
-        }()
+    }()
     
-     var purpleButton: UIButton = {
+    var purpleButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 15
@@ -71,7 +71,7 @@ class OptionsPlayersView: UIView {
         return button
     }()
     
-     var redButton: UIButton = {
+    var redButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 15
@@ -84,7 +84,7 @@ class OptionsPlayersView: UIView {
         return button
     }()
     
-     var blueButton: UIButton = {
+    var blueButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 15
@@ -97,7 +97,7 @@ class OptionsPlayersView: UIView {
         return button
     }()
     
-     var greenButton: UIButton = {
+    var greenButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.borderColor = .none
@@ -112,17 +112,17 @@ class OptionsPlayersView: UIView {
     }()
     
     private var stackView: UIStackView = {
-       var stack = UIStackView()
+        var stack = UIStackView()
         stack.axis = NSLayoutConstraint.Axis.horizontal
         stack.distribution = UIStackView.Distribution.equalSpacing
         stack.alignment = UIStackView.Alignment.center
         stack.spacing = 10
         stack.backgroundColor = .white
         stack.translatesAutoresizingMaskIntoConstraints = false
-       return stack
+        return stack
     }()
     
-     var doneButton: UIButton = {
+    var doneButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
         button.setTitle("Готово", for: .normal)
@@ -137,7 +137,7 @@ class OptionsPlayersView: UIView {
         button.layer.shadowRadius = 4.0
         button.addTarget(self, action: #selector(done), for: .touchUpInside)
         return button
-        }()
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -146,14 +146,14 @@ class OptionsPlayersView: UIView {
         addConstraints()
         checkValidationPOVC()
         nameTextField.delegate = self
-        }
-
+    }
+    
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-        }
-
+    }
+    
     private func config(){
-        self.isHidden = true 
+        self.isHidden = true
         self.backgroundColor = .white
         self.translatesAutoresizingMaskIntoConstraints = false
         self.layer.cornerRadius = 30
@@ -179,11 +179,12 @@ class OptionsPlayersView: UIView {
     }
     
     @objc private func done(){
-    //выход 
-
+        //выход
+        
     }
     
     @objc private func redTapped(){
+        checkValidationPOVC()
         for i in buttons {
             if i == redButton{
                 i.layer.borderWidth = 4 // одну функцию  и логику
@@ -201,6 +202,7 @@ class OptionsPlayersView: UIView {
     }
     
     @objc private func blueTapped(){
+        checkValidationPOVC()
         for i in buttons {
             if i == blueButton{
                 i.layer.borderWidth = 4 // одну функцию  и логику
@@ -217,6 +219,7 @@ class OptionsPlayersView: UIView {
     }
     
     @objc private func purpleTapped(){
+        checkValidationPOVC()
         for i in buttons {
             if i == purpleButton{
                 i.layer.borderWidth = 4 // одну функцию  и логику
@@ -233,9 +236,10 @@ class OptionsPlayersView: UIView {
     }
     
     @objc private func greenTapped(){
+        checkValidationPOVC()
         for i in buttons {
             if i == greenButton{
-                i.layer.borderWidth = 4 // одну функцию  и логику
+                i.layer.borderWidth = 4
                 i.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 i.tintColor = .white
                 i.setImage(UIImage(systemName: "checkmark"), for: .normal)
@@ -318,12 +322,12 @@ extension OptionsPlayersView: UITextFieldDelegate {
             textField.resignFirstResponder()
             checkValidationPOVC()
         }
-        return false 
+        return false
     }
-   
 }
+
 extension OptionsPlayersView: UIGestureRecognizerDelegate{
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.endEditing(true);
-        }
+    }
 }
