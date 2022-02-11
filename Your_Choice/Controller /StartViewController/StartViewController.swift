@@ -12,7 +12,7 @@ import Firebase
 
 class StartViewController: BaseViewController {
     
-//MARK:- UI
+    //MARK:- UI
     private var mainImageView: UIImageView = {
         var image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -28,6 +28,36 @@ class StartViewController: BaseViewController {
         image.contentMode = .scaleAspectFill
         image.alpha = 0.9
         return image
+    }()
+    
+    private var deleteEmailButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setBackgroundImage(UIImage(systemName: "multiply.circle.fill"), for: .normal )
+        button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        button.backgroundColor = .clear
+        button.tintColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.contentMode = .scaleAspectFit
+        button.layer.cornerRadius = 10
+        button.isHidden = false
+        button.layer.shadowColor = .none
+        button.addTarget(self, action: #selector(deleteEmail), for: .allEvents)
+        return button
+    }()
+    
+    private var deletePasswordButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setBackgroundImage(UIImage(systemName: "multiply.circle.fill"), for: .normal )
+        button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        button.backgroundColor = .clear
+        button.tintColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.contentMode = .scaleAspectFit
+        button.layer.cornerRadius = 10
+        button.isHidden = false
+        button.layer.shadowColor = .none
+        button.addTarget(self, action: #selector(deletePassword), for: .allEvents)
+        return button
     }()
     
     private var errorLabel : UILabel = {
@@ -79,7 +109,7 @@ class StartViewController: BaseViewController {
         textfield.autocorrectionType = .no
         return textfield
     }()
-   
+    
     
     private  var loginButton: UIButton = {
         let button = UIButton(type: .system)
@@ -114,7 +144,6 @@ class StartViewController: BaseViewController {
         button.addTarget(self, action: #selector(tappedRegistrationButton), for: .touchUpInside)
         return button
     }()
-    
     
     //MARK:- Life cycle vc
     override func viewDidLoad() {
@@ -155,11 +184,21 @@ class StartViewController: BaseViewController {
         emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         emailTextField.bottomAnchor.constraint(equalTo: passwordTextField.topAnchor, constant: -20).isActive = true
         
+        deleteEmailButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        deleteEmailButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        deleteEmailButton.rightAnchor.constraint(equalTo: emailTextField.rightAnchor, constant: -20).isActive = true
+        deleteEmailButton.centerYAnchor.constraint(equalTo: emailTextField.centerYAnchor).isActive = true
+        
         passwordTextField.heightAnchor.constraint(equalToConstant: 55).isActive = true
         passwordTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
         passwordTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
         passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         passwordTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 20).isActive = true
+        
+        deletePasswordButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        deletePasswordButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        deletePasswordButton.rightAnchor.constraint(equalTo: passwordTextField.rightAnchor, constant: -20).isActive = true
+        deletePasswordButton.centerYAnchor.constraint(equalTo: passwordTextField.centerYAnchor).isActive = true
         
         mainImageView.heightAnchor.constraint(equalToConstant: 190).isActive = true
         mainImageView.widthAnchor.constraint(equalToConstant: 190).isActive = true
@@ -171,6 +210,14 @@ class StartViewController: BaseViewController {
     @objc private func tappedRegistrationButton() {
         let nextVC = RegistrationViewController()
         navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    @objc private func deleteEmail() {
+        emailTextField.text = ""
+    }
+    
+    @objc private func deletePassword() {
+        passwordTextField.text = ""
     }
     
     @objc func tappedLoginButton() {
@@ -210,7 +257,9 @@ class StartViewController: BaseViewController {
         view.addSubview(loginButton)
         view.addSubview(registerButtons)
         view.addSubview(emailTextField)
+        view.addSubview(deleteEmailButton)
         view.addSubview(passwordTextField)
+        view.addSubview(deletePasswordButton)
         view.addSubview(mainImageView)
         view.addSubview(backgroundImageView)
         view.sendSubviewToBack(backgroundImageView)
@@ -226,7 +275,7 @@ class StartViewController: BaseViewController {
 //MARK:- Extensions
 extension StartViewController: UITextFieldDelegate {
     
-     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         switch textField {
         case emailTextField:
