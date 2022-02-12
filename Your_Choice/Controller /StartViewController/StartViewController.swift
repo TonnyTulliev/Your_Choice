@@ -33,13 +33,12 @@ class StartViewController: BaseViewController {
     private var deleteEmailButton: UIButton = {
         let button = UIButton(type: .system)
         button.setBackgroundImage(UIImage(systemName: "multiply.circle.fill"), for: .normal )
-        button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         button.backgroundColor = .clear
         button.tintColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.contentMode = .scaleAspectFit
         button.layer.cornerRadius = 10
-        button.isHidden = false
+        button.isHidden = true
         button.layer.shadowColor = .none
         button.addTarget(self, action: #selector(deleteEmail), for: .allEvents)
         return button
@@ -48,13 +47,12 @@ class StartViewController: BaseViewController {
     private var deletePasswordButton: UIButton = {
         let button = UIButton(type: .system)
         button.setBackgroundImage(UIImage(systemName: "multiply.circle.fill"), for: .normal )
-        button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         button.backgroundColor = .clear
         button.tintColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.contentMode = .scaleAspectFit
         button.layer.cornerRadius = 10
-        button.isHidden = false
+        button.isHidden = true
         button.layer.shadowColor = .none
         button.addTarget(self, action: #selector(deletePassword), for: .allEvents)
         return button
@@ -274,6 +272,33 @@ class StartViewController: BaseViewController {
 
 //MARK:- Extensions
 extension StartViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        switch textField {
+        case emailTextField:
+            if emailTextField.text == "" || emailTextField.text != ""{
+                deleteEmailButton.isHidden = false
+            }
+        case passwordTextField:
+            if passwordTextField.text == "" || passwordTextField.text != ""{
+                deletePasswordButton.isHidden = false
+            }
+        default:
+            break
+        }
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        switch textField {
+        case emailTextField:
+            deleteEmailButton.isHidden = true
+        case passwordTextField:
+            deletePasswordButton.isHidden = true
+        default:
+            break
+        }
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         

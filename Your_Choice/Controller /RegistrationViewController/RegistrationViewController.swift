@@ -33,6 +33,15 @@ class RegistrationViewController: BaseViewController {
         return label
     }()
     
+    private var backgroundImageView: UIImageView = {
+        var image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: "background3")
+        image.contentMode = .scaleAspectFill
+        image.alpha = 0.9
+        return image
+    }()
+    
     private var emailTextField: UITextField = {
         var textfield = UITextField()
         textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textfield.frame.height))
@@ -52,14 +61,21 @@ class RegistrationViewController: BaseViewController {
         return textfield
     }()
     
-    private var backgroundImageView: UIImageView = {
-        var image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "background3")
-        image.contentMode = .scaleAspectFill
-        image.alpha = 0.9
-        return image
+    private var deleteEmailButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setBackgroundImage(UIImage(systemName: "multiply.circle.fill"), for: .normal )
+        button.backgroundColor = .clear
+        button.tintColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.contentMode = .scaleAspectFit
+        button.layer.cornerRadius = 10
+        button.isHidden = true
+        button.layer.shadowColor = .none
+        button.addTarget(self, action: #selector(deleteEmail), for: .allEvents)
+        return button
     }()
+    
+    
     
     private var nameTextField: UITextField = {
         var textfield = UITextField()
@@ -78,6 +94,20 @@ class RegistrationViewController: BaseViewController {
         textfield.layer.shadowRadius = 2.0
         textfield.autocorrectionType = .no
         return textfield
+    }()
+    
+    private var deleteNameButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setBackgroundImage(UIImage(systemName: "multiply.circle.fill"), for: .normal )
+        button.backgroundColor = .clear
+        button.tintColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.contentMode = .scaleAspectFit
+        button.layer.cornerRadius = 10
+        button.isHidden = true
+        button.layer.shadowColor = .none
+        button.addTarget(self, action: #selector(deleteName), for: .allEvents)
+        return button
     }()
     
     private var passwordTextField: UITextField = {
@@ -100,6 +130,20 @@ class RegistrationViewController: BaseViewController {
         return textfield
     }()
     
+    private var deletePasswordButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setBackgroundImage(UIImage(systemName: "multiply.circle.fill"), for: .normal )
+        button.backgroundColor = .clear
+        button.tintColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.contentMode = .scaleAspectFit
+        button.layer.cornerRadius = 10
+        button.isHidden = true
+        button.layer.shadowColor = .none
+        button.addTarget(self, action: #selector(deletePassword), for: .allEvents)
+        return button
+    }()
+    
     private var repeatPasswordTextField: UITextField = {
         var textfield = UITextField()
         textfield.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textfield.frame.height))
@@ -118,6 +162,20 @@ class RegistrationViewController: BaseViewController {
         textfield.layer.shadowRadius = 2.0
         textfield.autocorrectionType = .no
         return textfield
+    }()
+    
+    private var deleteRepPasswordButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setBackgroundImage(UIImage(systemName: "multiply.circle.fill"), for: .normal )
+        button.backgroundColor = .clear
+        button.tintColor = #colorLiteral(red: 0.5512769818, green: 0.2539933324, blue: 0.5770897865, alpha: 1)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.contentMode = .scaleAspectFit
+        button.layer.cornerRadius = 10
+        button.isHidden = true
+        button.layer.shadowColor = .none
+        button.addTarget(self, action: #selector(deleteRepPassword), for: .allEvents)
+        return button
     }()
     
     private var registerButton: UIButton = {
@@ -193,11 +251,21 @@ class RegistrationViewController: BaseViewController {
         emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         emailTextField.bottomAnchor.constraint(equalTo: passwordTextField.topAnchor, constant: -10).isActive = true
         
+        deleteEmailButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        deleteEmailButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        deleteEmailButton.rightAnchor.constraint(equalTo: emailTextField.rightAnchor, constant: -20).isActive = true
+        deleteEmailButton.centerYAnchor.constraint(equalTo: emailTextField.centerYAnchor).isActive = true
+        
         passwordTextField.heightAnchor.constraint(equalToConstant: 55).isActive = true
         passwordTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
         passwordTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
         passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         passwordTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 30).isActive = true
+        
+        deletePasswordButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        deletePasswordButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        deletePasswordButton.rightAnchor.constraint(equalTo: passwordTextField.rightAnchor, constant: -20).isActive = true
+        deletePasswordButton.centerYAnchor.constraint(equalTo: passwordTextField.centerYAnchor).isActive = true
         
         repeatPasswordTextField.heightAnchor.constraint(equalToConstant: 55).isActive = true
         repeatPasswordTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
@@ -205,11 +273,21 @@ class RegistrationViewController: BaseViewController {
         repeatPasswordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         repeatPasswordTextField.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 10).isActive = true
         
+        deleteRepPasswordButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        deleteRepPasswordButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        deleteRepPasswordButton.rightAnchor.constraint(equalTo: repeatPasswordTextField.rightAnchor, constant: -20).isActive = true
+        deleteRepPasswordButton.centerYAnchor.constraint(equalTo: repeatPasswordTextField.centerYAnchor).isActive = true
+        
         nameTextField.heightAnchor.constraint(equalToConstant: 55).isActive = true
         nameTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
         nameTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
         nameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         nameTextField.bottomAnchor.constraint(equalTo: emailTextField.topAnchor, constant: -10).isActive = true
+        
+        deleteNameButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        deleteNameButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        deleteNameButton.rightAnchor.constraint(equalTo: nameTextField.rightAnchor, constant: -20).isActive = true
+        deleteNameButton.centerYAnchor.constraint(equalTo: nameTextField.centerYAnchor).isActive = true
         
         mainImageView.heightAnchor.constraint(equalToConstant: 170).isActive = true
         mainImageView.widthAnchor.constraint(equalToConstant: 170).isActive = true
@@ -220,6 +298,22 @@ class RegistrationViewController: BaseViewController {
     //MARK:- objc Metods
     @objc private func actionForBackButton() {
         navigationController?.popToRootViewController(animated: true)
+    }
+    
+    @objc private func deleteEmail(){
+        emailTextField.text = ""
+    }
+    
+    @objc private func deleteName(){
+        nameTextField.text = ""
+    }
+    
+    @objc private func deletePassword(){
+        passwordTextField.text = ""
+    }
+    
+    @objc private func deleteRepPassword(){
+        repeatPasswordTextField.text = ""
     }
     
     @objc func registrationAction() {
@@ -265,12 +359,16 @@ class RegistrationViewController: BaseViewController {
     private func addElementsToView(){
         view.addSubview(errorLabel)
         view.addSubview(nameTextField)
+        view.addSubview(deleteNameButton)
         view.addSubview(registerButton)
         view.addSubview(emailTextField)
+        view.addSubview(deleteEmailButton)
         view.addSubview(passwordTextField)
+        view.addSubview(deletePasswordButton)
         view.addSubview(mainImageView)
         view.addSubview(backButton)
         view.addSubview(repeatPasswordTextField)
+        view.addSubview(deleteRepPasswordButton)
         view.addSubview(backgroundImageView)
         view.sendSubviewToBack(backgroundImageView)
         
@@ -318,10 +416,44 @@ class RegistrationViewController: BaseViewController {
 //MARK:- Extensions
 extension RegistrationViewController : UITextFieldDelegate{
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        switch textField {
+        case nameTextField:
+            if nameTextField.text == "" || nameTextField.text != "" {
+                deleteNameButton.isHidden = false
+            }
+        case emailTextField:
+            if emailTextField.text == "" || emailTextField.text != "" {
+                deleteEmailButton.isHidden = false
+            }
+        case passwordTextField:
+            if passwordTextField.text == "" || passwordTextField.text != "" {
+                deletePasswordButton.isHidden = false
+            }
+        case repeatPasswordTextField:
+            if repeatPasswordTextField.text == "" || repeatPasswordTextField.text != "" {
+                deleteRepPasswordButton.isHidden = false
+            }
+        default:
+            break
+        }
+        return true
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
-        let name = nameTextField.text
-        UserDefaults.standard.setValue(name, forKey: "PlayersName")
          addRule()
+        switch textField {
+        case nameTextField:
+            deleteNameButton.isHidden = true
+        case emailTextField:
+            deleteEmailButton.isHidden = true
+        case passwordTextField:
+            deletePasswordButton.isHidden = true
+        case repeatPasswordTextField:
+            deleteRepPasswordButton.isHidden = true
+        default:
+            break
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
