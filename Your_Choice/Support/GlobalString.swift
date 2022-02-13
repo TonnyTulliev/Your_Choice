@@ -53,7 +53,20 @@ final class GlobalString {
     static let doneButton = NSLocalizedString("Создать", comment: "")
     
     // MARK: - Color
-    // MARK: - Task
+    static let redColor = NSLocalizedString("red", comment: "")
+    static let blueColor = NSLocalizedString("blue", comment: "")
+    static let purpleColor = NSLocalizedString("purple", comment: "")
+    static let greenColor = NSLocalizedString("green", comment: "")
+    // MARK: - TaskLabels
+    static let shoppingTaskLabel = NSLocalizedString("Покупки", comment: "")
+    static let homeTaskLabel = NSLocalizedString("Домашние", comment: "")
+    static let personTaskLabel = NSLocalizedString("Личные", comment: "")
+    static let otherTaskLabel = NSLocalizedString("Другое", comment: "")
+    // MARK: - TaskButtons
+    static let homeButton = NSLocalizedString("home", comment: "")
+    static let personButton = NSLocalizedString("person", comment: "")
+    static let shopButton = NSLocalizedString("shop", comment: "")
+    static let otherButton = NSLocalizedString("other", comment: "")
     // MARK: - Image
     
 }

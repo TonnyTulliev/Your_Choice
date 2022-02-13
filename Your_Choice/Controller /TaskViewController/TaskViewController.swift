@@ -361,13 +361,13 @@ class TaskViewController: UIViewController{
     func changeIndexSegmentedControl(taskType: String) {
         if segmentedControl.selectedSegmentIndex != 0 {
             switch taskType {
-            case "home":
+            case GlobalString.homeButton:
                 self.segmentedControl.selectedSegmentIndex = 1
-            case "person":
+            case GlobalString.personButton:
                 self.segmentedControl.selectedSegmentIndex = 2
-            case "shop":
+            case GlobalString.shopButton:
                 self.segmentedControl.selectedSegmentIndex = 3
-            case "other":
+            case GlobalString.otherButton:
                 self.segmentedControl.selectedSegmentIndex = 4
             default:
                 self.segmentedControl.selectedSegmentIndex = 0

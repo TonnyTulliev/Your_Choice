@@ -29,13 +29,13 @@ class PlayersTableViewCell : UITableViewCell {
         self.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         self.textLabel?.textColor = .white
         switch player.color {
-        case "red":
+        case GlobalString.redColor:
             self.backgroundColor = #colorLiteral(red: 0.8465180397, green: 0.6758248806, blue: 0.7737604976, alpha: 1)
-        case "blue":
+        case GlobalString.blueColor:
             self.backgroundColor = #colorLiteral(red: 0.281285584, green: 0.4995560646, blue: 0.7573058009, alpha: 1)
-        case "purple":
+        case GlobalString.purpleColor:
             self.backgroundColor = #colorLiteral(red: 0.692247808, green: 0.6088116169, blue: 0.931736052, alpha: 1)
-        case "green":
+        case GlobalString.greenColor:
             self.backgroundColor = #colorLiteral(red: 0.7582806945, green: 0.8539865613, blue: 0.8737122416, alpha: 1)
         default:
             self.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)

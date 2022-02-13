@@ -69,7 +69,7 @@ class TaskSettingView: UIView {
     
     var shoppingLabel: UILabel = {
         let label = UILabel()
-        label.text = "Покупки"
+        label.text = GlobalString.shoppingTaskLabel
         label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
         return label
     }()
@@ -87,7 +87,7 @@ class TaskSettingView: UIView {
     
     var homeLabel: UILabel = {
         let label = UILabel()
-        label.text = "Домашние"
+        label.text = GlobalString.homeTaskLabel
         label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
         return label
     }()
@@ -105,7 +105,7 @@ class TaskSettingView: UIView {
     
     var personLabel: UILabel = {
         let label = UILabel()
-        label.text = "Личные"
+        label.text = GlobalString.personTaskLabel
         label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
         return label
     }()
@@ -125,7 +125,7 @@ class TaskSettingView: UIView {
     
     var otherLabel: UILabel = {
         let label = UILabel()
-        label.text = "Другое"
+        label.text = GlobalString.otherTaskLabel
         label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
         return label
     }()
@@ -280,7 +280,7 @@ class TaskSettingView: UIView {
                 i.layer.borderWidth = 4
                 i.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 i.tintColor = .white
-                taskType = "home"
+                taskType = GlobalString.homeButton
                 
             }else{
                 i.layer.borderWidth = 0
@@ -296,7 +296,7 @@ class TaskSettingView: UIView {
                 i.layer.borderWidth = 4
                 i.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 i.tintColor = .white
-                taskType = "person"
+                taskType = GlobalString.personButton
             }else{
                 i.layer.borderWidth = 0
                 i.layer.borderColor = .none
@@ -311,7 +311,7 @@ class TaskSettingView: UIView {
                 i.layer.borderWidth = 4
                 i.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 i.tintColor = .white
-                taskType = "shop"
+                taskType = GlobalString.shopButton
             }else{
                 i.layer.borderWidth = 0
                 i.layer.borderColor = .none
@@ -325,7 +325,7 @@ class TaskSettingView: UIView {
             if i == otherTaskButton{
                 i.layer.borderWidth = 4
                 i.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-                taskType = "other"
+                taskType = GlobalString.otherButton
             }else{
                 i.layer.borderWidth = 0
                 i.layer.borderColor = .none

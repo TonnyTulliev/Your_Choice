@@ -191,7 +191,7 @@ class OptionsPlayersView: UIView {
                 i.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 i.tintColor = .white
                 i.setImage(UIImage(systemName: "checkmark"), for: .normal)
-                color = "red"
+                color = GlobalString.redColor
                 
             }else{
                 i.layer.borderWidth = 0
@@ -209,7 +209,7 @@ class OptionsPlayersView: UIView {
                 i.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 i.tintColor = .white
                 i.setImage(UIImage(systemName: "checkmark"), for: .normal)
-                color = "blue"
+                color = GlobalString.blueColor
             }else{
                 i.layer.borderWidth = 0
                 i.setImage(UIImage(named: ""), for: .normal)
@@ -226,7 +226,7 @@ class OptionsPlayersView: UIView {
                 i.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 i.tintColor = .white
                 i.setImage(UIImage(systemName: "checkmark"), for: .normal)
-                color = "purple"
+                color = GlobalString.purpleColor
             }else{
                 i.layer.borderWidth = 0
                 i.setImage(UIImage(named: ""), for: .normal)
@@ -243,7 +243,7 @@ class OptionsPlayersView: UIView {
                 i.layer.borderColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
                 i.tintColor = .white
                 i.setImage(UIImage(systemName: "checkmark"), for: .normal)
-                color = "green"
+                color = GlobalString.greenColor
             }else{
                 i.layer.borderWidth = 0
                 i.setImage(UIImage(named: ""), for: .normal)
